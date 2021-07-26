@@ -1,0 +1,24 @@
+{
+  "name": "rummygame",
+  "version": "1.0.0",
+  "description": "a game of cards for friends",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "rummy",
+    "deck-of-cards",
+    "javascript",
+    "html",
+    "css",
+    "node/express",
+    "multiplayers"
+  ],
+  "author": "Sidahmed Boutraaa",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
