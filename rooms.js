@@ -12,7 +12,7 @@ router.post('/create-rooms', (req, res) => {
     const { roomName, password } = req.body
 
     if (!roomName || !password) {
-        res.redirect('?error=please fill all fileds')
+        res.redirect('/?error=please fill all fileds')
     } else {
         // TODO: replace this with a database
         const roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {

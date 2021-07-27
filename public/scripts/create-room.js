@@ -9,3 +9,6 @@ document.onload = (() => {
     const myParam = urlParams.get('error')
     console.log(myParam)
 })()
+
+const socket = io()
+socket.emit('chat-message', "hello message from client")

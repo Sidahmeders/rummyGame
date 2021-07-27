@@ -14,7 +14,8 @@
     "html",
     "css",
     "node/express",
-    "multiplayers"
+    "multiplayers-card-game",
+    "socket.io"
   ],
   "author": "Sidahmed Boutraaa",
   "license": "ISC",

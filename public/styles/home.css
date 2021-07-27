@@ -26,6 +26,7 @@ body::before {
 
 h1 {
     text-align: center;
+    color: rgb(235, 215, 151);
 }
 
 form * {
@@ -44,26 +45,35 @@ input {
     outline: none;
     padding: 7px 12px;
     font-size: 15px;
-    border: 1px solid #3444;
+    border: 1px solid rgba(165, 164, 87, 0.3);
     border-radius: 4px;
 }
 
-form button {
+button {
     font-size: 17px;
     border: none;
     padding: 10px 2px;
     width: 90%;
     align-self: center;
+    transition: .8s;
+    background: #c96355;
+    color: white;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #c96355dd;
 }
 
 #rooms-container div,
 form {
     width: 50vw;
-    background: white;
+    background: #f3f1d9;
     padding: 3%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px 0;
 }
