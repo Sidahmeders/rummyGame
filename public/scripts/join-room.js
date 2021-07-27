@@ -1,6 +1,6 @@
 const getRooms = async() => {
     try {
-        let response = await fetch('http://localhost:5000/join')
+        let response = await fetch('http://localhost:5000/get-rooms')
         response = await response.json()
 
         return response
@@ -15,12 +15,17 @@ async function appendRooms() {
 
     if (rooms.length) {
         rooms.forEach(room => {
-            const { roomName, password } = room
+            const { roomName } = room
             const roomElement = document.createElement('div')
+
             const roomText = `
-                ${roomName}
-                <br/>
-                <input type="text" placeholder="please enter the room password.." />
+                join the ${roomName} room
+                <form method="POST" action="/join-room">
+                    <input name="roomName" value="${roomName}" readonly />
+                    <input type="text" name="password" placeholder="please enter the room password.." />
+                    <input type="text" name="username" placeholder="choose your username" />
+                    <button type="submit">enter the room</button>
+                </form>
             `
             roomElement.innerHTML = roomText
             roomsContainer.appendChild(roomElement)
