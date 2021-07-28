@@ -20,17 +20,31 @@ async function appendRooms() {
 
             const roomText = `
                 join the ${roomName} room
-                <form method="POST" action="/join-room">
+                <form id="roomId-${roomName}" onsubmit="return false">
                     <input name="roomName" value="${roomName}" readonly />
                     <input type="text" name="password" placeholder="please enter the room password.." />
                     <input type="text" name="username" placeholder="choose your username" />
-                    <button type="submit">enter the room</button>
+                    <button value="${roomName}" onclick="joinExistingRoom(this.value)">enter this room</button>
                 </form>
             `
             roomElement.innerHTML = roomText
             roomsContainer.appendChild(roomElement)
         })
     }
+}
+
+const socket = io()
+
+function joinExistingRoom(roomName) {
+    const room = document.getElementById(`roomId-${roomName}`).children
+    const roomInfo = {}
+
+    for (let input of room) {
+        let { name, value } = input
+        roomInfo[name] = value
+    }
+
+    socket.emit('join-room', roomInfo)
 }
 
 appendRooms()
