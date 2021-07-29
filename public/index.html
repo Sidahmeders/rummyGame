@@ -11,17 +11,23 @@
     <div id="create-room">
         <h1>~Rummy~</h1>
 
-        <form method="POST" action="/create-rooms" onsubmit="return false">
+        <form id="create-room-form" onsubmit="return false">
             <div>
                 <label for="roomName">Room Name</label>
-                <input type="text" name="roomName" id="roomName">
+                <input 
+                    type="text" id="roomName"
+                    name="roomName" value=""
+                    onchange="handleInputChange(this)" >
             </div>
             
             <div>
                 <label for="password">Room Password</label>
-                <input type="text" name="password" id="password">
+                <input 
+                    type="text" id="password"
+                    name="password" value=""
+                    onchange="handleInputChange(this)" >
             </div>
-            <button type="submit">create a room</button>
+            <button type="submit" onclick="hanldeRoomSubmition()" >create a room</button>
         </form>
     </div>
     

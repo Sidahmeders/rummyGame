@@ -1,18 +1,19 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+// const io = req.app.get('socketio')
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(`${__dirname}/public/home.html`))
+    res.sendFile(path.join(`${__dirname}/public/index.html`))
 })
 
 router.post('/create-rooms', (req, res) => {
     const { roomName, password } = req.body
 
     if (!roomName || !password) {
-        res.redirect('/?error=please fill all fileds')
+        res.status(400).json({ error: "please fill in the userName and password" })
     } else {
         // TODO: replace this with a database
         const roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {
@@ -23,7 +24,7 @@ router.post('/create-rooms', (req, res) => {
         // handle pushing new rooms to database
         const rooms = JSON.parse(roomsData)
         rooms.push({ roomName, password })
-        
+
         fs.writeFile(path.join(`${__dirname}/data`, 'rooms.json'), JSON.stringify(rooms), err => {
             if(err) {
                 throw Error(err.message)
@@ -44,12 +45,6 @@ router.get('/get-rooms', (req, res) => {
 
     const rooms = JSON.parse(roomsData)
     res.status(200).json({ rooms })
-})
-
-router.post('/join-room', (req, res) => {
-    const { username, roomName, password } = req.body
-    console.log(req.body)
-    
 })
 
 module.exports = router

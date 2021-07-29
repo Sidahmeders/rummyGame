@@ -1,4 +1,4 @@
-const getRooms = async() => {
+const getRooms = async () => {
     try {
         let response = await fetch('http://localhost:5000/get-rooms')
         response = await response.json()
@@ -46,5 +46,9 @@ function joinExistingRoom(roomName) {
 
     socket.emit('join-room', roomInfo)
 }
+
+socket.on('join-room-error', (error) => {
+    console.log(error)
+})
 
 appendRooms()
