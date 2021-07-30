@@ -15,8 +15,9 @@ async function hanldeRoomSubmition() {
                 "Content-Type": "application/json"
             }
         })
-
+        response = await response.json()
         console.log(response)
+        document.getElementById('create-room-form').reset()
     } catch (err) {
         console.log(err.message)
     }
