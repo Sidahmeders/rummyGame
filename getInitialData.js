@@ -2,6 +2,17 @@ const path = require('path')
 const fs = require('fs')
 const { createDeck, shuffleTheDeck } = require('./cards54')
 
+module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
+    if (!roomName) {
+        const errorMsg = 'no roomName is provided'
+        console.log(errorMsg)
+        res.status(400).json({error: errorMsg})
+    } else {
+        getRoomData(roomName, inMemoryActiveGames)
+        res.status(200).json({ data: inMemoryActiveGames[roomName] })
+    }
+}
+
 function getRoomData(roomName, inMemoryActiveGames) {
     let roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {
         if(err) throw err
@@ -25,8 +36,4 @@ function handlePlayingGame(roomName, deckOfCards, players, inMemoryActiveGames) 
         players,
         playersCards
     }
-}
-
-module.exports = {
-    getRoomData
 }

@@ -1,20 +1,27 @@
 
-.card {
+.card,
+.player-card {
     background-image:url('../asset/cards.png');
     background-size: 2004px 800px;
     width: 141px;
     height: 198px;
-    position: absolute;
     z-index: 2;
     border: 1px solid #333;
     border-radius: 10px;
-    transition: -webkit-transform .6s ease-out;
-    transition: -ms-transform .6s ease-out;
-    transition: transform .6s ease-out;
-    transform: translateX(0px) translateY(0px) rotateZ(0deg);
+}
+
+.card {
     position: absolute;
-    top: 3%;
-    left: 40%;
+    top: 30%;
+    left: 45%;
+}
+
+.player {
+    display: flex;
+}
+
+.player-card {
+    z-index: 9;
 }
 
 .hidden {
@@ -229,12 +236,12 @@
     background-position: -1716px -1px;
 }
 
-.card.Joker-1 {
+.Joker-1 {
     background-image: url(../asset/bg7.jpg) !important;
     background-size: cover;
 }
 
-.card.Joker-2 {
+.Joker-2 {
     background-image: url(../asset/bg7.jpg) !important;
     background-size: cover;
 }

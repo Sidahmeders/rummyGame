@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 
-const { getRoomData } = require('./playingRoom')
+const getTheInitialRoomData = require('./getInitialData')
 const inMemoryActiveGames = {}
 
 const router = express.Router()
@@ -17,7 +17,6 @@ router.post('/create-rooms', (req, res) => {
     if (!roomName || !password) {
         res.status(400).json({ error: "please fill in the userName and password" })
     } else {
-        // TODO: replace this with a database
         const roomsData = fs.readFileSync(
             path.join(`${__dirname}/data`, 'rooms.json'),
             'utf8', 
@@ -46,7 +45,6 @@ router.post('/create-rooms', (req, res) => {
 })
 
 router.get('/get-rooms', (req, res) => {
-    // TODO: replace this with a database
     const roomsData = fs.readFileSync(
         path.join(`${__dirname}/data`, 'rooms.json'), 
         'utf8', (err, data) => {
@@ -66,20 +64,9 @@ router.get('/room/:roomId', (req, res) => {
 router.get('/room-data', (req, res) => {
     const { roomName } = req.query
 
-    getTheInitialRoomData(req, res, roomName)
+    getTheInitialRoomData(res, roomName, inMemoryActiveGames)
     handleActiveRoomDataChange(req)
 })
-
-function getTheInitialRoomData(req, res, roomName) {
-    if (!roomName) {
-        const errorMsg = 'no roomName is provided'
-        console.log(errorMsg)
-        res.status(400).json({error: errorMsg})
-    } else {
-        getRoomData(roomName, inMemoryActiveGames)
-        res.status(200).json({ data: inMemoryActiveGames[roomName] })
-    }
-}
 
 function handleActiveRoomDataChange(req) {
     const io = req.app.get('socketio')
@@ -90,8 +77,9 @@ function handleActiveRoomDataChange(req) {
             const temporaryUserName = inMemoryActiveGames[roomName].players[0]
 
             console.log(temporaryUserName, card, inMemoryActiveGames[roomName])
+            
+            io.emit('deck-changed', inMemoryActiveGames[roomName])
         })
-        // io.emit('deck-changed', () => {})
     })
 }
 
