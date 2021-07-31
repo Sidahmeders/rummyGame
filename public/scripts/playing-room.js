@@ -1,9 +1,10 @@
+
 const socket2 = io()
 
 document.addEventListener('DOMContentLoaded', fetchPlayingData)
+let roomName = location.href.split('/')[4]
 
-async function fetchPlayingData() {
-    let roomName = location.href.split('/')[4]
+async function fetchPlayingData() {    
     let response = await fetch(`http://localhost:5000/room-data?roomName=${roomName}`)
     response = await response.json()
 
@@ -42,6 +43,10 @@ function handleCardsUI(cards) {
 
 function dragCardsFromTheDeck() {
     const cards = this.filter(card => card !== 'hidden')
-    socket2.emit('player-drags-card', 'username', cards[0])
+    socket2.emit('player-drags-card', roomName, 'username', cards[0])
     console.log(cards)
 }
+
+socket2.on('deck-chamged', (updatedDeck) => {
+    console.log(updatedDeck)
+})

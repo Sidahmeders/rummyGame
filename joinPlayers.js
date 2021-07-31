@@ -25,10 +25,14 @@ io.on('connection', (socket) => {
 
 function handlePlayersJoiningRooms(roomName, password, username) {
     let canWrite = false, errorMsg = ''
-    let roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {
-        if(err) throw err
-        return data
-    })
+    let roomsData = fs.readFileSync(
+        path.join(`${__dirname}/data`, 'rooms.json'),
+        'utf8',
+        (err, data) => {
+            if(err) throw err
+            return data
+        }
+    )
     roomsData = JSON.parse(roomsData)
 
     const rooms = roomsData.map(room => {
@@ -56,12 +60,16 @@ function handlePlayersJoiningRooms(roomName, password, username) {
     })
     
     if (canWrite) {
-        fs.writeFile(path.join(`${__dirname}/data`, 'rooms.json'), JSON.stringify(rooms), err => {
-            if(err) {
-                throw Error(err.message)
+        fs.writeFile(
+            path.join(`${__dirname}/data`, 'rooms.json'),
+            JSON.stringify(rooms),
+            (err) => {
+                if(err) {
+                    throw Error(err.message)
+                }
+                console.log('new player has been added...')
             }
-            console.log('new player has been added...')
-        })
+        )
     }
 }
 
