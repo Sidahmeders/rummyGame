@@ -1,5 +1,5 @@
 
-export function createDeck() {
+function createDeck() {
     const suits = ['H', 'C', 'D', 'S']
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
     const decks = ['Joker-1', 'Joker-2']
@@ -13,7 +13,7 @@ export function createDeck() {
     return decks
 }
 
-export function shuffleTheDeck(deck) {
+function shuffleTheDeck(deck) {
     for (let i = 0; i < deck.length; i++) {
         // get a random card from the deck
         let randomPosition = Math.floor(Math.random() * deck.length)
@@ -24,4 +24,9 @@ export function shuffleTheDeck(deck) {
     }
 
     return deck
+}
+
+module.exports = {
+    createDeck,
+    shuffleTheDeck
 }

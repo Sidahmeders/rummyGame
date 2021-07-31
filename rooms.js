@@ -2,6 +2,10 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 
+const { createDeck, shuffleTheDeck } = require('./cards54')
+
+const playingGame = {}
+
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -52,22 +56,50 @@ router.get('/room/:roomId', (req, res) => {
 
 router.get('/room-data', (req, res) => {
     const { roomName } = req.query
+    const io = req.app.get('socketio')
 
     if (!roomName) {
         const errorMsg = 'no roomName is provided'
         console.log(errorMsg)
         res.status(400).json({error: errorMsg})
     } else {
-        let roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {
-            if(err) throw err
-            return data
-        })
-        roomsData = JSON.parse(roomsData)
-        const room = roomsData.filter(room => room.roomName === roomName)[0]
-        delete room.password
-
-        res.status(200).json({data: room})
+        getRoomData(roomName)
+        res.status(200).json({ data: playingGame[roomName] })
     }
+
+    io.on('connection', (socket) => {
+
+        socket.on('player-drags-card', (username, card) => {
+            console.log(username, card)
+        })
+    
+    })
+    
 })
+
+function getRoomData(roomName) {
+    let roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {
+        if(err) throw err
+        return data
+    })
+    roomsData = JSON.parse(roomsData)
+    const { players } = roomsData.filter(room => room.roomName === roomName)[0]
+
+    const playingCards = shuffleTheDeck(createDeck())
+    handlePlayingGame(roomName, playingCards, players)
+}
+
+function handlePlayingGame(roomName, deckOfCards, players) {
+    const playersCards = {}
+    players.forEach(player => {
+        playersCards[player] = deckOfCards.splice(0, 8)
+    })
+    
+    playingGame[roomName] = {
+        cards: deckOfCards,
+        players,
+        playersCards
+    }
+}
 
 module.exports = router
