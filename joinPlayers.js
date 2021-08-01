@@ -1,6 +1,6 @@
-const io = require('./server')
 const fs = require('fs')
 const path = require('path')
+const io = require('./server')
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
@@ -13,7 +13,6 @@ io.on('connection', (socket) => {
             io.emit('join-room-error', "please fill in the password and username")
         } else {
             handlePlayersJoiningRooms(roomName, password, username)
-            io.emit('user-joined-room', roomName, username)
         }
     })
 
@@ -24,7 +23,8 @@ io.on('connection', (socket) => {
 })
 
 function handlePlayersJoiningRooms(roomName, password, username) {
-    let canWrite = false, errorMsg = ''
+    let canWrite = false
+
     let roomsData = fs.readFileSync(
         path.join(`${__dirname}/data`, 'rooms.json'),
         'utf8',
@@ -36,25 +36,9 @@ function handlePlayersJoiningRooms(roomName, password, username) {
     roomsData = JSON.parse(roomsData)
 
     const rooms = roomsData.map(room => {
-        if (room.roomName === roomName) {
-            if (!room["players"]) {
-                room["players"] = [username]
-                canWrite = true
-            } else if (room["players"].length < 4) {
-                const userExist = doesUserExist(room["players"], username)
-                if (userExist) {
-                    errorMsg = 'this username does exists, please try another name'
-                    console.log(errorMsg)
-                    io.emit('join-room-error', errorMsg)
-                } else {
-                    room["players"].push(username)
-                    canWrite = true
-                }
-            } else {
-                errorMsg = 'this room is full, please try another one, or create your own'
-                console.log(errorMsg)
-                io.emit('join-room-error', errorMsg)
-            }
+        if (validRoomAndPassword(room, roomName, password) && validPlayers(room, username)) {
+            joinNewPlayers(room, username)
+            canWrite = true
         }
         return room
     })
@@ -70,7 +54,26 @@ function handlePlayersJoiningRooms(roomName, password, username) {
                 console.log('new player has been added...')
             }
         )
+        io.emit('user-joined-room', roomName, username)
     }
+}
+
+function validRoomAndPassword(room, roomName, password) {
+    if (room.roomName === roomName && room.password === password) {
+        return true
+    }
+    io.emit('join-room-error', 'please make sure the password is correct')
+    return false
+}
+
+function validPlayers(room, username) {
+    roomPlayers = room["players"] || []
+    const userExist = doesUserExist(roomPlayers, username)
+    if (roomPlayers.length >= 4 || userExist) {
+        io.emit('join-room-error', 'this room is full OR username already exist')
+        return false
+    }
+    return true
 }
 
 function doesUserExist(roomPlayers, username) {
@@ -80,4 +83,13 @@ function doesUserExist(roomPlayers, username) {
         }
     }
     return false
+}
+
+function joinNewPlayers(room, username) {
+    if (!room["players"]) {
+        room["players"] = [username]
+    } else {
+        room["players"].push(username)
+    }
+    return room
 }
