@@ -53,7 +53,7 @@ socket.on('join-room-error', (error) => {
 
 socket.on('user-joined-room', (roomName, username) => {
     console.log(`${username} joined ${roomName}`)
-    // location.href = `/room/${roomName}`
+    location.href = `/room/${roomName}`
 })
 
 appendRooms()
