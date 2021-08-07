@@ -5,7 +5,6 @@ const { createDeck, shuffleTheDeck } = require('./cards54')
 module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
     if (!roomName) {
         const errorMsg = 'no roomName is provided'
-        console.log(errorMsg)
         res.status(400).json({error: errorMsg})
     } else {
         getRoomData(roomName, inMemoryActiveGames)
@@ -19,7 +18,8 @@ function getRoomData(roomName, inMemoryActiveGames) {
         return data
     })
     roomsData = JSON.parse(roomsData)
-    const { players } = roomsData.filter(room => room.roomName === roomName)[0]
+    const targetRoom = roomsData.filter(room => room.roomName === roomName)[0] 
+    const players = targetRoom ? targetRoom.players : []
 
     const playingCards = shuffleTheDeck(createDeck())
     handlePlayingGame(roomName, playingCards, players, inMemoryActiveGames)

@@ -28,9 +28,9 @@ router.get('/room/:roomId', (req, res) => {
 
 router.get('/room-data', (req, res) => {
     const { roomName } = req.query
-
     getTheInitialRoomData(res, roomName, inMemoryActiveGames)
     activeRoomDataChange(req, inMemoryActiveGames)
+    
 })
 
 module.exports = router

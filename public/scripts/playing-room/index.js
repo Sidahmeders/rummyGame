@@ -47,5 +47,5 @@ function displayPlayerCards(playersCards) {
 
 const socket2 = io()
 socket2.on('deck-changed', (updatedDeck) => {
-    console.log(updatedDeck) // DATA LOGGING
+    console.log(updatedDeck, "DECK CHANGED") // DATA LOGGING
 })

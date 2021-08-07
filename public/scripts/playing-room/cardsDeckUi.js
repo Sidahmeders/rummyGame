@@ -1,6 +1,3 @@
-const socket3 = io()
-const roomName = location.href.split('/')[4]
-
 export default function handleCardsDeckUI(cards) {
     cards.push('hidden') // push the hidden card on top of the deck
     const cardsElement = document.getElementById('cards')
@@ -9,14 +6,16 @@ export default function handleCardsDeckUI(cards) {
         const cardElement = document.createElement('div')
         cardElement.classList.add('card', card)
         if (card === 'hidden') {
-            cardElement.onclick = dragCardsFromTheDeck.bind(cards)
+            cardElement.onclick = dragCardsFromTheDeck
         }
         cardsElement.appendChild(cardElement)
     })
 }
 
+const socket3 = io()
+
 function dragCardsFromTheDeck() {
-    const cards = this.filter(card => card !== 'hidden')
-    socket3.emit('player-drags-card', roomName, 'username', cards[0])
-    console.log(cards)
+    const roomName = location.href.split('/')[4]
+    const username = localStorage.getItem('username')
+    socket3.emit('player-drags-card', roomName, username)
 }

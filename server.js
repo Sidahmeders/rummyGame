@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: false}))
 app.set('socketio', io)
 app.use((req, res, next) => corsConfig(req, res, next))
 
-app.use('/', require('./rooms'))
+app.use('/', require('./rooms.routes'))
 
 const PORT = process.env.PORT || 5000
 server.listen(PORT, console.log(`server running on port ${PORT}..`))
