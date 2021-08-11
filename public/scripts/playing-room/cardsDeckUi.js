@@ -1,3 +1,4 @@
+
 export default function handleCardsDeckUI(cards) {
     cards.push('hidden') // push the hidden card on top of the deck
     const cardsElement = document.getElementById('cards')
