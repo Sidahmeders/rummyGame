@@ -19,7 +19,6 @@ async function fetchPlayingData() {
 function handleSuccessfullFetch(data) {
     const tableElement = document.getElementById('table')
     const { players, cards, playersCards } = data
-    console.log(data) // DATA LOGGING
     
     players.map(player => {
         const playerElement = document.createElement('div')
