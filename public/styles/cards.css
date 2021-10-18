@@ -28,6 +28,19 @@
     background-position: -1862px -1px !important;  
 }
 
+.player-card.invisible {
+    display: none;
+}
+
+.player-card.hold {
+    width: 330px;
+    border: 2px solid orange;
+}
+
+.player-card.hovered {
+    border: 2px solid orange;
+}
+
 .SA {
     background-position: -1px -401px;
 }
