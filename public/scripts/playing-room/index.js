@@ -1,4 +1,4 @@
-import handleCardsDeckUI from './cardsDeckUi.js'
+import handleCardsDeckUI from './handleCardsDeckUI.js'
 import displayPlayerCards from './displayPlayerCards.js'
 
 document.addEventListener('DOMContentLoaded', fetchPlayingData)
