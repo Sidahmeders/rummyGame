@@ -8,11 +8,16 @@ export default function handleCardsArrangement(cardElement){
     cardElement.addEventListener('drop', dragDrop)
 }
 
+let pickedCardClass, pickedCardElement, droppedCardClass
+
 function dragStart() {
     this.classList.add('hold')
     setTimeout(() => {
         this.classList.add('invisible')
     }, 0)
+
+    pickedCardElement = this
+    pickedCardClass = this.classList[1]
 }
 
 function dragEnd() {
@@ -34,7 +39,12 @@ function dragLeave() {
 }
 
 function dragDrop() {
-    // this.append()
     this.classList.remove('hovered')
-    console.log(this.classList)
+    droppedCardClass = this.classList[1]
+    
+    this.classList.add(pickedCardClass)
+    this.classList.remove(droppedCardClass)
+
+    pickedCardElement.classList.remove(pickedCardClass)
+    pickedCardElement.classList.add(droppedCardClass)
 }
