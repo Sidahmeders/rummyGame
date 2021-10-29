@@ -1,0 +1,20 @@
+::selection {
+    background: transparent;
+}
+
+#drop-box {
+    padding: 0;
+    margin: 0;
+    width: 99vw;
+    height: 120px;
+    position: absolute;
+    bottom: 0;
+    background-color: #884242d5;
+    border-top: 2px solid rgb(116, 6, 6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    opacity: 0.5;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
