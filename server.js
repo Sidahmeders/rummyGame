@@ -13,15 +13,7 @@ io.on('connection', (socket) => {
     console.log(`A user ${socket.id} connected`)
 
     socket.on('join-room', (roomInfo) => {
-        let { roomName, password, username } = roomInfo
-        username = username.replace(/\s/g, '') // remove spaces from the username
-
-        if (!roomName || !password || !username) {
-            io.emit('join-room-error', "please fill in the password and username")
-        } else {
-            const handlePlayersJoiningRooms = joinPlayers(io)
-            handlePlayersJoiningRooms(roomName, password, username)
-        }
+        joinPlayers(socket, roomInfo)
     })
 
     //Whenever someone disconnects this piece of code executed
