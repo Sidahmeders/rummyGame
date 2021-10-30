@@ -1,11 +1,10 @@
-const path = require('path')
-const fs = require('fs')
-const getJsonData = require('./getJsonData')
+const readJsonData = require('./readJsonData')
+const writeJsonData = require('./writeJsonData')
 
 module.exports = function joinPlayers(io) {
-    return function handlePlayersJoiningRooms(roomName, password, username) {
+    return async function handlePlayersJoiningRooms(roomName, password, username) {
         let canWrite = false
-        let roomsData = JSON.parse(getJsonData())
+        let roomsData = JSON.parse(readJsonData())
 
         const rooms = roomsData.map(room => {
             if (validRoomAndPassword(room, roomName, password) && validPlayers(room, username)) {
@@ -16,16 +15,7 @@ module.exports = function joinPlayers(io) {
         })
         
         if (canWrite) {
-            fs.writeFile(
-                path.join(`${__dirname}/../data`, 'rooms.json'),
-                JSON.stringify(rooms),
-                (err) => {
-                    if(err) {
-                        throw Error(err.message)
-                    }
-                    console.log('new player has been added...')
-                }
-            )
+            await writeJsonData(rooms, 'new player has been added...')
             io.emit('user-joined-room', roomName, username)
         }
     }

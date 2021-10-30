@@ -1,5 +1,5 @@
 const { createDeck, shuffleTheDeck } = require('../cards54')
-const getJsonData = require('../utils/getJsonData')
+const readJsonData = require('../utils/readJsonData')
 
 module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
     if (!roomName) {
@@ -12,7 +12,7 @@ module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGam
 }
 
 function getRoomData(roomName, inMemoryActiveGames) {
-    let roomsData = getJsonData()
+    let roomsData = readJsonData()
 
     if (!inMemoryActiveGames[roomName]) { // this will prevent the recreation of playingCards on page referesh
         roomsData = JSON.parse(roomsData)

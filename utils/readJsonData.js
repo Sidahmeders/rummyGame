@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-module.exports = function getJsonData() {
+module.exports = function readJsonData() {
     const roomsData = fs.readFileSync(
         path.join(`${__dirname}/../data`, 'rooms.json'),
         'utf8', 
