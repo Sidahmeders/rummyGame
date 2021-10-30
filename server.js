@@ -13,7 +13,8 @@ io.on('connection', (socket) => {
     console.log(`A user ${socket.id} connected`)
 
     socket.on('join-room', (roomInfo) => {
-        const { roomName, password, username } = roomInfo
+        let { roomName, password, username } = roomInfo
+        username = username.replace(/\s/g, '') // remove spaces from the username
 
         if (!roomName || !password || !username) {
             io.emit('join-room-error', "please fill in the password and username")
