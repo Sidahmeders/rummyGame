@@ -6,13 +6,14 @@ const {
     getAllRooms,
     getTheInitialRoomData,
     activeRoomData 
-} = require('./controllers/index')
+} = require('../controllers/index')
+
 const inMemoryActiveGames = {}
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(`${__dirname}/public/index.html`))
+    res.sendFile(path.join(`${__dirname}/../public/index.html`))
 })
 
 router.post('/create-rooms', (req, res) => {
@@ -24,7 +25,7 @@ router.get('/get-rooms', (req, res) => {
 })
 
 router.get('/room/:roomId', (req, res) => {
-    res.sendFile(path.join(`${__dirname}/public/room.html`))
+    res.sendFile(path.join(`${__dirname}/../public/room.html`))
 })
 
 router.get('/room-data', (req, res) => {

@@ -1,6 +1,5 @@
-const path = require('path')
-const fs = require('fs')
 const { createDeck, shuffleTheDeck } = require('../cards54')
+const getJsonData = require('../utils/getJsonData')
 
 module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
     if (!roomName) {
@@ -13,10 +12,7 @@ module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGam
 }
 
 function getRoomData(roomName, inMemoryActiveGames) {
-    let roomsData = fs.readFileSync(path.join(`${__dirname}/../data`, 'rooms.json'), 'utf8', (err, data) => {
-        if(err) throw err
-        return data
-    })
+    let roomsData = getJsonData()
 
     if (!inMemoryActiveGames[roomName]) { // this will prevent the recreation of playingCards on page referesh
         roomsData = JSON.parse(roomsData)

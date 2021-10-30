@@ -1,19 +1,11 @@
-const fs = require('fs')
 const path = require('path')
+const fs = require('fs')
+const getJsonData = require('./getJsonData')
 
 module.exports = function joinPlayers(io) {
     return function handlePlayersJoiningRooms(roomName, password, username) {
         let canWrite = false
-
-        let roomsData = fs.readFileSync(
-            path.join(`${__dirname}/../data`, 'rooms.json'),
-            'utf8',
-            (err, data) => {
-                if(err) throw err
-                return data
-            }
-        )
-        roomsData = JSON.parse(roomsData)
+        let roomsData = JSON.parse(getJsonData())
 
         const rooms = roomsData.map(room => {
             if (validRoomAndPassword(room, roomName, password) && validPlayers(room, username)) {
