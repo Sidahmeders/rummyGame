@@ -1,25 +1,25 @@
+const inMemoryActiveGames = require('../data/inMemoryGames')
 
-module.exports = function handleActiveRoomDataChange(req, inMemoryActiveGames) {
-    const io = req.app.get('socketio')
-
-    io.on('connection', (socket) => {
-        socket.on('player-drags-card', (roomName, username) => {
-            addNewCardToPlayersDeck(username, inMemoryActiveGames[roomName])
-            io.emit('deck-changed', inMemoryActiveGames[roomName])
-        })
-    })
+module.exports = function handleRoomCards({ io, roomName, username }) {
+  const targetRoom = inMemoryActiveGames[roomName]
+  if (!targetRoom) {
+    io.emit('room-error', 'target room is empty, please refresh the page and start a new game.')
+  } else {
+    addNewCardToPlayersDeck(username, targetRoom)
+    io.emit('deck-changed', targetRoom)
+  }
 }
 
 function addNewCardToPlayersDeck(username, targetRoom) {
-    const { cards, playersCards } = targetRoom
-    const pickedCard = cards.pop()
-    playersCards[username].push(pickedCard)
+  const { cards, playersCards } = targetRoom
+  const pickedCard = cards.pop()
+  playersCards[username].push(pickedCard)
 }
 
 function dropCardFromPlayersDeck(username, selectedCard, targetRoom) {
   const { playersCards } = targetRoom
   let playerHand = playersCards[username]
-  playerHand = playerHand.filter(card => card !== selectedCard)
+  playerHand = playerHand.filter((card) => card !== selectedCard)
   targetRoom[username] = playerHand
 }
 

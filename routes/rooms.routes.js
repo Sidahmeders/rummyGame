@@ -4,11 +4,10 @@ const path = require('path')
 const { 
     createRooms,
     getAllRooms,
-    getTheInitialRoomData,
-    activeRoomData 
+    getTheInitialRoomData
 } = require('../controllers/index')
 
-const inMemoryActiveGames = {}
+const inMemoryActiveGames = require('../data/inMemoryGames')
 
 const router = express.Router()
 
@@ -31,8 +30,6 @@ router.get('/room/:roomId', (req, res) => {
 router.get('/room-data', (req, res) => {
     const { roomName } = req.query
     getTheInitialRoomData(res, roomName, inMemoryActiveGames)
-    activeRoomData(req, inMemoryActiveGames)
-    
 })
 
 module.exports = router
