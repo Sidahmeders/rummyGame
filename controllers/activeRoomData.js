@@ -4,7 +4,6 @@ module.exports = function handleActiveRoomDataChange(req, inMemoryActiveGames) {
 
     io.on('connection', (socket) => {
         socket.on('player-drags-card', (roomName, username) => {
-            console.log(username, inMemoryActiveGames[roomName]) // LOGGING DATA
             addNewCardToPlayersDeck(username, inMemoryActiveGames[roomName])
             io.emit('deck-changed', inMemoryActiveGames[roomName])
         })

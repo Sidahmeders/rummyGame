@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const { createDeck, shuffleTheDeck } = require('./cards54')
+const { createDeck, shuffleTheDeck } = require('../cards54')
 
 module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
     if (!roomName) {
@@ -13,16 +13,19 @@ module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGam
 }
 
 function getRoomData(roomName, inMemoryActiveGames) {
-    let roomsData = fs.readFileSync(path.join(`${__dirname}/data`, 'rooms.json'), 'utf8', (err, data) => {
+    let roomsData = fs.readFileSync(path.join(`${__dirname}/../data`, 'rooms.json'), 'utf8', (err, data) => {
         if(err) throw err
         return data
     })
-    roomsData = JSON.parse(roomsData)
-    const targetRoom = roomsData.filter(room => room.roomName === roomName)[0] 
-    const players = targetRoom ? targetRoom.players : []
 
-    const playingCards = shuffleTheDeck(createDeck())
-    handlePlayingGame(roomName, playingCards, players, inMemoryActiveGames)
+    if (!inMemoryActiveGames[roomName]) { // this will prevent the recreation of playingCards on page referesh
+        roomsData = JSON.parse(roomsData)
+        const targetRoom = roomsData.filter(room => room.roomName === roomName)[0] 
+        const players = targetRoom ? targetRoom.players : []
+
+        const playingCards = shuffleTheDeck(createDeck())
+        handlePlayingGame(roomName, playingCards, players, inMemoryActiveGames)
+    }
 }
 
 function handlePlayingGame(roomName, deckOfCards, players, inMemoryActiveGames) {

@@ -8,7 +8,7 @@ module.exports = function createRooms(req, res) {
         res.status(400).json({ error: "please fill in the userName and password" })
     } else {
         const roomsData = fs.readFileSync(
-            path.join(`${__dirname}/data`, 'rooms.json'),
+            path.join(`${__dirname}/../data`, 'rooms.json'),
             'utf8', 
             (err, data) => {
                 if(err) throw err
@@ -22,7 +22,7 @@ module.exports = function createRooms(req, res) {
 
         // write back the new data to our json file
         fs.writeFile(
-            path.join(`${__dirname}/data`, 'rooms.json'),
+            path.join(`${__dirname}/../data`, 'rooms.json'),
             JSON.stringify(rooms), err => {
                 if(err) {
                     throw Error(err.message)

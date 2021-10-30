@@ -1,11 +1,12 @@
 const express = require('express')
 const path = require('path')
 
-const createRooms = require('./createRooms')
-const getAllRooms = require('./getAllRooms')
-
-const getTheInitialRoomData = require('./getInitialData')
-const activeRoomDataChange = require('./activeRoomData')
+const { 
+    createRooms,
+    getAllRooms,
+    getTheInitialRoomData,
+    activeRoomData 
+} = require('./controllers/index')
 const inMemoryActiveGames = {}
 
 const router = express.Router()
@@ -29,7 +30,7 @@ router.get('/room/:roomId', (req, res) => {
 router.get('/room-data', (req, res) => {
     const { roomName } = req.query
     getTheInitialRoomData(res, roomName, inMemoryActiveGames)
-    activeRoomDataChange(req, inMemoryActiveGames)
+    activeRoomData(req, inMemoryActiveGames)
     
 })
 
