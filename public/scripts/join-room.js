@@ -13,23 +13,20 @@ async function appendRooms() {
     const { rooms } = await getRooms()
     const roomsContainer = document.getElementById('rooms-container')
 
-    if (rooms.length) {
-        rooms.forEach(room => {
-            const { roomName } = room
-            const roomElement = document.createElement('div')
+    for (let roomName in rooms) {
+        const roomElement = document.createElement('div')
 
-            const roomText = `
-                join the ${roomName} room
-                <form id="roomId-${roomName}" onsubmit="return false">
-                    <input name="roomName" value="${roomName}" readonly />
-                    <input type="text" name="password" placeholder="please enter the room password.." />
-                    <input type="text" name="username" placeholder="choose your username" />
-                    <button value="${roomName}" onclick="joinExistingRoom(this.value)">enter this room</button>
-                </form>
-            `
-            roomElement.innerHTML = roomText
-            roomsContainer.appendChild(roomElement)
-        })
+        const roomText = `
+        join the ${roomName} room
+        <form id="roomId-${roomName}" onsubmit="return false">
+            <input name="roomName" value="${roomName}" readonly />
+            <input type="text" name="password" placeholder="please enter the room password.." />
+            <input type="text" name="username" placeholder="choose your username" />
+            <button value="${roomName}" onclick="joinExistingRoom(this.value)">enter this room</button>
+        </form>
+    `
+        roomElement.innerHTML = roomText
+        roomsContainer.appendChild(roomElement)
     }
 }
 

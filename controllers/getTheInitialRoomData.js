@@ -4,7 +4,7 @@ const readJsonData = require('../utils/readJsonData')
 module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
     if (!roomName) {
         const errorMsg = 'no roomName is provided'
-        res.status(400).json({error: errorMsg})
+        res.status(400).json({ error: errorMsg })
     } else {
         getRoomData(roomName, inMemoryActiveGames)
         res.status(200).json({ data: inMemoryActiveGames[roomName] })
@@ -12,11 +12,11 @@ module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGam
 }
 
 function getRoomData(roomName, inMemoryActiveGames) {
-    let roomsData = readJsonData()
+    let roomsData = JSON.parse(readJsonData())
 
-    if (!inMemoryActiveGames[roomName]) { // this will prevent the recreation of playingCards on page referesh
-        roomsData = JSON.parse(roomsData)
-        const targetRoom = roomsData.filter(room => room.roomName === roomName)[0] 
+    if (!inMemoryActiveGames[roomName]) {
+        // this will prevent the recreation of playingCards on page referesh
+        const targetRoom = roomsData[roomName]
         const players = targetRoom ? targetRoom.players : []
 
         const playingCards = shuffleTheDeck(createDeck())
@@ -26,13 +26,13 @@ function getRoomData(roomName, inMemoryActiveGames) {
 
 function handlePlayingGame(roomName, deckOfCards, players, inMemoryActiveGames) {
     const playersCards = {}
-    players.forEach(player => {
+    players.forEach((player) => {
         playersCards[player] = deckOfCards.splice(0, 8)
     })
-    
+
     inMemoryActiveGames[roomName] = {
         cards: deckOfCards,
         players,
-        playersCards
+        playersCards,
     }
 }
