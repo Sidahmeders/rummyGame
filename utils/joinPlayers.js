@@ -23,11 +23,11 @@ async function handlePlayersJoiningRooms({ roomName, password, username }) {
         roomPassword = room.password
 
     const isValidPassword = roomPassword === password
-    const isValidUsername = validUserName(roomPlayers, username)
+    const isValidUsername = roomPlayers.indexOf(username) == -1
     const isValidRoom = roomPlayers.length < 4
 
     if (!isValidRoom) {
-        ioSocket.emit('join-room-error', 'this room is already full')
+        ioSocket.emit('join-room-error', 'this room is full, please try another one')
     } else if (!isValidUsername) {
         ioSocket.emit('join-room-error', 'this username already exist')
     } else if (!isValidPassword) {
@@ -37,13 +37,4 @@ async function handlePlayersJoiningRooms({ roomName, password, username }) {
         await writeJsonData(roomsData, 'new player has been added...')
         ioSocket.emit('user-joined-room', roomName, username)
     }
-}
-
-function validUserName(roomPlayers, username) {
-    for (let player of roomPlayers) {
-        if (player == username) {
-            return false
-        }
-    }
-    return true
 }

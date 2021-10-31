@@ -1,4 +1,1 @@
-{
-    "simba": { "password": "1234", "players": ["kaiba", "kaboto", "samuel", "karlosps"] },
-    "gunjack": { "password": "abcd", "players": ["SodiumUnited", "kilwa"] }
-}
+{"simba":{"password":"1234","players":["kaiba","kaboto","samuel","karlosps"]},"gunjack":{"password":"abcd","players":["SodiumUnited","kilwa","kaiba","jinmio"]}}
