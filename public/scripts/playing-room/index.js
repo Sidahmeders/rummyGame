@@ -40,7 +40,9 @@ socket.on('card-dragged', (updatedDeck) => {
 })
 
 socket.on('card-dropped', (updatedDeck) => {
-    // some logic
+    const { cards, playersCards } = updatedDeck
+    handleCardsDeckUI(cards)
+    displayPlayerCards(playersCards)
 })
 
 socket.on('room-error', (error) => console.log(error))

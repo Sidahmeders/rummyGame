@@ -1,5 +1,4 @@
-
-export default function handleCardsArrangement(cardElement){
+export default function arrangeCards(cardElement) {
     cardElement.addEventListener('dragstart', dragStart)
     cardElement.addEventListener('dragend', dragEnd)
     cardElement.addEventListener('dragover', dragOver)
@@ -41,7 +40,7 @@ function dragLeave() {
 function dragDrop() {
     this.classList.remove('hovered')
     droppedCardClass = this.classList[1]
-    
+
     this.classList.add(pickedCardClass)
     this.classList.remove(droppedCardClass)
 
