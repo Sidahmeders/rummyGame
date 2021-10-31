@@ -30,8 +30,6 @@ async function appendRooms() {
     }
 }
 
-const socket = io()
-
 function joinExistingRoom(roomName) {
     const room = document.getElementById(`roomId-${roomName}`).children
     const roomInfo = {}
@@ -41,14 +39,14 @@ function joinExistingRoom(roomName) {
         roomInfo[name] = value
     }
 
-    socket.emit('join-room', roomInfo)
+    io().emit('join-room', roomInfo)
 }
 
-socket.on('join-room-error', (error) => {
+io().on('join-room-error', (error) => {
     console.log(error)
 })
 
-socket.on('user-joined-room', (roomName, username) => {
+io().on('user-joined-room', (roomName, username) => {
     localStorage.setItem('username', username)
     location.href = `/room/${roomName}`
 })

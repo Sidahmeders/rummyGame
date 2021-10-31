@@ -1,26 +1,37 @@
 const inMemoryActiveGames = require('../data/inMemoryGames')
+let ioRef
 
 module.exports = function handleRoomCards({ io, roomName, username }) {
-  const targetRoom = inMemoryActiveGames[roomName]
-  if (!targetRoom) {
-    io.emit('room-error', 'target room is empty, please refresh the page and start a new game.')
-  } else {
-    addNewCardToPlayersDeck(username, targetRoom)
-    io.emit('deck-changed', targetRoom)
-  }
+    ioRef = io
+    const targetRoom = inMemoryActiveGames[roomName]
+    if (!targetRoom) {
+        ioRef.emit(
+            'room-error',
+            'this room is empty, something unexpected happens. please try again'
+        )
+    } else {
+        addNewCardToPlayersDeck(username, targetRoom)
+    }
 }
 
 function addNewCardToPlayersDeck(username, targetRoom) {
-  const { cards, playersCards } = targetRoom
-  const pickedCard = cards.pop()
-  playersCards[username].push(pickedCard)
+    const { cards, playersCards } = targetRoom
+    const pickedCard = cards.pop()
+    const playerHand = playersCards[username]
+
+    if (playerHand.length >= 9) {
+        ioRef.emit('room-error', 'please drop a card before you can pick again')
+    } else {
+        playerHand.push(pickedCard)
+        ioRef.emit('deck-changed', targetRoom)
+    }
 }
 
 function dropCardFromPlayersDeck(username, selectedCard, targetRoom) {
-  const { playersCards } = targetRoom
-  let playerHand = playersCards[username]
-  playerHand = playerHand.filter((card) => card !== selectedCard)
-  targetRoom[username] = playerHand
+    const { playersCards } = targetRoom
+    let playerHand = playersCards[username]
+    playerHand = playerHand.filter((card) => card !== selectedCard)
+    targetRoom[username] = playerHand
 }
 
 /*

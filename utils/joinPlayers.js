@@ -1,10 +1,9 @@
 const readJsonData = require('./readJsonData')
 const writeJsonData = require('./writeJsonData')
-
-let ioSocket
+let socketRef
 
 module.exports = function joinPlayers({ socket, roomInfo }) {
-    ioSocket = socket
+    socketRef = socket
     let { roomName, password, username } = roomInfo
     username = username.replace(/\s/g, '') // remove spaces from the username
 
@@ -27,14 +26,14 @@ async function handlePlayersJoiningRooms({ roomName, password, username }) {
     const isValidRoom = roomPlayers.length < 4
 
     if (!isValidRoom) {
-        ioSocket.emit('join-room-error', 'this room is full, please try another one')
+        socketRef.emit('join-room-error', 'this room is full, please try another one')
     } else if (!isValidUsername) {
-        ioSocket.emit('join-room-error', 'this username already exist')
+        socketRef.emit('join-room-error', 'this username already exist')
     } else if (!isValidPassword) {
-        ioSocket.emit('join-room-error', 'the given password is wrong')
+        socketRef.emit('join-room-error', 'the given password is wrong')
     } else {
         roomPlayers.push(username)
         await writeJsonData(roomsData, 'new player has been added...')
-        ioSocket.emit('user-joined-room', roomName, username)
+        socketRef.emit('user-joined-room', roomName, username)
     }
 }

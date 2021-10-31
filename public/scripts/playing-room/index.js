@@ -4,38 +4,37 @@ import displayPlayerCards from './displayPlayerCards.js'
 document.addEventListener('DOMContentLoaded', fetchPlayingData)
 
 async function fetchPlayingData() {
-  const roomName = location.href.split('/')[4]
-  let response = await fetch(`http://localhost:5000/room-data?roomName=${roomName}`)
-  response = await response.json()
+    const roomName = location.href.split('/')[4]
+    let response = await fetch(`http://localhost:5000/room-data?roomName=${roomName}`)
+    response = await response.json()
 
-  const { data, error } = response
-  if (data) {
-    handleSuccessfullFetch(data)
-  } else {
-    console.log(error)
-  }
+    const { data, error } = response
+    if (data) {
+        handleSuccessfullFetch(data)
+    } else {
+        console.log(error)
+    }
 }
 
 function handleSuccessfullFetch(data) {
-  const tableElement = document.getElementById('table')
-  const { players, cards, playersCards } = data
+    const tableElement = document.getElementById('table')
+    const { players, cards, playersCards } = data
 
-  players.map((player) => {
-    const playerElement = document.createElement('div')
-    playerElement.classList.add('player', player)
-    playerElement.innerHTML = `<p class="username"> ${player} </p>`
-    tableElement.appendChild(playerElement)
-  })
+    players.map((player) => {
+        const playerElement = document.createElement('div')
+        playerElement.classList.add('player', player)
+        playerElement.innerHTML = `<p class="username"> ${player} </p>`
+        tableElement.appendChild(playerElement)
+    })
 
-  handleCardsDeckUI(cards)
-  displayPlayerCards(playersCards)
+    handleCardsDeckUI(cards)
+    displayPlayerCards(playersCards)
 }
 
-const socket2 = io()
-socket2.on('deck-changed', (updatedDeck) => {
-  console.log(updatedDeck, 'DECK CHANGED') // DATA LOGGING
-  handleCardsDeckUI(updatedDeck.cards)
-  displayPlayerCards(updatedDeck.playersCards)
+io().on('deck-changed', (updatedDeck) => {
+    console.log(updatedDeck, 'DECK CHANGED') // DATA LOGGING
+    handleCardsDeckUI(updatedDeck.cards)
+    displayPlayerCards(updatedDeck.playersCards)
 })
 
-socket2.on('room-error', (error) => console.log(error))
+io().on('room-error', (error) => console.log(error))
