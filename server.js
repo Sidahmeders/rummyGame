@@ -5,7 +5,8 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
 const joinPlayers = require('./utils/joinPlayers')
-const handleRoomCards = require('./utils/handleRoomCards')
+const handleCardPickup = require('./utils/handleCardPickup')
+const handleCardDrops = require('./utils/handleCardDrops')
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
@@ -15,8 +16,12 @@ io.on('connection', (socket) => {
         joinPlayers({ socket, roomInfo })
     })
 
-    socket.on('player-drags-card', (roomName, username) => {
-        handleRoomCards({ io, roomName, username })
+    socket.on('drag-card', (roomName, username) => {
+        handleCardPickup({ io, roomName, username })
+    })
+
+    socket.on('drop-card', (roomName, username) => {
+        handleCardDrops() // TODO: handle cards dropping
     })
 
     //Whenever someone disconnects this piece of code executed

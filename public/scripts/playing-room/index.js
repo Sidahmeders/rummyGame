@@ -31,10 +31,16 @@ function handleSuccessfullFetch(data) {
     displayPlayerCards(playersCards)
 }
 
-io().on('deck-changed', (updatedDeck) => {
-    console.log(updatedDeck, 'DECK CHANGED') // DATA LOGGING
-    handleCardsDeckUI(updatedDeck.cards)
-    displayPlayerCards(updatedDeck.playersCards)
+const socket = io()
+
+socket.on('card-dragged', (updatedDeck) => {
+    const { cards, playersCards } = updatedDeck
+    handleCardsDeckUI(cards)
+    displayPlayerCards(playersCards)
 })
 
-io().on('room-error', (error) => console.log(error))
+socket.on('card-dropped', (updatedDeck) => {
+    // some logic
+})
+
+socket.on('room-error', (error) => console.log(error))

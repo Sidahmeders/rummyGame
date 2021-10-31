@@ -3,7 +3,6 @@ const writeJsonData = require('../utils/writeJsonData')
 
 module.exports = async function createRooms(req, res) {
     const { roomName, password } = req.body
-
     if (!roomName || !password) {
         res.status(400).json({ error: 'please fill in the userName and password' })
         return
@@ -11,7 +10,6 @@ module.exports = async function createRooms(req, res) {
 
     try {
         let rooms = JSON.parse(readJsonData())
-
         if (rooms[roomName]) {
             throw Error('room name already exist..')
         }

@@ -12,8 +12,10 @@ export default function handleCardsDeckUI(cards) {
     })
 }
 
+const socket = io()
+
 function dragCardsFromTheDeck() {
     const roomName = location.href.split('/')[4]
     const username = localStorage.getItem('username')
-    io().emit('player-drags-card', roomName, username)
+    socket.emit('drag-card', roomName, username)
 }
