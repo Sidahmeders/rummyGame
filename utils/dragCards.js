@@ -1,7 +1,7 @@
 const inMemoryActiveGames = require('../data/inMemoryGames')
 let ioRef
 
-module.exports = function handleCardPickup({ io, roomName, username }) {
+module.exports = function dragCards({ io, roomName, username }) {
     ioRef = io
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {
@@ -10,11 +10,11 @@ module.exports = function handleCardPickup({ io, roomName, username }) {
             'this room is empty, something unexpected happens. please try again'
         )
     } else {
-        addNewCardToPlayersDeck(username, targetRoom)
+        appendCard(username, targetRoom)
     }
 }
 
-function addNewCardToPlayersDeck(username, targetRoom) {
+function appendCard(username, targetRoom) {
     const { cards, playersCards } = targetRoom
     const pickedCard = cards.pop()
     const playerHand = playersCards[username]
