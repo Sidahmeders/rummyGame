@@ -1,3 +1,5 @@
+import getRoomInfo from '../../utils/getRoomInfo.js'
+
 function handleDropBox() {
     const dropBoxElement = document.getElementById('drop-box')
 
@@ -15,15 +17,14 @@ function dragLeave() {
     this.classList.remove('hovered')
 }
 
+const socket = io()
+
 function dragDrop() {
-    console.log('drop..')
     this.classList.remove('hovered')
+    const { roomName, username } = getRoomInfo()
+    const { pickedCardClass } = window.roomState
 
-    const roomName = location.href.split('/')[4]
-    const username = localStorage.getItem('username')
-
-    console.log(roomName, username)
-    // socket.emit('drop-card', roomName, username)
+    socket.emit('drop-card', roomName, username, pickedCardClass)
 }
 
 handleDropBox()

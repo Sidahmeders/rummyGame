@@ -22,7 +22,7 @@ function dropCard(username, targetRoom, selectedCard) {
         ioRef.emit('room-error', 'please make sure you have picked a card before you can drop')
     } else {
         playerHand = playerHand.filter((card) => card !== selectedCard)
-        targetRoom[username] = playerHand
+        targetRoom.playersCards[username] = playerHand
         ioRef.emit('card-dropped', targetRoom)
     }
 }

@@ -1,5 +1,6 @@
-import handleCardsDeckUI from './handleCardsDeckUI.js'
-import displayPlayerCards from './displayPlayerCards.js'
+import '../_globals.js'
+import './handleDropBox.js'
+import updateRoomUI from './updateRoomUI.js'
 
 document.addEventListener('DOMContentLoaded', fetchPlayingData)
 
@@ -27,22 +28,16 @@ function handleSuccessfullFetch(data) {
         tableElement.appendChild(playerElement)
     })
 
-    handleCardsDeckUI(cards)
-    displayPlayerCards(playersCards)
+    updateRoomUI({ cards, playersCards })
 }
 
 const socket = io()
+const cardEvents = ['card-dragged', 'card-dropped']
 
-socket.on('card-dragged', (updatedDeck) => {
-    const { cards, playersCards } = updatedDeck
-    handleCardsDeckUI(cards)
-    displayPlayerCards(playersCards)
-})
-
-socket.on('card-dropped', (updatedDeck) => {
-    const { cards, playersCards } = updatedDeck
-    handleCardsDeckUI(cards)
-    displayPlayerCards(playersCards)
+cardEvents.forEach((event) => {
+    socket.on(event, (updatedDeck) => {
+        updateRoomUI(updatedDeck)
+    })
 })
 
 socket.on('room-error', (error) => console.log(error))

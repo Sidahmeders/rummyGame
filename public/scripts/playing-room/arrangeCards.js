@@ -1,5 +1,3 @@
-import { playerCardsState } from '../_state.js'
-
 export default function arrangeCards(cardElement) {
     cardElement.addEventListener('dragstart', dragStart)
     cardElement.addEventListener('dragend', dragEnd)
@@ -9,7 +7,7 @@ export default function arrangeCards(cardElement) {
     cardElement.addEventListener('drop', dragDrop)
 }
 
-let { pickedCardClass, pickedCardElement, droppedCardClass } = playerCardsState
+const roomState = window.roomState
 
 function dragStart() {
     this.classList.add('hold')
@@ -17,8 +15,8 @@ function dragStart() {
         this.classList.add('invisible')
     }, 0)
 
-    pickedCardElement = this
-    pickedCardClass = this.classList[1]
+    roomState.pickedCardElement = this
+    roomState.pickedCardClass = this.classList[1]
 }
 
 function dragEnd() {
@@ -41,11 +39,11 @@ function dragLeave() {
 
 function dragDrop() {
     this.classList.remove('hovered')
-    droppedCardClass = this.classList[1]
+    roomState.droppedCardClass = this.classList[1]
 
-    this.classList.add(pickedCardClass)
-    this.classList.remove(droppedCardClass)
+    this.classList.add(roomState.pickedCardClass)
+    this.classList.remove(roomState.droppedCardClass)
 
-    pickedCardElement.classList.remove(pickedCardClass)
-    pickedCardElement.classList.add(droppedCardClass)
+    roomState.pickedCardElement.classList.remove(roomState.pickedCardClass)
+    roomState.pickedCardElement.classList.add(roomState.droppedCardClass)
 }
