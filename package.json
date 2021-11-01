@@ -1,27 +1,26 @@
 {
-  "name": "rummygame",
-  "version": "1.0.0",
-  "description": "a game of cards for friends",
-  "main": "server.js",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
-  },
-  "keywords": [
-    "rummy",
-    "deck-of-cards",
-    "javascript",
-    "html",
-    "css",
-    "node/express",
-    "multiplayers-card-game",
-    "socket.io"
-  ],
-  "author": "Sidahmed Boutraaa",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "socket.io": "^4.1.3",
-    "socket.io-client": "^4.1.3"
-  }
+    "name": "rummygame",
+    "version": "1.0.0",
+    "description": "a game of cards for friends",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon server.js",
+        "start": "node server.js"
+    },
+    "keywords": [
+        "rummy",
+        "multiplayers-card-game",
+        "javascript",
+        "html",
+        "css",
+        "node/express",
+        "socket.io"
+    ],
+    "author": "Sidahmed Boutraaa",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^4.1.3",
+        "socket.io-client": "^4.1.3"
+    }
 }

@@ -17,18 +17,8 @@ async function fetchPlayingData() {
     }
 }
 
-function handleSuccessfullFetch(data) {
-    const tableElement = document.getElementById('table')
-    const { players, cards, playersCards } = data
-
-    players.map((player) => {
-        const playerElement = document.createElement('div')
-        playerElement.classList.add('player', player)
-        playerElement.innerHTML = `<p class="username"> ${player} </p>`
-        tableElement.appendChild(playerElement)
-    })
-
-    updateRoomUI({ cards, playersCards })
+function handleSuccessfullFetch(updatedDeck) {
+    updateRoomUI(updatedDeck)
 }
 
 const socket = io()
