@@ -1,6 +1,6 @@
 import arrangeCards from './arrangeCards.js'
 
-export default function displayPlayerCards(playersCards) {
+export default function displayCards(playersCards) {
     for (let username in playersCards) {
         const playerElement = document.getElementsByClassName(`player ${username}`)
         const playerHand = playersCards[username]
