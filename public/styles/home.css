@@ -10,9 +10,6 @@ body::before {
     z-index: -1;
     top: 0;
     left: 0;
-    background-image: url(../asset/bg7.jpg);
-    background-size: cover;
-    opacity: .7;
 }
 
 #create-room,
@@ -55,7 +52,7 @@ button {
     padding: 10px 2px;
     width: 90%;
     align-self: center;
-    transition: .8s;
+    transition: 0.8s;
     background: #c96355;
     color: white;
     border-radius: 4px;

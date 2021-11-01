@@ -20,8 +20,8 @@ io.on('connection', (socket) => {
         dragCards({ io, roomName, username })
     })
 
-    socket.on('drop-card', (roomName, username) => {
-        dropCards() // TODO: handle cards dropping
+    socket.on('drop-card', (roomName, username, selectedCard) => {
+        dropCards({ io, roomName, username, selectedCard })
     })
 
     //Whenever someone disconnects this piece of code executed

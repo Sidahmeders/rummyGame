@@ -1,3 +1,5 @@
+import { playerCardsState } from '../_state.js'
+
 export default function arrangeCards(cardElement) {
     cardElement.addEventListener('dragstart', dragStart)
     cardElement.addEventListener('dragend', dragEnd)
@@ -7,7 +9,7 @@ export default function arrangeCards(cardElement) {
     cardElement.addEventListener('drop', dragDrop)
 }
 
-let pickedCardClass, pickedCardElement, droppedCardClass
+let { pickedCardClass, pickedCardElement, droppedCardClass } = playerCardsState
 
 function dragStart() {
     this.classList.add('hold')

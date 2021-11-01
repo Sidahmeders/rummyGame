@@ -10,9 +10,6 @@ body::before {
     z-index: -1;
     top: 0;
     left: 0;
-    background-image: url(../asset/bg1.jpg);
-    background-size: cover;
-    opacity: .75;
 }
 
 #table {
@@ -37,9 +34,9 @@ body::before {
 }
 
 #table .player .username {
-    position:absolute;
+    position: absolute;
     top: -20%;
-    left:0;
+    left: 0;
     background-color: aliceblue;
     padding: 5px 12px;
     border-radius: 4px;

@@ -1,7 +1,7 @@
 const inMemoryActiveGames = require('../data/inMemoryGames')
 let ioRef
 
-module.exports = function dropCards({ io, roomName, username }) {
+module.exports = function dropCards({ io, roomName, username, selectedCard }) {
     ioRef = io
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {

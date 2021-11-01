@@ -17,4 +17,9 @@
     font-size: 32px;
     opacity: 0.5;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    transition: 0.6s ease;
+}
+
+#drop-box.hovered {
+    background: #40e0d077;
 }

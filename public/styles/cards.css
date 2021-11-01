@@ -1,7 +1,6 @@
-
 .card,
 .player-card {
-    background-image:url('../asset/cards.png');
+    background-image: url('../asset/cards.png');
     background-size: 2004px 800px;
     width: 141px;
     height: 198px;
@@ -25,7 +24,7 @@
 }
 
 .hidden {
-    background-position: -1862px -1px !important;  
+    background-position: -1862px -1px !important;
 }
 
 .player-card.invisible {
