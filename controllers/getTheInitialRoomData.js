@@ -12,11 +12,12 @@ module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGam
 }
 
 function getRoomData(roomName, inMemoryActiveGames) {
-    let roomsData = JSON.parse(readJsonData())
+    const roomsData = JSON.parse(readJsonData())
+    const targetRoom = roomsData[roomName]
 
-    if (!inMemoryActiveGames[roomName]) {
-        // this will prevent the recreation of playingCards on page referesh
-        const targetRoom = roomsData[roomName]
+    // this will prevent the recreation of playingCards on page referesh
+    // and makes sure we don't have and empty game[room] vriables in memory
+    if (targetRoom.players.length < 4 || !inMemoryActiveGames[roomName]) {
         const players = targetRoom ? targetRoom.players : []
 
         const playingCards = shuffleTheDeck(createDeck())

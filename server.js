@@ -4,7 +4,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const joinPlayers = require('./utils/joinPlayers')
+const joinRoom = require('./utils/joinRoom')
 const dragCards = require('./utils/dragCards')
 const dropCards = require('./utils/dropCards')
 
@@ -13,7 +13,10 @@ io.on('connection', (socket) => {
     console.log(`A user ${socket.id} connected`)
 
     socket.on('join-room', (roomInfo) => {
-        joinPlayers({ socket, roomInfo })
+        // log all the rooms
+        const allRooms = Object.keys(io.sockets.adapter.rooms)
+        console.log(allRooms)
+        joinRoom({ socket, roomInfo })
     })
 
     socket.on('drag-card', (roomName, username) => {
@@ -37,7 +40,7 @@ io.on('connection', (socket) => {
  * @emits socket.to('game').emit('message',__"enjoy_the_game") //sending to sender client, only if they are in 'game' room(channel)
  * @emits socket.broadcast.to(socketid).emit('message',__"for_your_eyes_only') //sending to individual socketid
  * @emits io.emit('message',__"this_is_a_test") //sending to all clients, include sender
- * @emits io.in('game').emit('message',__ 'cool game'); //sending to all clients in 'game' room(channel), include sender
+ * @emits io.in('game').emit('message',__"cool_game"); //sending to all clients in 'game' room(channel), include sender
  * @emits io.of('myNamespace').emit('message',__"gg") //sending to all clients in namespace 'myNamespace', include sender
  * @emits socket.emit() //send to all connected clients
  * @emits socket.broadcast.emit() //send to all connected clients except the one that sent the message

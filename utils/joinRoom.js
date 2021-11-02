@@ -2,19 +2,21 @@ const readJsonData = require('./readJsonData')
 const writeJsonData = require('./writeJsonData')
 let socketRef
 
-module.exports = function joinPlayers({ socket, roomInfo }) {
+module.exports = function joinRoom({ socket, roomInfo }) {
     socketRef = socket
     let { roomName, password, username } = roomInfo
     username = username.replace(/\s/g, '') // remove spaces from the username
 
+    // socket.join(roomName) // join this user socket.id to a room
+
     if (!roomName || !password || !username) {
         socket.emit('join-room-error', 'please fill in the password and username')
     } else {
-        handlePlayersJoiningRooms({ roomName, password, username })
+        validateAndJoinRoom({ roomName, password, username })
     }
 }
 
-async function handlePlayersJoiningRooms({ roomName, password, username }) {
+async function validateAndJoinRoom({ roomName, password, username }) {
     const roomsData = JSON.parse(readJsonData())
     const room = roomsData[roomName]
 
