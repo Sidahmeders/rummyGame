@@ -2,15 +2,19 @@ const inMemoryActiveGames = require('../data/inMemoryGames')
 let ioRef
 
 module.exports = function dragCards({ io, roomName, username }) {
-    ioRef = io
-    const targetRoom = inMemoryActiveGames[roomName]
-    if (!targetRoom) {
-        ioRef.emit(
-            'room-error',
-            'this room is empty, something unexpected happens. please try again'
-        )
-    } else {
-        appendCard(username, targetRoom)
+    try {
+        ioRef = io
+        const targetRoom = inMemoryActiveGames[roomName]
+        if (!targetRoom) {
+            ioRef.emit(
+                'room-error',
+                'this room is empty, something unexpected happens. please try again'
+            )
+        } else {
+            appendCard(username, targetRoom)
+        }
+    } catch (err) {
+        ioRef.emit('room-error', err.message)
     }
 }
 

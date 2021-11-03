@@ -6,29 +6,30 @@ module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGam
         const errorMsg = 'no roomName is provided'
         res.status(400).json({ error: errorMsg })
     } else {
-        getRoomData(roomName, inMemoryActiveGames)
+        setRoomData(roomName, inMemoryActiveGames)
         res.status(200).json({ data: inMemoryActiveGames[roomName] })
     }
 }
 
-function getRoomData(roomName, inMemoryActiveGames) {
+function setRoomData(roomName, inMemoryActiveGames) {
     const roomsData = JSON.parse(readJsonData())
-    const targetRoom = roomsData[roomName]
 
-    // this will prevent the recreation of playingCards on page referesh
-    // and makes sure we don't have and empty game[room] vriables in memory
-    if (targetRoom.players.length < 4 || !inMemoryActiveGames[roomName]) {
-        const players = targetRoom ? targetRoom.players : []
+    const targetRoom = inMemoryActiveGames[roomName]
+    const { players } = roomsData[roomName]
+    let deckOfCards,
+        playersCards = {}
 
-        const playingCards = shuffleTheDeck(createDeck())
-        handlePlayingGame(roomName, playingCards, players, inMemoryActiveGames)
+    if (!targetRoom) {
+        deckOfCards = shuffleTheDeck(createDeck())
+    } else {
+        deckOfCards = targetRoom.cards
+        playersCards = targetRoom.playersCards
     }
-}
 
-function handlePlayingGame(roomName, deckOfCards, players, inMemoryActiveGames) {
-    const playersCards = {}
-    players.forEach((player) => {
-        playersCards[player] = deckOfCards.splice(0, 8)
+    players.forEach((username) => {
+        if (!playersCards[username]) {
+            playersCards[username] = deckOfCards.splice(0, 8)
+        }
     })
 
     inMemoryActiveGames[roomName] = {

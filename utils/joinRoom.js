@@ -8,7 +8,6 @@ module.exports = function joinRoom({ socket, roomInfo }) {
     username = username.replace(/\s/g, '') // remove spaces from the username
 
     // socket.join(roomName) // join this user socket.id to a room
-
     if (!roomName || !password || !username) {
         socket.emit('join-room-error', 'please fill in the password and username')
     } else {
