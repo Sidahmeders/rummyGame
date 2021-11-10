@@ -1,6 +1,7 @@
 import '../_globals.js'
 import './handleDropBox.js'
-import updateRoomUI from './updateRoomUI.js'
+import displayInitialData from './displayInitialData.js'
+import removeDroppedCard from './removeDroppedCard.js'
 
 document.addEventListener('DOMContentLoaded', fetchPlayingData)
 
@@ -18,16 +19,17 @@ async function fetchPlayingData() {
 }
 
 function handleSuccessfullFetch(updatedDeck) {
-    updateRoomUI(updatedDeck)
+    displayInitialData(updatedDeck)
 }
 
 const socket = io()
-const cardEvents = ['card-dragged', 'card-dropped']
+socket.on('card-dropped', (updatedDeck) => {
+    const { playersCards } = updatedDeck
+    removeDroppedCard(playersCards)
+})
 
-cardEvents.forEach((event) => {
-    socket.on(event, (updatedDeck) => {
-        updateRoomUI(updatedDeck)
-    })
+socket.on('card-dragged', (updatedDeck) => {
+    displayInitialData(updatedDeck) // REPLACE THIS FUNCTION
 })
 
 socket.on('room-error', (error) => console.log(error))
