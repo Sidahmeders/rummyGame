@@ -1,6 +1,7 @@
 import '../_globals.js'
 import './handleDropBox.js'
 import displayInitialData from './displayInitialData.js'
+import addDraggedCard from './addDraggedCard.js'
 import removeDroppedCard from './removeDroppedCard.js'
 
 document.addEventListener('DOMContentLoaded', fetchPlayingData)
@@ -29,7 +30,9 @@ socket.on('card-dropped', (updatedDeck) => {
 })
 
 socket.on('card-dragged', (updatedDeck) => {
-    displayInitialData(updatedDeck) // REPLACE THIS FUNCTION
+    const { playersCards } = updatedDeck
+    addDraggedCard(playersCards)
+    // displayInitialData(updatedDeck) // REPLACE THIS FUNCTION
 })
 
 socket.on('room-error', (error) => console.log(error))
