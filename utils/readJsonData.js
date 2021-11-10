@@ -3,10 +3,10 @@ const fs = require('fs')
 
 module.exports = function readJsonData() {
     const roomsData = fs.readFileSync(
-        path.join(`${__dirname}/../data`, 'rooms.json'),
-        'utf8', 
+        path.join(`${__dirname}/../store`, 'rooms.json'),
+        'utf8',
         (err, data) => {
-            if(err) throw err
+            if (err) throw err
             return data
         }
     )

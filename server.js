@@ -4,9 +4,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const joinRoom = require('./utils/joinRoom')
-const dragCards = require('./utils/dragCards')
-const dropCards = require('./utils/dropCards')
+const { joinRoom, dragCards, dropCards } = require('./events/index')
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {

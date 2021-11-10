@@ -1,5 +1,5 @@
-const readJsonData = require('./readJsonData')
-const writeJsonData = require('./writeJsonData')
+const readJsonData = require('../utils/readJsonData')
+const writeJsonData = require('../utils/writeJsonData')
 let socketRef
 
 module.exports = function joinRoom({ socket, roomInfo }) {

@@ -1,4 +1,4 @@
-const inMemoryActiveGames = require('../data/inMemoryGames')
+const inMemoryActiveGames = require('../store/inMemoryGames')
 let ioRef
 
 module.exports = function dropCards({ io, roomName, username, selectedCard }) {
