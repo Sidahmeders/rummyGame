@@ -1,7 +1,6 @@
 import getRoomInfo from '../../utils/getRoomInfo.js'
 import getPlayerCardsList from '../../utils/getPlayerCardsList.js'
 import getTargetCard from '../../utils/getTargetCard.js'
-
 import arrangeCards from './arrangeCards.js'
 
 const { username } = getRoomInfo()

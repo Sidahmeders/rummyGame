@@ -1,6 +1,7 @@
-import dragNewCard from './dragNewCard.js'
+import getRoomInfo from '../../../utils/getRoomInfo.js'
+const socket = io()
 
-export default function handleCardsDeckUI(cards) {
+export default function deckUIHandler(cards) {
     cards.push('hidden') // push the hidden card on top of the deck
     const cardsContainer = document.getElementById('cards')
 
@@ -12,4 +13,9 @@ export default function handleCardsDeckUI(cards) {
         }
         cardsContainer.appendChild(cardElement)
     })
+}
+
+function dragNewCard() {
+    const { roomName, username } = getRoomInfo()
+    socket.emit('drag-card', roomName, username)
 }

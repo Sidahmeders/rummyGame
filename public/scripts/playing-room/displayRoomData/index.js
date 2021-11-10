@@ -1,11 +1,11 @@
 import displayPlayers from './displayPlayers.js'
 import displayCards from './displayCards.js'
-import handleCardsDeckUI from './handleCardsDeckUI.js'
+import deckUIHandler from './deckUIHandler.js'
 
-export default function displayInitialData(updatedDeck) {
+export default function displayRoomData(updatedDeck) {
     const { players, cards, playersCards } = updatedDeck
 
     displayPlayers(players)
     displayCards(playersCards)
-    handleCardsDeckUI(cards)
+    deckUIHandler(cards)
 }

@@ -1,6 +1,6 @@
 import '../_globals.js'
-import './handleDropBox.js'
-import displayInitialData from './displayInitialData.js'
+import './dropBoxHandler.js'
+import displayRoomData from './displayRoomData/index.js'
 import addDraggedCard from './addDraggedCard.js'
 import removeDroppedCard from './removeDroppedCard.js'
 
@@ -20,7 +20,7 @@ async function fetchPlayingData() {
 }
 
 function handleSuccessfullFetch(updatedDeck) {
-    displayInitialData(updatedDeck)
+    displayRoomData(updatedDeck)
 }
 
 const socket = io()
@@ -32,7 +32,6 @@ socket.on('card-dropped', (updatedDeck) => {
 socket.on('card-dragged', (updatedDeck) => {
     const { playersCards } = updatedDeck
     addDraggedCard(playersCards)
-    // displayInitialData(updatedDeck) // REPLACE THIS FUNCTION
 })
 
 socket.on('room-error', (error) => console.log(error))

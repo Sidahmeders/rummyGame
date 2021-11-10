@@ -1,6 +1,6 @@
 import getRoomInfo from '../../utils/getRoomInfo.js'
 
-function handleDropBox() {
+function dropBoxHandler() {
     const dropBoxElement = document.getElementById('drop-box')
 
     dropBoxElement.addEventListener('dragover', dragOver)
@@ -27,4 +27,4 @@ function dragDrop() {
     socket.emit('drop-card', roomName, username, pickedCardClass)
 }
 
-handleDropBox()
+dropBoxHandler()

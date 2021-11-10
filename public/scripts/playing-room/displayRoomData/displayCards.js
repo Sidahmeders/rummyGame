@@ -1,4 +1,4 @@
-import arrangeCards from './arrangeCards.js'
+import arrangeCards from '../arrangeCards.js'
 
 export default function displayCards(playersCards) {
     for (let username in playersCards) {
