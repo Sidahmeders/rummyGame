@@ -257,3 +257,7 @@
     background-image: url(../asset/joke2.jpg) !important;
     background-size: cover;
 }
+
+.x-card {
+    background-image: url(../asset/x-card.jpg) !important;
+}

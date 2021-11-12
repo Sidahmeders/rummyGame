@@ -11,10 +11,12 @@ export default function addDraggedCard(playersCards) {
 
     const targetCard = getTargetCard(oldCardsList, newCardsList)
 
-    const cardElement = document.createElement('div')
-    cardElement.classList.add('player-card', targetCard)
-    cardElement.setAttribute('draggable', true)
-    arrangeCards(cardElement)
+    if (targetCard) {
+        const cardElement = document.createElement('div')
+        cardElement.classList.add('player-card', targetCard)
+        cardElement.setAttribute('draggable', true)
+        arrangeCards(cardElement)
+    }
 
     const playerElement = document.getElementsByClassName(`player ${username}`)
     playerElement[0].appendChild(cardElement)

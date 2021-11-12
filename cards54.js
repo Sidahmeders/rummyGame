@@ -1,4 +1,3 @@
-
 function createDeck() {
     const suits = ['H', 'C', 'D', 'S']
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
@@ -28,5 +27,5 @@ function shuffleTheDeck(deck) {
 
 module.exports = {
     createDeck,
-    shuffleTheDeck
+    shuffleTheDeck,
 }

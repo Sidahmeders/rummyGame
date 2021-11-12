@@ -1,10 +1,11 @@
 const { createDeck, shuffleTheDeck } = require('../cards54')
 const readJsonData = require('../utils/readJsonData')
 
+// TODO: Make getting the Initial room data as a Triggerd Event.
+
 module.exports = function getTheInitialRoomData(res, roomName, inMemoryActiveGames) {
     if (!roomName) {
-        const errorMsg = 'no roomName is provided'
-        res.status(400).json({ error: errorMsg })
+        res.status(400).json({ errorMsg: 'no roomName is provided' })
     } else {
         setRoomData(roomName, inMemoryActiveGames)
         res.status(200).json({ data: inMemoryActiveGames[roomName] })
