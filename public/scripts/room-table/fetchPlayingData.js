@@ -1,18 +1,12 @@
 import displayRoomData from './displayRoomData/index.js'
+const socket = io()
 
-export default async function fetchPlayingData() {
+export default function fetchPlayingData() {
     const roomName = location.href.split('/')[4]
-    let response = await fetch(`http://localhost:5000/room-data?roomName=${roomName}`)
-    response = await response.json()
-
-    const { data, error } = response
-    if (data) {
-        handleSuccessfullFetch(data)
-    } else {
-        console.log(error)
-    }
+    socket.emit('get-roomName-data', roomName)
 }
 
-function handleSuccessfullFetch(updatedDeck) {
+socket.on('user-joined-room', (updatedDeck) => {
+    console.log(updatedDeck, 'HELLO MY FRIEND...')
     displayRoomData(updatedDeck)
-}
+})

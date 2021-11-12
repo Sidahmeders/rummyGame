@@ -1,9 +1,7 @@
 const express = require('express')
 const path = require('path')
 
-const { createRooms, getAllRooms, getTheInitialRoomData } = require('../controllers/index')
-
-const inMemoryActiveGames = require('../store/inMemoryGames')
+const { createRooms, getAllRooms } = require('../controllers/index')
 
 const router = express.Router()
 
@@ -21,11 +19,6 @@ router.get('/get-rooms', (req, res) => {
 
 router.get('/room/:roomId', (req, res) => {
     res.sendFile(path.join(`${__dirname}/../public/room.html`))
-})
-
-router.get('/room-data', (req, res) => {
-    const { roomName } = req.query
-    getTheInitialRoomData(res, roomName, inMemoryActiveGames)
 })
 
 module.exports = router

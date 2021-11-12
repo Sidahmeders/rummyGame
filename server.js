@@ -4,17 +4,22 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const { joinRoom, dragCards, dropCards } = require('./events/index')
+const { joinRoom, dragCards, dropCards, getRoomNameData } = require('./events/index')
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
     console.log(`A user ${socket.id} connected`)
 
     socket.on('join-room', (roomInfo) => {
-        // log all the rooms
-        const allRooms = Object.keys(io.sockets.adapter.rooms)
-        console.log(allRooms)
+        // TODO: JOIN USERS TO ROOMS SOCKETS
+        // const allRooms = Object.keys(io.sockets.adapter.rooms)
+        // console.log(allRooms)
+
         joinRoom({ socket, roomInfo })
+    })
+
+    socket.on('get-roomName-data', (roomName) => {
+        getRoomNameData({ socket, roomName })
     })
 
     socket.on('drag-card', (roomName, username) => {
