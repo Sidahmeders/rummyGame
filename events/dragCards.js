@@ -25,6 +25,8 @@ function appendCard(username, targetRoom) {
 
     if (playerHand.length >= 9) {
         ioRef.emit('room-error', 'please drop a card before you can pick again')
+    } else if (!pickedCard) {
+        ioRef.emit('room-error', 'the cards deck is empty')
     } else {
         playerHand.push(pickedCard)
         ioRef.emit('card-dragged', targetRoom)
