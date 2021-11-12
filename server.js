@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('get-roomName-data', (roomName) => {
-        getRoomNameData({ io, socket, roomName })
+        getRoomNameData({ io, roomName })
     })
 
     socket.on('drag-card', (roomName, username) => {
