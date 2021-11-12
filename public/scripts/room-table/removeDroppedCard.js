@@ -9,5 +9,7 @@ export default function removeDroppedCard(playersCards) {
     const newCardsList = playersCards[username]
 
     const targetCard = getTargetCard(oldCardsList, newCardsList)
-    document.getElementsByClassName(`${targetCard}`)[0].remove()
+    if (targetCard) {
+        document.getElementsByClassName(`${targetCard}`)[0].remove()
+    }
 }

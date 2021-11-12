@@ -8,7 +8,6 @@ const { username } = getRoomInfo()
 export default function addDraggedCard(playersCards) {
     const newCardsList = getPlayerCardsList(playersCards, username)
     const oldCardsList = playersCards[username]
-
     const targetCard = getTargetCard(oldCardsList, newCardsList)
 
     if (targetCard) {
@@ -16,8 +15,8 @@ export default function addDraggedCard(playersCards) {
         cardElement.classList.add('player-card', targetCard)
         cardElement.setAttribute('draggable', true)
         arrangeCards(cardElement)
-    }
 
-    const playerElement = document.getElementsByClassName(`player ${username}`)
-    playerElement[0].appendChild(cardElement)
+        const playerElement = document.getElementsByClassName(`player ${username}`)
+        playerElement[0].appendChild(cardElement)
+    }
 }
