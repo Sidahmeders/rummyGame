@@ -2,12 +2,12 @@ const { createDeck, shuffleTheDeck } = require('../cards54')
 const readJsonData = require('../utils/readJsonData')
 const inMemoryActiveGames = require('../store/inMemoryGames.js')
 
-module.exports = function getRoomNameData({ socket, roomName }) {
+module.exports = function getRoomNameData({ io, socket, roomName }) {
     if (!roomName) {
-        socket.emit('room-error', 'roomName is null or undefined')
+        io.emit('room-error', 'roomName is null or undefined')
     } else {
         setRoomData(roomName, inMemoryActiveGames)
-        socket.emit('user-joined-room', inMemoryActiveGames[roomName])
+        io.emit('user-joined-room', inMemoryActiveGames[roomName])
     }
 }
 

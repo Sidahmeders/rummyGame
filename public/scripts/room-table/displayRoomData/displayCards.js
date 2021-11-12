@@ -7,24 +7,18 @@ export default function displayCards(playersCards) {
     for (let playerName in playersCards) {
         const playerElement = document.getElementsByClassName(`player ${playerName}`)
         const playerHand = playersCards[playerName]
+        const isTargetPlayer = playerName === username
 
-        // if (playerName === username) {
         playerHand.forEach((card) => {
             removeDuplicateCards(card)
             const cardElement = document.createElement('div')
-            cardElement.classList.add('player-card', card)
-            cardElement.setAttribute('draggable', true)
-            arrangeCards(cardElement)
+            cardElement.classList.add('player-card', isTargetPlayer ? card : 'x-card')
+            if (isTargetPlayer) {
+                cardElement.setAttribute('draggable', true)
+                arrangeCards(cardElement)
+            }
             playerElement[0].appendChild(cardElement)
         })
-        // } else {
-        //     playerHand.forEach((card) => {
-        //         removeDuplicateCards(card)
-        //         const cardElement = document.createElement('div')
-        //         cardElement.classList.add('player-card', 'x-card')
-        //         playerElement[0].appendChild(cardElement)
-        //     })
-        // }
     }
 }
 

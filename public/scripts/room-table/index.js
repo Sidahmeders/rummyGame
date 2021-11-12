@@ -19,13 +19,11 @@ socket.on('user-joined-room', (updatedDeck) => {
 })
 
 socket.on('card-dragged', (updatedDeck) => {
-    const { playersCards } = updatedDeck
-    addDraggedCard(playersCards)
+    addDraggedCard(updatedDeck)
 })
 
 socket.on('card-dropped', (updatedDeck) => {
-    const { playersCards } = updatedDeck
-    removeDroppedCard(playersCards)
+    removeDroppedCard(updatedDeck)
 })
 
 socket.on('room-error', (error) => console.log(error))

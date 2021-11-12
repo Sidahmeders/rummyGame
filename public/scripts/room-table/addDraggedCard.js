@@ -5,7 +5,7 @@ import arrangeCards from './arrangeCards.js'
 
 const { username } = getRoomInfo()
 
-export default function addDraggedCard(playersCards) {
+export default function addDraggedCard({ playersCards }) {
     const newCardsList = getPlayerCardsList(playersCards, username)
     const oldCardsList = playersCards[username]
     const targetCard = getTargetCard(oldCardsList, newCardsList)
