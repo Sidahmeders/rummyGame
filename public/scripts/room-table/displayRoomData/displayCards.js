@@ -8,23 +8,23 @@ export default function displayCards(playersCards) {
         const playerElement = document.getElementsByClassName(`player ${playerName}`)
         const playerHand = playersCards[playerName]
 
-        if (playerName === username) {
-            playerHand.forEach((card) => {
-                removeDuplicateCards(card)
-                const cardElement = document.createElement('div')
-                cardElement.classList.add('player-card', card)
-                cardElement.setAttribute('draggable', true)
-                arrangeCards(cardElement)
-                playerElement[0].appendChild(cardElement)
-            })
-        } else {
-            playerHand.forEach((card) => {
-                removeDuplicateCards(card)
-                const cardElement = document.createElement('div')
-                cardElement.classList.add('player-card', 'x-card')
-                playerElement[0].appendChild(cardElement)
-            })
-        }
+        // if (playerName === username) {
+        playerHand.forEach((card) => {
+            removeDuplicateCards(card)
+            const cardElement = document.createElement('div')
+            cardElement.classList.add('player-card', card)
+            cardElement.setAttribute('draggable', true)
+            arrangeCards(cardElement)
+            playerElement[0].appendChild(cardElement)
+        })
+        // } else {
+        //     playerHand.forEach((card) => {
+        //         removeDuplicateCards(card)
+        //         const cardElement = document.createElement('div')
+        //         cardElement.classList.add('player-card', 'x-card')
+        //         playerElement[0].appendChild(cardElement)
+        //     })
+        // }
     }
 }
 
