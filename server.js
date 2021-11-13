@@ -12,14 +12,11 @@ io.on('connection', (socket) => {
 
     socket.on('join-room', (roomInfo) => {
         // TODO: JOIN USERS TO ROOMS SOCKETS
-        // const allRooms = Object.keys(io.sockets.adapter.rooms)
-        // console.log(allRooms)
-
         joinRoom({ socket, roomInfo })
     })
 
     socket.on('get-roomName-data', (roomName) => {
-        getRoomNameData({ io, roomName })
+        getRoomNameData({ io, socket, roomName })
     })
 
     socket.on('drag-card', (roomName, username) => {
