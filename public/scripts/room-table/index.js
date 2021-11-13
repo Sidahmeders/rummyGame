@@ -5,8 +5,6 @@ import displayRoomData from './displayRoomData/index.js'
 import addDraggedCard from './addDraggedCard.js'
 import removeDroppedCard from './removeDroppedCard.js'
 
-const socket = io()
-
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
@@ -19,10 +17,12 @@ socket.on('user-joined-room', (updatedDeck) => {
 })
 
 socket.on('card-dragged', (updatedDeck) => {
+    console.log('Card has been dragged')
     addDraggedCard(updatedDeck)
 })
 
 socket.on('card-dropped', (updatedDeck) => {
+    console.log('Card has been dropped')
     removeDroppedCard(updatedDeck)
 })
 

@@ -11,7 +11,6 @@ io.on('connection', (socket) => {
     console.log(`A user ${socket.id} connected`)
 
     socket.on('join-room', (roomInfo) => {
-        // TODO: JOIN USERS TO ROOMS SOCKETS
         joinRoom({ socket, roomInfo })
     })
 
@@ -20,11 +19,11 @@ io.on('connection', (socket) => {
     })
 
     socket.on('drag-card', (roomName, username) => {
-        dragCards({ io, roomName, username })
+        dragCards({ socket, roomName, username })
     })
 
     socket.on('drop-card', (roomName, username, selectedCard) => {
-        dropCards({ io, roomName, username, selectedCard })
+        dropCards({ socket, roomName, username, selectedCard })
     })
 
     //Whenever someone disconnects this piece of code executed

@@ -1,64 +1,32 @@
 const inMemoryActiveGames = require('../store/inMemoryGames')
-let ioRef
 
-module.exports = function dragCards({ io, roomName, username }) {
+module.exports = function dragCards({ socket, roomName, username }) {
     try {
-        ioRef = io
         const targetRoom = inMemoryActiveGames[roomName]
         if (!targetRoom) {
-            ioRef.emit(
+            socket.emit(
                 'room-error',
                 'this room is empty, something unexpected happens. please try again'
             )
         } else {
-            appendCard(username, targetRoom)
+            appendCard({ socket, username, targetRoom })
         }
     } catch (err) {
-        ioRef.emit('room-error', err.message)
+        socket.emit('room-error', err.message)
     }
 }
 
-function appendCard(username, targetRoom) {
+function appendCard({ socket, username, targetRoom }) {
     const { cards, playersCards } = targetRoom
     const pickedCard = cards.pop()
     const playerHand = playersCards[username]
 
     if (playerHand.length >= 9) {
-        ioRef.emit('room-error', 'please drop a card before you can pick again')
+        socket.emit('room-error', 'please drop a card before you can pick again')
     } else if (!pickedCard) {
-        ioRef.emit('room-error', 'the cards deck is empty')
+        socket.emit('room-error', 'the cards deck is empty')
     } else {
         playerHand.push(pickedCard)
-        ioRef.emit('card-dragged', targetRoom)
+        socket.emit('card-dragged', targetRoom)
     }
 }
-
-/*
-{
-  cards: [
-    'H9', 'D9',      'D3', 'H2',
-    'S5', 'S2',      'C8', 'H4',
-    'SJ', 'CK',      'S7', 'SK',
-    'H8', 'CQ',      'HJ', 'HQ',
-    'DJ', 'S9',      'S3', 'C5',
-    'D7', 'ST',      'H6', 'C6',
-    'DK', 'D4',      'D2', 'CA',
-    'D6', 'HT',      'S4', 'SQ',
-    'C3', 'Joker-2', 'SA', 'HA',
-    'C7', 'Joker-1'
-  ],
-  players: [ 'kaiba', 'kaboto' ],
-  playersCards: {
-    kaiba: [
-      'H7', 'HK', 'C9',
-      'CT', 'D8', 'CJ',
-      'S6', 'H3'
-    ],
-    kaboto: [
-      'H5', 'C2', 'DT',
-      'C4', 'DA', 'S8',
-      'DQ', 'D5'
-    ]
-  }
-}
-*/

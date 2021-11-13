@@ -17,8 +17,6 @@ function dragLeave() {
     this.classList.remove('hovered')
 }
 
-const socket = io()
-
 function dragDrop() {
     this.classList.remove('hovered')
     const { roomName, username } = getRoomInfo()

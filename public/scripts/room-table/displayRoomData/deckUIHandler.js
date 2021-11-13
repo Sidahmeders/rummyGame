@@ -1,5 +1,4 @@
 import getRoomInfo from '../../../utils/getRoomInfo.js'
-const socket = io()
 
 export default function deckUIHandler(cards) {
     cards.push('hidden') // push the hidden card on top of the deck

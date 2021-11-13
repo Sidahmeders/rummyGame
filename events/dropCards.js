@@ -1,28 +1,26 @@
 const inMemoryActiveGames = require('../store/inMemoryGames')
-let ioRef
 
-module.exports = function dropCards({ io, roomName, username, selectedCard }) {
-    ioRef = io
+module.exports = function dropCards({ socket, roomName, username, selectedCard }) {
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {
-        ioRef.emit(
+        socket.emit(
             'room-error',
             'this room is empty, something unexpected happens. please try again'
         )
     } else {
-        dropCard(username, targetRoom, selectedCard)
+        dropCard({ socket, username, targetRoom, selectedCard })
     }
 }
 
-function dropCard(username, targetRoom, selectedCard) {
+function dropCard({ socket, username, targetRoom, selectedCard }) {
     const { playersCards } = targetRoom
     let playerHand = playersCards[username]
 
     if (playerHand.length <= 8) {
-        ioRef.emit('room-error', 'please make sure you have picked a card before you can drop')
+        socket.emit('room-error', 'please make sure you have picked a card before you can drop')
     } else {
         playerHand = playerHand.filter((card) => card !== selectedCard)
         targetRoom.playersCards[username] = playerHand
-        ioRef.emit('card-dropped', targetRoom)
+        socket.emit('card-dropped', targetRoom)
     }
 }
