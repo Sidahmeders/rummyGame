@@ -1,3 +1,5 @@
+// import { errorNotification } from '../notifications/index.js'
+
 let roomInfo = {}
 
 function handleInputChange(event) {
@@ -20,7 +22,8 @@ async function hanldeRoomSubmition() {
             document.getElementById('create-room-form').reset()
             window.location.reload()
         }
-    } catch (err) {
-        console.log(err.message)
+    } catch (error) {
+        console.log(error)
+        // errorNotification(error)
     }
 }

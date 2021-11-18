@@ -4,11 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="styles/home.css" />
+        <link rel="stylesheet" href="/styles/notifications.css" />
         <title>Home Page</title>
     </head>
     <body>
         <div id="create-room">
             <h1>~Rummy~</h1>
+
+            <div id="alert"></div>
 
             <form id="create-room-form" onsubmit="return false">
                 <div>
@@ -39,9 +42,9 @@
         <div id="rooms-container"></div>
 
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/scripts/_state.js"></script>
 
         <script src="/scripts/rooms/create-room.js"></script>
-        <script src="/scripts/rooms/get-all-rooms.js"></script>
-        <script src="/scripts/rooms/join-room.js"></script>
+        <script type="module" src="/scripts/rooms/get-all-rooms.js"></script>
     </body>
 </html>

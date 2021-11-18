@@ -1,5 +1,6 @@
 body {
     font-family: Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #112;
 }
 
 body::before {
@@ -19,6 +20,7 @@ body::before {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    color: lightskyblue;
 }
 
 h1 {
@@ -53,19 +55,19 @@ button {
     width: 90%;
     align-self: center;
     transition: 0.8s;
-    background: #c96355;
+    background: #236;
     color: white;
     border-radius: 4px;
 }
 
 button:hover {
-    background: #c96355dd;
+    background: #348;
 }
 
 #rooms-container div,
 form {
     width: 50vw;
-    background: #f3f1d9;
+    background: #224;
     padding: 3%;
     border-radius: 10px;
     display: flex;

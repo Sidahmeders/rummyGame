@@ -1,7 +1,11 @@
-const socket = io()
+import { errorNotification } from '../notifications/index.js'
 
-function joinRoom(roomName) {
-    const room = document.getElementById(`roomId-${roomName}`).children
+const socket = window.socket
+
+export default function joinRoom(event) {
+    event.preventDefault()
+    const roomId = event.target.id
+    const room = document.getElementById(roomId).children
     const roomInfo = {}
 
     for (let input of room) {
@@ -9,11 +13,13 @@ function joinRoom(roomName) {
         roomInfo[name] = value
     }
 
+    console.log(roomInfo)
+
     socket.emit('join-room', roomInfo)
 }
 
 socket.on('join-room-error', (error) => {
-    console.log(error)
+    errorNotification(error)
 })
 
 socket.on('user-joined-room', (roomName, username) => {

@@ -1,4 +1,3 @@
-import './_state.js'
 import './dropBoxHandler.js'
 import { errorNotification } from '../notifications/index.js'
 

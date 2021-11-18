@@ -1,3 +1,5 @@
+import joinRoom from './join-room.js'
+
 const getRooms = async () => {
     try {
         let response = await fetch('http://localhost:5000/get-rooms')
@@ -15,17 +17,24 @@ async function appendRooms() {
 
     for (let roomName in rooms) {
         const roomElement = document.createElement('div')
+        const formElement = document.createElement('form')
+        formElement.id = `roomId-${roomName}`
+        formElement.onsubmit = joinRoom
 
-        const roomText = `
-        join the ${roomName} room
-        <form id="roomId-${roomName}" onsubmit="return false">
-            <input name="roomName" value="${roomName}" readonly />
-            <input type="text" name="password" placeholder="please enter the room password.." />
-            <input type="text" name="username" placeholder="choose your username" />
-            <button value="${roomName}" onclick="joinRoom(this.value)">enter this room</button>
-        </form>
-    `
-        roomElement.innerHTML = roomText
+        const roomNameInput = document.createElement('input')
+        const passwordInput = document.createElement('input')
+        const usernameInput = document.createElement('input')
+        const buttonElement = document.createElement('button')
+
+        roomNameInput.value = roomName
+        roomNameInput.name = 'roomName'
+        roomNameInput.readOnly = true
+        passwordInput.placeholder = passwordInput.name = passwordInput.type = 'password'
+        usernameInput.placeholder = usernameInput.name = 'username'
+        buttonElement.innerText = 'join this room'
+
+        formElement.append(roomNameInput, passwordInput, usernameInput, buttonElement)
+        roomElement.appendChild(formElement)
         roomsContainer.appendChild(roomElement)
     }
 }
