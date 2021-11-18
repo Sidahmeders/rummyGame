@@ -3,10 +3,7 @@ const inMemoryActiveGames = require('../store/inMemoryGames')
 module.exports = function dropCards({ socket, roomName, username, selectedCard }) {
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {
-        socket.emit(
-            'room-error',
-            'this room is empty, something unexpected happens. please try again'
-        )
+        socket.emit('room-error', 'something unexpected happens. please refresh the page')
     } else {
         dropCard({ socket, username, targetRoom, selectedCard })
     }
@@ -17,7 +14,7 @@ function dropCard({ socket, username, targetRoom, selectedCard }) {
     let playerHand = playersCards[username]
 
     if (playerHand.length <= 8) {
-        socket.emit('room-error', 'please make sure you have picked a card before you can drop')
+        socket.emit('room-error', 'make sure you have picked a card before you can drop')
     } else {
         playerHand = playerHand.filter((card) => card !== selectedCard)
         targetRoom.playersCards[username] = playerHand

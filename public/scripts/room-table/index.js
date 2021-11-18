@@ -1,5 +1,6 @@
 import './_state.js'
 import './dropBoxHandler.js'
+import { errorNotification } from '../notifications/index.js'
 
 import displayRoomData from './displayRoomData/index.js'
 import addDraggedCard from './addDraggedCard.js'
@@ -17,13 +18,13 @@ socket.on('user-joined-room', (updatedDeck) => {
 })
 
 socket.on('card-dragged', (updatedDeck) => {
-    console.log('Card has been dragged')
     addDraggedCard(updatedDeck)
 })
 
 socket.on('card-dropped', (updatedDeck) => {
-    console.log('Card has been dropped')
     removeDroppedCard(updatedDeck)
 })
 
-socket.on('room-error', (error) => console.log(error))
+socket.on('room-error', (error) => {
+    errorNotification(error)
+})

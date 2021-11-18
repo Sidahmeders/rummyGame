@@ -4,10 +4,7 @@ module.exports = function dragCards({ socket, roomName, username }) {
     try {
         const targetRoom = inMemoryActiveGames[roomName]
         if (!targetRoom) {
-            socket.emit(
-                'room-error',
-                'this room is empty, something unexpected happens. please try again'
-            )
+            socket.emit('room-error', 'something unexpected happens. please refresh the page')
         } else {
             appendCard({ socket, username, targetRoom })
         }
