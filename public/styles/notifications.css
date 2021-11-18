@@ -11,8 +11,8 @@
 }
 
 #alert.error > div {
-    background: darkblue;
-    color: lightblue;
+    background: #6e0e0ef3;
+    color: #dcf4fc;
     min-width: 25vw;
     padding: 15px 30px;
     border-radius: 3px;

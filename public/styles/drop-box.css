@@ -9,8 +9,8 @@
     height: 120px;
     position: absolute;
     bottom: 0;
-    background-color: #884242d5;
-    border-top: 2px solid rgb(116, 6, 6);
+    background-color: #463b88d5;
+    border-top: 2px solid #c7b40d;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,5 +21,5 @@
 }
 
 #drop-box.hovered {
-    background: #40e0d077;
+    background: #49ffff96;
 }

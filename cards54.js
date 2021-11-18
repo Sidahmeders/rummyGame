@@ -1,15 +1,14 @@
 function createDeck() {
     const suits = ['H', 'C', 'D', 'S']
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
-    const decks = ['Joker-1', 'Joker-2']
+    const deck = ['Joker-1', 'Joker-2']
 
     for (let suit of suits) {
         for (let rank of ranks) {
-            decks.push(`${suit}${rank}`)
+            deck.push(`${suit}${rank}`)
         }
     }
-
-    return decks
+    return deck
 }
 
 function shuffleTheDeck(deck) {
@@ -21,7 +20,6 @@ function shuffleTheDeck(deck) {
         deck[randomPosition] = deck[i]
         deck[i] = randomCard
     }
-
     return deck
 }
 
