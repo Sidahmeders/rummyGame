@@ -13,8 +13,6 @@ export default function joinRoom(event) {
         roomInfo[name] = value
     }
 
-    console.log(roomInfo)
-
     socket.emit('join-room', roomInfo)
 }
 

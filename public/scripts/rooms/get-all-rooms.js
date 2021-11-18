@@ -1,13 +1,13 @@
 import joinRoom from './join-room.js'
+import { errorNotification } from '../notifications/index.js'
 
 const getRooms = async () => {
     try {
         let response = await fetch('http://localhost:5000/get-rooms')
         response = await response.json()
-
         return response
-    } catch (err) {
-        console.log(err.message)
+    } catch (error) {
+        errorNotification(error)
     }
 }
 

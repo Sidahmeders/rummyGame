@@ -49,6 +49,12 @@ io.on('connection', (socket) => {
  * @emits io.sockets.on() //initial connection from a client.
  */
 
+/**
+ * Pure Sequence (10_SPADE, J_SPADE, Q_SPADE)
+ * SET (2_CLOVER, 2_HEART, 2_SPADE)
+ * INVALID (4_SPADE, 5_SPADE, 8_SPADE)
+ */
+
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
