@@ -17,7 +17,21 @@ export default function addDraggedCard({ playersCards }) {
         arrangeCards(cardElement)
 
         const playerElement = document.getElementsByClassName(`player ${username}`)[0].childNodes
-        const lastNodeSet = playerElement[3]
-        lastNodeSet.appendChild(cardElement)
+        const minSetIndex = getMinSetIndex(playerElement)
+        const nodeSetContainer = playerElement[minSetIndex]
+        nodeSetContainer.appendChild(cardElement)
     }
+}
+
+function getMinSetIndex(playerElement) {
+    let minSetIndex = 0,
+        minLength = 4
+    playerElement.forEach((node, nodeIndex) => {
+        let nodeLength = node.childNodes.length
+        if (nodeIndex > 0 && minLength > nodeLength) {
+            minSetIndex = nodeIndex
+            minLength = nodeLength
+        }
+    })
+    return minSetIndex
 }
