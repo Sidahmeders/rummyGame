@@ -16,7 +16,8 @@ export default function addDraggedCard({ playersCards }) {
         cardElement.setAttribute('draggable', true)
         arrangeCards(cardElement)
 
-        const playerElement = document.getElementsByClassName(`player ${username}`)
-        playerElement[0].appendChild(cardElement)
+        const playerElement = document.getElementsByClassName(`player ${username}`)[0].childNodes
+        const lastNodeSet = playerElement[3]
+        lastNodeSet.appendChild(cardElement)
     }
 }
