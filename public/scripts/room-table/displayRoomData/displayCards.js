@@ -1,6 +1,5 @@
-import arrangeCards from '../arrangeCards.js'
 import getRoomInfo from '../../../utils/getRoomInfo.js'
-import handSetValidator from '../validateSets.js'
+import createHandSet from '../createHandSet.js'
 
 export default function displayCards(playersCards) {
     const { username } = getRoomInfo()
@@ -20,21 +19,6 @@ function appendPlayerCards(playerName, playerHand) {
         const handSetElement = createHandSet(handSet)
         playerElement[0].appendChild(handSetElement)
     }
-}
-
-function createHandSet(handSet) {
-    const handSetElement = document.createElement('div')
-    const setClassName = handSetValidator(handSet)
-    handSetElement.classList.add('hand-set', setClassName)
-
-    handSet.forEach((card) => {
-        const cardElement = document.createElement('div')
-        cardElement.classList.add('player-card', card)
-        cardElement.setAttribute('draggable', true)
-        arrangeCards(cardElement)
-        handSetElement.append(cardElement)
-    })
-    return handSetElement
 }
 
 function splitCards(cards) {

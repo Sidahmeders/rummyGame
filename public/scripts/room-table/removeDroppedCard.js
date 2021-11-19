@@ -1,6 +1,6 @@
-import getRoomInfo from '../../utils/getRoomInfo.js'
-import getPlayerCardsList from '../../utils/getPlayerCardsList.js'
-import getTargetCard from '../../utils/getTargetCard.js'
+import getRoomInfo from '../../../utils/getRoomInfo.js'
+import getTargetCard from '../../../utils/getTargetCard.js'
+import getPlayerCardsList from '../../../utils/getPlayerCardsList.js'
 
 const { username } = getRoomInfo()
 
