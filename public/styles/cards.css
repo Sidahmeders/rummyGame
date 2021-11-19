@@ -1,3 +1,42 @@
+.hand-set {
+    display: flex;
+    max-width: 15vw;
+    position: relative;
+}
+
+.hand-set::before {
+    text-align: center;
+    color: white;
+    font-family: cursive;
+    padding-bottom: 3px;
+    display: block;
+    width: 14.8vw;
+    height: 20px;
+    position: absolute;
+    bottom: -12%;
+    border-radius: 5px;
+}
+
+.hand-set.invalid::before {
+    content: 'invalid';
+    background: firebrick;
+}
+
+.hand-set.pure-sequance::before {
+    content: 'pure seqaunce';
+    background: seagreen;
+}
+
+.hand-set.valid-set::before {
+    content: 'valid set';
+    background: lightseagreen;
+}
+
+.hand-set.tunnela::before {
+    content: 'tunnela';
+    background: limegreen;
+}
+
 .card,
 .player-card {
     background-image: url('../asset/cards.png');
@@ -258,6 +297,6 @@
     background-size: cover;
 }
 
-.x-card {
+/* .x-card {
     background-image: url(../asset/x-card.jpg) !important;
-}
+} */

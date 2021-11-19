@@ -29,7 +29,8 @@ body::before {
     border-radius: 8px;
     margin: 10px 0;
     padding: 10px;
-    width: 45vw;
+    width: fit-content;
+    max-width: 45vw;
     z-index: 99;
     position: relative;
 }
