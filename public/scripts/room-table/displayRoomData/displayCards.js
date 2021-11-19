@@ -7,6 +7,8 @@ export default function displayCards(playersCards) {
         if (playerName === username) {
             const playerHand = playersCards[playerName]
             appendPlayerCards(playerName, playerHand)
+        } else {
+            appendOpponentCards(playerName)
         }
     }
 }
@@ -18,6 +20,16 @@ function appendPlayerCards(playerName, playerHand) {
     for (let handSet of handSets) {
         const handSetElement = createHandSet(handSet)
         playerElement[0].appendChild(handSetElement)
+    }
+}
+
+function appendOpponentCards(playerName) {
+    const playerElement = document.getElementsByClassName(`player ${playerName}`)
+    playerElement[0].style.width = '30vw'
+    for (let i = 0; i < 8; i++) {
+        const cardElement = document.createElement('div')
+        cardElement.classList.add('player-card', 'x-card')
+        playerElement[0].appendChild(cardElement)
     }
 }
 

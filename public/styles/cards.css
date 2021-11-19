@@ -297,6 +297,6 @@
     background-size: cover;
 }
 
-/* .x-card {
-    background-image: url(../asset/x-card.jpg) !important;
-} */
+.x-card {
+    background-position: -1862px -1px !important;
+}
