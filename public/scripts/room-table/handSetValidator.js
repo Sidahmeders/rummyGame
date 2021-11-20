@@ -76,6 +76,7 @@ function isValidTunnela(cards) {
 const rummyMethods = [isValidTunnela, isValidSet, isValidSequence]
 
 export default function handSetValidator(handSet, methods = rummyMethods) {
+    if (typeof handSet !== 'object') return false
     for (let method of methods) {
         let result = method(handSet)
         if (result) {

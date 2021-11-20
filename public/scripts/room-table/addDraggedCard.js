@@ -2,10 +2,10 @@ import getRoomInfo from '../../utils/getRoomInfo.js'
 import getPlayerCardsList from '../../utils/getPlayerCardsList.js'
 import getTargetCard from '../../utils/getTargetCard.js'
 import arrangeCards from './arrangeCards.js'
-
-const { username } = getRoomInfo()
+import handSetValidator from './handSetValidator.js'
 
 export default function addDraggedCard({ playersCards }) {
+    const { username } = getRoomInfo()
     const newCardsList = getPlayerCardsList(playersCards, username)
     const oldCardsList = playersCards[username]
     const targetCard = getTargetCard(oldCardsList, newCardsList)
@@ -19,6 +19,7 @@ export default function addDraggedCard({ playersCards }) {
         const playerElement = document.getElementsByClassName(`player ${username}`)[0].childNodes
         const minSetIndex = getMinSetIndex(playerElement)
         const nodeSetContainer = playerElement[minSetIndex]
+        updateSetStatus(nodeSetContainer)
         nodeSetContainer.appendChild(cardElement)
     }
 }
@@ -34,4 +35,25 @@ function getMinSetIndex(playerElement) {
         }
     })
     return minSetIndex
+}
+
+async function updateSetStatus(nodeSetContainer) {
+    const handSet = await extarctHandSet(nodeSetContainer)
+    const oldSetClass = nodeSetContainer.classList[1]
+    const newSetClass = handSetValidator(handSet)
+    nodeSetContainer.classList.replace(oldSetClass, newSetClass)
+}
+
+async function extarctHandSet(nodeSetContainer) {
+    const nodeSetCards = nodeSetContainer.childNodes
+    const handSet = []
+
+    return new Promise((reslove) => {
+        setTimeout(() => {
+            for (let card of nodeSetCards) {
+                handSet.push(card.classList[1])
+                reslove(handSet)
+            }
+        }, 5)
+    })
 }
