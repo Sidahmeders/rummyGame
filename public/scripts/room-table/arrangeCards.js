@@ -1,3 +1,5 @@
+import updateSetStatus from './updateSetStatus.js'
+
 export default function arrangeCards(cardElement) {
     cardElement.addEventListener('dragstart', dragStart)
     cardElement.addEventListener('dragend', dragEnd)
@@ -46,4 +48,12 @@ function dragDrop() {
 
     roomState.pickedCardElement.classList.remove(roomState.pickedCardClass)
     roomState.pickedCardElement.classList.add(roomState.droppedCardClass)
+    updateSwappedSetsStatus(this)
+}
+
+function updateSwappedSetsStatus(targetCard) {
+    let sourceNode = roomState.pickedCardElement.parentNode
+    let targetNode = targetCard.parentNode
+    updateSetStatus(sourceNode)
+    updateSetStatus(targetNode)
 }

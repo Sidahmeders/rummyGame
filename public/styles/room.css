@@ -31,7 +31,7 @@ body::before {
     padding: 10px;
     width: fit-content;
     max-width: 45vw;
-    z-index: 99;
+    z-index: 9;
     position: relative;
 }
 

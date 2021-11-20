@@ -1,6 +1,6 @@
 #alert {
     position: fixed;
-    z-index: 9;
+    z-index: 10;
     right: 0%;
     top: 0%;
     width: fit-content;
