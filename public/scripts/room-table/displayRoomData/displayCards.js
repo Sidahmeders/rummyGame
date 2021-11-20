@@ -23,16 +23,6 @@ function appendPlayerCards(playerName, playerHand) {
     }
 }
 
-function appendOpponentCards(playerName) {
-    const playerElement = document.getElementsByClassName(`player ${playerName}`)
-    playerElement[0].style.width = '30vw'
-    for (let i = 0; i < 8; i++) {
-        const cardElement = document.createElement('div')
-        cardElement.classList.add('player-card', 'x-card')
-        playerElement[0].appendChild(cardElement)
-    }
-}
-
 function splitCards(cards) {
     let subArrays = []
     let k = 0
@@ -46,4 +36,14 @@ function splitCards(cards) {
         k++
     }
     return subArrays
+}
+
+function appendOpponentCards(playerName) {
+    const playerElement = document.getElementsByClassName(`player ${playerName}`)
+    playerElement[0].style.width = '30vw'
+    for (let i = 0; i < 8; i++) {
+        const cardElement = document.createElement('div')
+        cardElement.classList.add('player-card', 'x-card')
+        playerElement[0].appendChild(cardElement)
+    }
 }

@@ -7,14 +7,15 @@ export default async function updateSetStatus(nodeSetContainer) {
     nodeSetContainer.classList.replace(oldSetClass, newSetClass)
 }
 
-async function extarctHandSet(nodeSetContainer) {
+function extarctHandSet(nodeSetContainer) {
     const nodeSetCards = nodeSetContainer.childNodes
     const handSet = []
 
     return new Promise((reslove) => {
         setTimeout(() => {
             for (let card of nodeSetCards) {
-                handSet.push(card.classList[1])
+                const cardIndex = card.classList.length - 1
+                handSet.push(card.classList[cardIndex])
                 reslove(handSet)
             }
         }, 5)
