@@ -4,32 +4,41 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const { joinRoom, dragCards, dropCards, getRoomNameData } = require('./events/index')
+const {
+  joinRoom,
+  dragCards,
+  dropCards,
+  getRoomNameData,
+  webrtcSignaling,
+} = require('./events/index')
 
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
-    console.log(`A user ${socket.id} connected`)
+  console.log(`A user ${socket.id} connected`)
 
-    socket.on('join-room', (roomInfo) => {
-        joinRoom({ socket, roomInfo })
-    })
+  socket.on('join-room', (roomInfo) => {
+    joinRoom({ socket, roomInfo })
+  })
 
-    socket.on('get-roomName-data', (roomName) => {
-        getRoomNameData({ io, socket, roomName })
-    })
+  socket.on('get-roomName-data', (roomName) => {
+    getRoomNameData({ io, socket, roomName })
+  })
 
-    socket.on('drag-card', (roomName, username) => {
-        dragCards({ socket, roomName, username })
-    })
+  socket.on('drag-card', (roomName, username) => {
+    dragCards({ socket, roomName, username })
+  })
 
-    socket.on('drop-card', (roomName, username, selectedCard) => {
-        dropCards({ socket, roomName, username, selectedCard })
-    })
+  socket.on('drop-card', (roomName, username, selectedCard) => {
+    dropCards({ socket, roomName, username, selectedCard })
+  })
 
-    //Whenever someone disconnects this piece of code executed
-    socket.on('disconnect', () => {
-        console.log(`A user ${socket.id} disconnected`)
-    })
+  //   socket.on('peer-message', {
+  //       webrtcSignaling
+  //   })
+
+  socket.on('disconnect', () => {
+    console.log(`A user ${socket.id} disconnected`)
+  })
 })
 
 /**
@@ -55,7 +64,7 @@ io.on('connection', (socket) => {
  * INVALID (4_SPADE, 5_SPADE, 8_SPADE)
  */
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/client'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
