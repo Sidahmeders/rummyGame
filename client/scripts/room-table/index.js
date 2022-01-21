@@ -8,22 +8,22 @@ import removeDroppedCard from './removeDroppedCard.js'
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
-    const roomName = location.href.split('/')[4]
-    socket.emit('get-roomName-data', roomName)
+  const roomName = location.href.split('/')[4]
+  socket.emit('get-room-data', roomName)
 }
 
 socket.on('user-joined-room', (updatedDeck) => {
-    displayRoomData(updatedDeck)
+  displayRoomData(updatedDeck)
 })
 
 socket.on('card-dragged', (updatedDeck) => {
-    addDraggedCard(updatedDeck)
+  addDraggedCard(updatedDeck)
 })
 
 socket.on('card-dropped', (updatedDeck) => {
-    removeDroppedCard(updatedDeck)
+  removeDroppedCard(updatedDeck)
 })
 
 socket.on('room-error', (error) => {
-    errorNotification(error)
+  errorNotification(error)
 })

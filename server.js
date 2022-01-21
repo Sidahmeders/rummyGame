@@ -4,42 +4,34 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const {
-  joinRoom,
-  dragCards,
-  dropCards,
-  getRoomNameData,
-  webrtcSignaling,
-} = require('./events/index')
+const { joinRoom, dragCards, dropCards, getRoomNameData, webrtcSignaling } = require('./events/index')
 
-//Whenever someone connects this gets executed
 io.on('connection', (socket) => {
   console.log(`A user ${socket.id} connected`)
 
-  socket.on('join-room', (roomInfo) => {
-    joinRoom({ socket, roomInfo })
-  })
+  socket.on('join-room', (roomInfo) => joinRoom({ socket, roomInfo }))
+  socket.on('get-room-data', (roomName) => getRoomNameData({ io, socket, roomName }))
 
-  socket.on('get-roomName-data', (roomName) => {
-    getRoomNameData({ io, socket, roomName })
-  })
+  socket.on('drag-card', (roomName, username) => dragCards({ socket, roomName, username }))
+  socket.on('drop-card', (roomName, username, selectedCard) => dropCards({ socket, roomName, username, selectedCard }))
 
-  socket.on('drag-card', (roomName, username) => {
-    dragCards({ socket, roomName, username })
-  })
+  socket.on('peer-message', (message) => webrtcSignaling().onPeerMessage(message))
+  socket.on('peer-join', (room) => webrtcSignaling().onPeerJoin(room))
 
-  socket.on('drop-card', (roomName, username, selectedCard) => {
-    dropCards({ socket, roomName, username, selectedCard })
-  })
-
-  //   socket.on('peer-message', {
-  //       webrtcSignaling
-  //   })
-
-  socket.on('disconnect', () => {
-    console.log(`A user ${socket.id} disconnected`)
-  })
+  socket.on('disconnect', () => console.log(`A user ${socket.id} disconnected`))
 })
+
+app.use(express.static(__dirname + '/client'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
+const corsConfig = require('./middlewares/cors.config')
+app.use((req, res, next) => corsConfig(req, res, next))
+
+app.use('/', require('./routes/rooms.routes'))
+
+const PORT = process.env.PORT || 5000
+server.listen(PORT, console.log(`server running on port ${PORT}..`))
 
 /**
  * @emits socket.emit('message',__"this_is_a_test") //sending to sender-client only
@@ -63,15 +55,3 @@ io.on('connection', (socket) => {
  * SET (2_CLOVER, 2_HEART, 2_SPADE)
  * INVALID (4_SPADE, 5_SPADE, 8_SPADE)
  */
-
-app.use(express.static(__dirname + '/client'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-
-const corsConfig = require('./middlewares/cors.config')
-app.use((req, res, next) => corsConfig(req, res, next))
-
-app.use('/', require('./routes/rooms.routes'))
-
-const PORT = process.env.PORT || 5000
-server.listen(PORT, console.log(`server running on port ${PORT}..`))
