@@ -1,5 +1,3 @@
-import { getRoomInfo } from '../utils.js'
-
 export default function deckUIHandler(cards) {
   cards.push('hidden') // push the hidden card on top of the deck
   const cardsContainer = document.getElementById('cards')

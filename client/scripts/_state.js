@@ -1,5 +1,11 @@
 var socket = io()
 
+var getRoomInfo = () => {
+  const roomName = location.href.split('/')[4]
+  const username = localStorage.getItem('username')
+  return { roomName, username }
+}
+
 // room-table
 var roomState = {
   pickedCardClass: undefined,
@@ -12,11 +18,11 @@ var peersMap = {}
 var localUuid
 var localStream
 var localVideo = document.getElementById('localVideo')
+var room
+var peerName
 
 var turnReady
 var STUNServers = null
-var room // peers-room
-
 var mediaConstraint = { audio: false, video: true }
 var peerConfig = {
   iceServers: [

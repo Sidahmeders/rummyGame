@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/styles/room.css" />
-        <link rel="stylesheet" href="/styles/notifications.css" />
-        <link rel="stylesheet" href="/styles/cards.css" />
-        <link rel="stylesheet" href="/styles/drop-box.css" />
-        <title>Room</title>
-    </head>
-    <body>
-        <div id="alert"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/peers-call.css" />
+    <link rel="stylesheet" href="/styles/room.css" />
+    <link rel="stylesheet" href="/styles/notifications.css" />
+    <link rel="stylesheet" href="/styles/cards.css" />
+    <link rel="stylesheet" href="/styles/drop-box.css" />
+    <title>Room</title>
+  </head>
+  <body>
+    <section id="VC">
+      <div id="videos">
+        <video id="localVideo" autoplay></video>
+        <!-- remote videos goes here -->
+      </div>
+    </section>
 
-        <div id="table"></div>
+    <div id="alert"></div>
 
-        <div id="dropped-cards"></div>
+    <div id="table"></div>
 
-        <div id="cards"></div>
+    <div id="dropped-cards"></div>
 
-        <div id="drop-box">drop box</div>
+    <div id="cards"></div>
 
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/scripts/_state.js"></script>
+    <div id="drop-box">drop box</div>
 
-        <script type="module" src="/scripts/room-table/index.js"></script>
-    </body>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/scripts/_state.js"></script>
+
+    <script type="module" src="/scripts/room-table/index.js"></script>
+  </body>
 </html>

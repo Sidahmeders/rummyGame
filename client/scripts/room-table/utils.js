@@ -17,12 +17,6 @@ export function getPlayerCardsList(playersCards, username) {
   return cardsList
 }
 
-export function getRoomInfo() {
-  const roomName = location.href.split('/')[4]
-  const username = localStorage.getItem('username')
-  return { roomName, username }
-}
-
 export function getTargetCard(oldCardsList, newCardsList) {
   for (let oldCard of oldCardsList) {
     if (newCardsList.indexOf(oldCard) === -1) {

@@ -1,4 +1,3 @@
-import { getRoomInfo } from '../utils.js'
 import createHandSet from '../createHandSet.js'
 
 export default function displayCards(playersCards) {

@@ -1,6 +1,4 @@
-import { getRoomInfo } from './utils.js'
-import { getPlayerCardsList } from './utils.js'
-import { getTargetCard } from './utils.js'
+import { getPlayerCardsList, getTargetCard } from './utils.js'
 import arrangeCards from './arrangeCards.js'
 import updateSetStatus from './updateSetStatus.js'
 

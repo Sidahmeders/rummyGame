@@ -1,11 +1,19 @@
 import requestTurn from './requestTURN.js'
 import { onJoined, onCall, onOffer, onAnswer, onCandidate } from './handlers.js'
+import { EventTypes } from './utils.js'
 
-if (room !== '') socket.emit('peer-join', room)
+const { roomName, username } = getRoomInfo()
+room = roomName
+peerName = username
+
+if (room) {
+  console.log(username, 'REQUESTING A PEER TO PEER CALL ON ROOM ', room)
+  socket.emit(EventTypes.join, room)
+}
 if (location.hostname !== 'localhost') requestTurn('https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913')
 
-socket.on('peer-joined', (payload) => onJoined(payload))
-socket.on('peer-call', (payload) => onCall(payload))
-socket.on('peer-offer', (payload) => onOffer(payload))
-socket.on('peer-answer', (payload) => onAnswer(payload))
-socket.on('peer-candidate', (payload) => onCandidate(payload))
+socket.on(EventTypes.joined, (payload) => onJoined(payload))
+socket.on(EventTypes.call, (payload) => onCall(payload))
+socket.on(EventTypes.offer, (payload) => onOffer(payload))
+socket.on(EventTypes.answer, (payload) => onAnswer(payload))
+socket.on(EventTypes.candidate, (payload) => onCandidate(payload))

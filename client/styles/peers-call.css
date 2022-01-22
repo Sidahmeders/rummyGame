@@ -1,0 +1,17 @@
+#VC {
+  border: 2px solid green;
+  margin: 20px 10px;
+  text-align: center;
+}
+
+#videos {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+video {
+  max-width: 100%;
+  width: 320px;
+}

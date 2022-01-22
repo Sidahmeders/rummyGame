@@ -1,4 +1,5 @@
 import './dropBoxHandler.js'
+import '../peers-call/index.js'
 import { errorNotification } from '../notifications/index.js'
 
 import displayRoomData from './displayRoomData/index.js'

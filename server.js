@@ -7,7 +7,7 @@ const io = require('socket.io')(server)
 const { joinRoom, dragCards, dropCards, getRoomNameData, webrtcSignaling } = require('./events/index')
 
 io.on('connection', (socket) => {
-  console.log(`A user ${socket.id} connected`)
+  console.log(`user:: ${socket.id} ::connected`)
 
   socket.on('join-room', (roomInfo) => joinRoom({ socket, roomInfo }))
   socket.on('get-room-data', (roomName) => getRoomNameData({ io, socket, roomName }))
@@ -15,8 +15,8 @@ io.on('connection', (socket) => {
   socket.on('drag-card', (roomName, username) => dragCards({ socket, roomName, username }))
   socket.on('drop-card', (roomName, username, selectedCard) => dropCards({ socket, roomName, username, selectedCard }))
 
-  socket.on('peer-message', (message) => webrtcSignaling().onPeerMessage(message))
-  socket.on('peer-join', (room) => webrtcSignaling().onPeerJoin(room))
+  socket.on('peer-join', (room) => webrtcSignaling({ socket }).onPeerJoin(room))
+  socket.on('peer-message', (message) => webrtcSignaling({ socket }).onPeerMessage(message))
 
   socket.on('disconnect', () => console.log(`A user ${socket.id} disconnected`))
 })

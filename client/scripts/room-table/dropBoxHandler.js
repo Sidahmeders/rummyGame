@@ -1,5 +1,3 @@
-import { getRoomInfo } from './utils.js'
-
 function dropBoxHandler() {
   const dropBoxElement = document.getElementById('drop-box')
 
