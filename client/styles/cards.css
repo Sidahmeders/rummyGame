@@ -1,19 +1,17 @@
 .hand-set {
   display: flex;
-  max-width: 15vw;
-  position: relative;
+  max-width: 14vw;
 }
 
 .hand-set::before {
   text-align: center;
   color: white;
   font-family: cursive;
-  padding-bottom: 3px;
   display: block;
-  width: 14.8vw;
-  height: 20px;
+  width: 13.8vw;
+  height: 24px;
   position: absolute;
-  bottom: -12%;
+  bottom: -6%;
   border-radius: 5px;
 }
 

@@ -1,8 +1,12 @@
 #VC {
-  width: 100vw;
+  width: 20vw;
   position: fixed;
-  border-bottom: 2px solid green;
-  text-align: center;
+  bottom: 0;
+  right: 0;
+  border: 2px solid #6c6218;
+  border-right: none;
+  border-bottom: none;
+  z-index: 2;
 }
 
 #videos {
@@ -14,5 +18,8 @@
 
 video {
   max-width: 100%;
-  width: 220px;
+  width: 200px;
+  border: 2px solid #6c6218;
+  border-radius: 6px;
+  margin: 2px;
 }
