@@ -1,6 +1,7 @@
 #VC {
-  border: 2px solid green;
-  margin: 20px 10px;
+  width: 100vw;
+  position: fixed;
+  border-bottom: 2px solid green;
   text-align: center;
 }
 
@@ -13,5 +14,5 @@
 
 video {
   max-width: 100%;
-  width: 320px;
+  width: 220px;
 }

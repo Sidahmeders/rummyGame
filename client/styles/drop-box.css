@@ -1,25 +1,25 @@
 ::selection {
-    background: transparent;
+  background: transparent;
 }
 
 #drop-box {
-    padding: 0;
-    margin: 0;
-    width: 99vw;
-    height: 120px;
-    position: absolute;
-    bottom: 0;
-    background-color: #463b88d5;
-    border-top: 2px solid #c7b40d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    opacity: 0.5;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    transition: 0.6s ease;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  background-color: #463b88d5;
+  border-top: 2px solid #c7b40d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  opacity: 0.5;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  transition: 0.6s ease;
 }
 
 #drop-box.hovered {
-    background: #49ffff96;
+  background: #49ffff96;
 }

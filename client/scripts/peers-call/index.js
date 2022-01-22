@@ -6,10 +6,7 @@ const { roomName, username } = getRoomInfo()
 room = roomName
 peerName = username
 
-if (room) {
-  console.log(username, 'REQUESTING A PEER TO PEER CALL ON ROOM ', room)
-  socket.emit(EventTypes.join, room)
-}
+if (room) socket.emit(EventTypes.join, room)
 if (location.hostname !== 'localhost') requestTurn('https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913')
 
 socket.on(EventTypes.joined, (payload) => onJoined(payload))

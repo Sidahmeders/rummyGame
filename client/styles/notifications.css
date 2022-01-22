@@ -1,19 +1,19 @@
 #alert {
-    position: fixed;
-    z-index: 10;
-    right: 0%;
-    top: 0%;
-    width: fit-content;
-    background: #4444;
-    text-align: center;
-    display: flex;
-    justify-content: center;
+  position: fixed;
+  z-index: 10;
+  right: 0%;
+  top: 0%;
+  width: fit-content;
+  background: #4444;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 #alert.error > div {
-    background: #6e0e0ef3;
-    color: #dcf4fc;
-    min-width: 25vw;
-    padding: 15px 30px;
-    border-radius: 3px;
+  background: #6e0e0ef3;
+  color: #dcf4fc;
+  min-width: 25vw;
+  padding: 15px 30px;
+  border-radius: 3px;
 }

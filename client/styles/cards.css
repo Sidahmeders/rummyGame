@@ -1,302 +1,302 @@
 .hand-set {
-    display: flex;
-    max-width: 15vw;
-    position: relative;
+  display: flex;
+  max-width: 15vw;
+  position: relative;
 }
 
 .hand-set::before {
-    text-align: center;
-    color: white;
-    font-family: cursive;
-    padding-bottom: 3px;
-    display: block;
-    width: 14.8vw;
-    height: 20px;
-    position: absolute;
-    bottom: -12%;
-    border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-family: cursive;
+  padding-bottom: 3px;
+  display: block;
+  width: 14.8vw;
+  height: 20px;
+  position: absolute;
+  bottom: -12%;
+  border-radius: 5px;
 }
 
 .hand-set.invalid::before {
-    content: 'invalid';
-    background: firebrick;
+  content: 'invalid';
+  background: firebrick;
 }
 
 .hand-set.pure-sequance::before {
-    content: 'pure seqaunce';
-    background: seagreen;
+  content: 'pure seqaunce';
+  background: seagreen;
 }
 
 .hand-set.valid-set::before {
-    content: 'valid set';
-    background: lightseagreen;
+  content: 'valid set';
+  background: lightseagreen;
 }
 
 .hand-set.tunnela::before {
-    content: 'tunnela';
-    background: limegreen;
+  content: 'tunnela';
+  background: limegreen;
 }
 
 .card,
 .player-card {
-    background-image: url('../asset/cards.png');
-    background-size: 2004px 800px;
-    width: 141px;
-    height: 198px;
-    z-index: 2;
-    border: 1px solid #333;
-    border-radius: 10px;
+  background-image: url('../asset/cards.png');
+  background-size: 2004px 800px;
+  width: 141px;
+  height: 198px;
+  z-index: 2;
+  border: 1px solid #333;
+  border-radius: 10px;
 }
 
 .card {
-    position: absolute;
-    top: 30%;
-    left: 45%;
+  position: absolute;
+  top: 30%;
+  left: 45%;
 }
 
 .player {
-    display: flex;
+  display: flex;
 }
 
 .player-card {
-    z-index: 9;
+  z-index: 9;
 }
 
 .hidden {
-    background-position: -1862px -1px !important;
+  background-position: -1862px -1px !important;
 }
 
 .player-card.invisible {
-    display: none;
+  display: none;
 }
 
 .player-card.hold {
-    width: 330px;
-    border: 2px solid orange;
+  width: 330px;
+  border: 2px solid orange;
 }
 
 .player-card.hovered {
-    border: 2px solid orange;
+  border: 2px solid orange;
 }
 
 .SA {
-    background-position: -1px -401px;
+  background-position: -1px -401px;
 }
 
 .S2 {
-    background-position: -144px -401px;
+  background-position: -144px -401px;
 }
 
 .S3 {
-    background-position: -287px -401px;
+  background-position: -287px -401px;
 }
 
 .S4 {
-    background-position: -430px -401px;
+  background-position: -430px -401px;
 }
 
 .S5 {
-    background-position: -572px -401px;
+  background-position: -572px -401px;
 }
 
 .S6 {
-    background-position: -715px -401px;
+  background-position: -715px -401px;
 }
 
 .S7 {
-    background-position: -858px -401px;
+  background-position: -858px -401px;
 }
 
 .S8 {
-    background-position: -1001px -401px;
+  background-position: -1001px -401px;
 }
 
 .S9 {
-    background-position: -1143px -401px;
+  background-position: -1143px -401px;
 }
 
 .ST {
-    background-position: -1286px -401px;
+  background-position: -1286px -401px;
 }
 
 .SJ {
-    background-position: -1429px -401px;
+  background-position: -1429px -401px;
 }
 
 .SQ {
-    background-position: -1573px -401px;
+  background-position: -1573px -401px;
 }
 
 .SK {
-    background-position: -1716px -401px;
+  background-position: -1716px -401px;
 }
 
 .HA {
-    background-position: -1px -201px;
+  background-position: -1px -201px;
 }
 
 .H2 {
-    background-position: -144px -201px;
+  background-position: -144px -201px;
 }
 
 .H3 {
-    background-position: -287px -201px;
+  background-position: -287px -201px;
 }
 
 .H4 {
-    background-position: -430px -201px;
+  background-position: -430px -201px;
 }
 
 .H5 {
-    background-position: -572px -201px;
+  background-position: -572px -201px;
 }
 
 .H6 {
-    background-position: -715px -201px;
+  background-position: -715px -201px;
 }
 
 .H7 {
-    background-position: -858px -201px;
+  background-position: -858px -201px;
 }
 
 .H8 {
-    background-position: -1001px -201px;
+  background-position: -1001px -201px;
 }
 
 .H9 {
-    background-position: -1143px -201px;
+  background-position: -1143px -201px;
 }
 
 .HT {
-    background-position: -1286px -201px;
+  background-position: -1286px -201px;
 }
 
 .HJ {
-    background-position: -1429px -201px;
+  background-position: -1429px -201px;
 }
 
 .HQ {
-    background-position: -1573px -201px;
+  background-position: -1573px -201px;
 }
 
 .HK {
-    background-position: -1716px -201px;
+  background-position: -1716px -201px;
 }
 
 .DA {
-    background-position: -1px -601px;
+  background-position: -1px -601px;
 }
 
 .D2 {
-    background-position: -144px -601px;
+  background-position: -144px -601px;
 }
 
 .D3 {
-    background-position: -287px -601px;
+  background-position: -287px -601px;
 }
 
 .D4 {
-    background-position: -430px -601px;
+  background-position: -430px -601px;
 }
 
 .D5 {
-    background-position: -572px -601px;
+  background-position: -572px -601px;
 }
 
 .D6 {
-    background-position: -715px -601px;
+  background-position: -715px -601px;
 }
 
 .D7 {
-    background-position: -858px -601px;
+  background-position: -858px -601px;
 }
 
 .D8 {
-    background-position: -1001px -601px;
+  background-position: -1001px -601px;
 }
 
 .D9 {
-    background-position: -1143px -601px;
+  background-position: -1143px -601px;
 }
 
 .DT {
-    background-position: -1286px -601px;
+  background-position: -1286px -601px;
 }
 
 .DJ {
-    background-position: -1429px -601px;
+  background-position: -1429px -601px;
 }
 
 .DQ {
-    background-position: -1573px -601px;
+  background-position: -1573px -601px;
 }
 
 .DK {
-    background-position: -1716px -601px;
+  background-position: -1716px -601px;
 }
 
 .CA {
-    background-position: -1px -1px;
+  background-position: -1px -1px;
 }
 
 .C2 {
-    background-position: -144px -1px;
+  background-position: -144px -1px;
 }
 
 .C3 {
-    background-position: -287px -1px;
+  background-position: -287px -1px;
 }
 
 .C4 {
-    background-position: -430px -1px;
+  background-position: -430px -1px;
 }
 
 .C5 {
-    background-position: -572px -1px;
+  background-position: -572px -1px;
 }
 
 .C6 {
-    background-position: -715px -1px;
+  background-position: -715px -1px;
 }
 
 .C7 {
-    background-position: -858px -1px;
+  background-position: -858px -1px;
 }
 
 .C8 {
-    background-position: -1001px -1px;
+  background-position: -1001px -1px;
 }
 
 .C9 {
-    background-position: -1143px -1px;
+  background-position: -1143px -1px;
 }
 
 .CT {
-    background-position: -1286px -1px;
+  background-position: -1286px -1px;
 }
 
 .CJ {
-    background-position: -1429px -1px;
+  background-position: -1429px -1px;
 }
 
 .CQ {
-    background-position: -1573px -1px;
+  background-position: -1573px -1px;
 }
 
 .CK {
-    background-position: -1716px -1px;
+  background-position: -1716px -1px;
 }
 
 .Joker-1 {
-    background-image: url(../asset/joke1.png) !important;
-    background-size: cover;
+  background-image: url(../asset/joke1.png) !important;
+  background-size: cover;
 }
 
 .Joker-2 {
-    background-image: url(../asset/joke2.jpg) !important;
-    background-size: cover;
+  background-image: url(../asset/joke2.jpg) !important;
+  background-size: cover;
 }
 
 .x-card {
-    background-position: -1862px -1px !important;
+  background-position: -1862px -1px !important;
 }
