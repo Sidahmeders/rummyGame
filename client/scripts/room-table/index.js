@@ -9,7 +9,7 @@ import removeDroppedCard from './removeDroppedCard.js'
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
-  const roomName = location.href.split('/')[4]
+  const { roomName } = getRoomInfo()
   socket.emit('get-room-data', roomName)
 }
 

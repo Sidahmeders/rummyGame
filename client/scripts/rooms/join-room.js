@@ -3,24 +3,23 @@ import { errorNotification } from '../notifications/index.js'
 const socket = window.socket
 
 export default function joinRoom(event) {
-    event.preventDefault()
-    const roomId = event.target.id
-    const room = document.getElementById(roomId).children
-    const roomInfo = {}
+  event.preventDefault()
+  const roomId = event.target.id
+  const room = document.getElementById(roomId).children
+  const roomInfo = {}
 
-    for (let input of room) {
-        let { name, value } = input
-        roomInfo[name] = value
-    }
+  for (let input of room) {
+    let { name, value } = input
+    roomInfo[name] = value
+  }
 
-    socket.emit('join-room', roomInfo)
+  socket.emit('join-room', roomInfo)
 }
 
 socket.on('join-room-error', (error) => {
-    errorNotification(error)
+  errorNotification(error)
 })
 
 socket.on('user-joined-room', (roomName, username) => {
-    localStorage.setItem('username', username)
-    location.href = `/room/${roomName}`
+  location.href = `/room/${roomName}?username=${username}`
 })

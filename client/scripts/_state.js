@@ -1,8 +1,8 @@
 var socket = io()
 
 var getRoomInfo = () => {
-  const roomName = location.href.split('/')[4]
-  const username = localStorage.getItem('username')
+  const roomName = location.pathname.split('/')[2]
+  const username = location.search.split('=')[1]
   return { roomName, username }
 }
 
