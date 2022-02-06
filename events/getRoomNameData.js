@@ -23,7 +23,7 @@ function setRoomData(roomName, inMemoryGames) {
   const { players } = roomsData[roomName]
   players.forEach((username) => {
     if (!playersCards[username]) {
-      playersCards[username] = deckOfCards.splice(0, 8)
+      playersCards[username] = deckOfCards.splice(0, 14)
     }
   })
 

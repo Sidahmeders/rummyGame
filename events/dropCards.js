@@ -13,7 +13,7 @@ function dropCard({ socket, username, targetRoom, selectedCard }) {
   const { playersCards } = targetRoom
   let playerHand = playersCards[username]
 
-  if (playerHand.length <= 8) {
+  if (playerHand.length <= 14) {
     socket.emit('room-error', 'make sure you have picked a card before you can drop')
   } else {
     playerHand = playerHand.filter((card) => card !== selectedCard)

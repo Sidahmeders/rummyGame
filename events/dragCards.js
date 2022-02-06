@@ -18,7 +18,7 @@ function appendCard({ socket, username, targetRoom }) {
   const pickedCard = cards.pop()
   const playerHand = playersCards[username]
 
-  if (playerHand.length >= 9) {
+  if (playerHand.length >= 15) {
     socket.emit('room-error', 'please drop a card before you can pick again')
   } else if (!pickedCard) {
     socket.emit('room-error', 'the cards deck is empty')
