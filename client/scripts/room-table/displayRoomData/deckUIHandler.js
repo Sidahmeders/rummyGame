@@ -1,18 +1,20 @@
 export default function deckUIHandler(cards) {
-  cards.push('hidden') // push the hidden card on top of the deck
   const cardsContainer = document.getElementById('cards')
 
-  cards.forEach((card) => {
+  while (cards.length) {
+    const card = cards.pop()
     const cardElement = document.createElement('div')
     cardElement.classList.add('card', card)
-    if (card === 'hidden') {
-      cardElement.onclick = dragNewCard
-    }
     cardsContainer.appendChild(cardElement)
-  })
+  }
+
+  cardsContainer.appendChild(hiddenCard())
 }
 
-function dragNewCard() {
-  const { roomName, username } = getRoomInfo()
-  socket.emit('drag-card', roomName, username)
+function hiddenCard() {
+  const hiddenCardElement = document.createElement('div')
+  hiddenCardElement.className = 'card hidden'
+  const { roomName, username } = window.getRoomInfo()
+  hiddenCardElement.onclick = () => window.socket.emit('drag-card', roomName, username)
+  return hiddenCardElement
 }

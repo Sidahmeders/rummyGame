@@ -10,7 +10,7 @@ io.on('connection', (socket) => {
   console.log(`user:: ${socket.id} ::connected`)
 
   socket.on('join-room', (roomInfo) => joinRoom({ socket, roomInfo }))
-  socket.on('get-room-data', (roomName) => getRoomNameData({ io, socket, roomName }))
+  socket.on('get-room-data', ({ roomName, username }) => getRoomNameData({ io, socket, roomName, username }))
 
   socket.on('drag-card', (roomName, username) => dragCards({ socket, roomName, username }))
   socket.on('drop-card', (roomName, username, selectedCard) => dropCards({ socket, roomName, username, selectedCard }))
@@ -51,8 +51,10 @@ server.listen(PORT, console.log(`server running on port ${PORT}..`))
  */
 
 /**
- * valid sets (10_S, J_S, Q_S) || (2_C, 2_H, 2_S) || (4_S, 5_S, 8_S)
- *
+ * valid suite (10-S, J-S, Q-S), (2-C, 2-H, 2-S), (4-S, 5-S, 6-S, ...)
+ * valid suite (A-H, 2-H, 3-H, 4-H, 5-H, 6-H....)
+ * 1 2 3 4.... J Q K A
+ * A = 11 OR 1
  * 91++ point can drop
  * n_i++ can beat n_i
  * a complete set can beat em all

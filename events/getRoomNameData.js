@@ -2,15 +2,27 @@ const createNewDeck = require('../cards54')
 const readJsonData = require('../utils/readJsonData')
 const inMemoryGames = require('../store/inMemoryGames.js')
 
-module.exports = function getRoomNameData({ io, socket, roomName }) {
+module.exports = function getRoomNameData({ io, socket, roomName, username }) {
   socket.join(roomName)
 
   if (!roomName) {
     socket.emit('room-error', 'roomName is null or undefined')
   } else {
     setRoomData(roomName, inMemoryGames)
-    io.in(roomName).emit('user-joined-room', inMemoryGames[roomName])
+    const userData = getUserData(username, roomName)
+    io.in(roomName).emit('user-joined-room', userData)
   }
+}
+
+function getUserData(username, roomName) {
+  const roomNameData = inMemoryGames[roomName]
+  const userData = {
+    playerCards: roomNameData?.playersCards[username],
+    players: roomNameData?.players,
+    cards: roomNameData?.cards,
+  }
+
+  return userData
 }
 
 function setRoomData(roomName, inMemoryGames) {

@@ -1,17 +1,9 @@
 import createHandSet from '../createHandSet.js'
 
-export default function displayCards(playersCards) {
-  for (let playerName in playersCards) {
-    if (playerName === window.peerName) {
-      const playerHand = playersCards[playerName]
-      appendPlayerCards(playerName, playerHand)
-    }
-  }
-}
-
-function appendPlayerCards(playerName, playerHand) {
-  const playerElement = document.getElementsByClassName(`player ${playerName}`)
-  const handSets = splitCards(playerHand)
+export default function displayCards(playerCards) {
+  const { username } = window.getRoomInfo()
+  const playerElement = document.getElementsByClassName(`player ${username}`)
+  const handSets = splitCards(playerCards)
 
   for (let handSet of handSets) {
     const handSetElement = createHandSet(handSet)

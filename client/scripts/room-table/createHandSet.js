@@ -2,6 +2,7 @@ import arrangeCards from './arrangeCards.js'
 import suiteValidator from './suiteValidator.js'
 
 export default function createHandSet(handSet) {
+  console.log(handSet) // FIXME:
   const handSetElement = document.createElement('div')
   const handSetClass = suiteValidator(handSet)
   handSetElement.classList.add('hand-set', handSetClass)

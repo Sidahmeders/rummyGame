@@ -4,7 +4,7 @@ export default function displayPlayers(players) {
   replacmentElement.setAttribute('id', 'table')
 
   players.map((player) => {
-    if (player === peerName) {
+    if (player === window.peerName) {
       const playerElement = document.createElement('div')
       playerElement.classList.add('player', player)
       playerElement.innerHTML = `<p class="username"> ${player} </p>`
