@@ -3,8 +3,8 @@ import displayCards from './displayCards.js'
 import deckUIHandler from './deckUIHandler.js'
 
 export default function displayRoomData(userData) {
-  const { playerCards, players, cards } = userData
-  displayPlayers(players)
+  const { playerCards, cards } = userData
+  displayPlayers()
   displayCards(playerCards)
   deckUIHandler(cards)
 }
