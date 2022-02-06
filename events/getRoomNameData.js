@@ -1,4 +1,4 @@
-const { createDeck, shuffleTheDeck } = require('../cards54')
+const createNewDeck = require('../cards54')
 const readJsonData = require('../utils/readJsonData')
 const inMemoryGames = require('../store/inMemoryGames.js')
 
@@ -17,7 +17,7 @@ function setRoomData(roomName, inMemoryGames) {
   const roomsData = JSON.parse(readJsonData())
 
   const targetRoom = inMemoryGames[roomName]
-  let deckOfCards = targetRoom ? targetRoom.cards : shuffleTheDeck(createDeck())
+  let deckOfCards = targetRoom ? targetRoom.cards : createNewDeck(2)
   let playersCards = targetRoom ? targetRoom.playersCards : new Object()
 
   const { players } = roomsData[roomName]
