@@ -4,7 +4,7 @@ import { EventTypes } from './utils.js'
 
 const { roomName, username } = getRoomInfo()
 room = roomName
-peerName = username
+localUserName = username
 
 if (room) socket.emit(EventTypes.join, room)
 if (location.hostname !== 'localhost') requestTurn('https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913')

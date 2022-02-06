@@ -5,7 +5,7 @@ export default function displayPlayers() {
 
   const playerElement = document.createElement('div')
   playerElement.id = 'player'
-  playerElement.innerHTML = `<p class="username"> ${window.peerName} </p>`
+  playerElement.innerHTML = `<p class="username"> ${window.localUserName} </p>`
   replacmentElement.appendChild(playerElement)
 
   tableElement.replaceWith(replacmentElement)

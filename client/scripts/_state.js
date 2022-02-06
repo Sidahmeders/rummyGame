@@ -19,7 +19,7 @@ var localUuid
 var localStream
 var localVideo = document.getElementById('localVideo')
 var room
-var peerName
+var localUserName
 
 var turnReady
 var STUNServers = null
