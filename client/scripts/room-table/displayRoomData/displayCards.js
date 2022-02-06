@@ -2,7 +2,7 @@ import createHandSet from '../createHandSet.js'
 
 export default function displayCards(playersCards) {
   for (let playerName in playersCards) {
-    if (playerName === peerName) {
+    if (playerName === window.peerName) {
       const playerHand = playersCards[playerName]
       appendPlayerCards(playerName, playerHand)
     }

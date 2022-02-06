@@ -9,22 +9,23 @@ import removeDroppedCard from './removeDroppedCard.js'
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
-  const { roomName } = getRoomInfo()
-  socket.emit('get-room-data', roomName)
+  const { roomName } = window.getRoomInfo()
+  window.socket.emit('get-room-data', roomName)
 }
 
-socket.on('user-joined-room', (updatedDeck) => {
+window.socket.on('user-joined-room', (updatedDeck) => {
+  console.log(updatedDeck) // FIXME:
   displayRoomData(updatedDeck)
 })
 
-socket.on('card-dragged', (updatedDeck) => {
+window.socket.on('card-dragged', (updatedDeck) => {
   addDraggedCard(updatedDeck)
 })
 
-socket.on('card-dropped', (updatedDeck) => {
+window.socket.on('card-dropped', (updatedDeck) => {
   removeDroppedCard(updatedDeck)
 })
 
-socket.on('room-error', (error) => {
+window.socket.on('room-error', (error) => {
   errorNotification(error)
 })
