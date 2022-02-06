@@ -17,17 +17,10 @@ function setRoomData(roomName, inMemoryGames) {
   const roomsData = JSON.parse(readJsonData())
 
   const targetRoom = inMemoryGames[roomName]
+  let deckOfCards = targetRoom ? targetRoom.cards : shuffleTheDeck(createDeck())
+  let playersCards = targetRoom ? targetRoom.playersCards : new Object()
+
   const { players } = roomsData[roomName]
-  let deckOfCards,
-    playersCards = {}
-
-  if (!targetRoom) {
-    deckOfCards = shuffleTheDeck(createDeck())
-  } else {
-    deckOfCards = targetRoom.cards
-    playersCards = targetRoom.playersCards
-  }
-
   players.forEach((username) => {
     if (!playersCards[username]) {
       playersCards[username] = deckOfCards.splice(0, 8)
@@ -36,7 +29,7 @@ function setRoomData(roomName, inMemoryGames) {
 
   inMemoryGames[roomName] = {
     cards: deckOfCards,
-    players,
     playersCards,
+    players,
   }
 }
