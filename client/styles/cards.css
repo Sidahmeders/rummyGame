@@ -52,10 +52,6 @@
   left: 69%;
 }
 
-.player {
-  display: flex;
-}
-
 .player-card {
   z-index: 9;
 }

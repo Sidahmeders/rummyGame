@@ -7,7 +7,7 @@
   flex-wrap: wrap;
 }
 
-#table .player {
+#table #player {
   color: rgb(13, 140, 214);
   border: 2px solid aliceblue;
   background-color: rgba(240, 248, 255, 0.3);
@@ -18,9 +18,11 @@
   max-width: 72vw;
   z-index: 9;
   position: relative;
+
+  display: flex;
 }
 
-#table .player .username {
+#table #player .username {
   position: absolute;
   top: -20%;
   left: 0;

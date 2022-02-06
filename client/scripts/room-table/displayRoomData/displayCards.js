@@ -1,16 +1,17 @@
-import createHandSet from '../createHandSet.js'
+import arrangeCards from '../arrangeCards.js'
+import suiteValidator from '../suiteValidator.js'
 
 export default function displayCards(playerCards) {
-  const { username } = window.getRoomInfo()
-  const playerElement = document.getElementsByClassName(`player ${username}`)
+  const playerElement = document.getElementById('player')
   const handSets = splitCards(playerCards)
 
   for (let handSet of handSets) {
     const handSetElement = createHandSet(handSet)
-    playerElement[0].appendChild(handSetElement)
+    playerElement.appendChild(handSetElement)
   }
 }
 
+// FIXME: ADD or REMOVE
 function splitCards(cards) {
   let subArrays = []
   let k = 0
@@ -25,3 +26,28 @@ function splitCards(cards) {
   }
   return subArrays
 }
+
+function createHandSet(handSet) {
+  const handSetElement = document.createElement('div')
+  const handSetClass = suiteValidator(handSet)
+  handSetElement.classList.add('hand-set', handSetClass)
+
+  handSet.forEach((card) => {
+    const cardElement = document.createElement('div')
+    cardElement.classList.add('player-card', card)
+    cardElement.setAttribute('draggable', true)
+    arrangeCards(cardElement)
+    handSetElement.append(cardElement)
+  })
+  return handSetElement
+}
+
+// function createHandCardsContainer(playerCards) {
+//   while (playerCards.length) {
+//     const card = playerCards.pop()
+//     const cardElement = document.createElement('div')
+//     cardElement.classList.add('player-card', card)
+//     cardElement.setAttribute('draggable', true)
+
+//   }
+// }

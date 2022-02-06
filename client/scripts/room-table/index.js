@@ -14,7 +14,7 @@ function fetchRoomNameData() {
 }
 
 window.socket.on('user-joined-room', (userData) => {
-  console.log(userData) // FIXME:
+  console.log(userData) // FIXME: REMOVE
   displayRoomData(userData)
 })
 

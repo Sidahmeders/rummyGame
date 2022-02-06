@@ -1,19 +1,16 @@
-export function getPlayerCardsList(playersCards, username) {
+export function getPlayerCardsList() {
   const cardsList = []
-  for (let playerName in playersCards) {
-    if (playerName === username) {
-      const playerElement = document.getElementsByClassName(`player ${playerName}`)
-      const setsNodes = playerElement[0].childNodes
+  const playerElement = document.getElementById('player')
+  const setsNodes = playerElement.childNodes
 
-      for (let k = 1; k < setsNodes.length; k++) {
-        let setNodeList = setsNodes[k].childNodes
-        for (let node of setNodeList) {
-          const nodeClass = node.classList[1]
-          cardsList.push(nodeClass)
-        }
-      }
+  for (let k = 1; k < setsNodes.length; k++) {
+    let setNodeList = setsNodes[k].childNodes
+    for (let node of setNodeList) {
+      const nodeClass = node.classList[1]
+      cardsList.push(nodeClass)
     }
   }
+
   return cardsList
 }
 

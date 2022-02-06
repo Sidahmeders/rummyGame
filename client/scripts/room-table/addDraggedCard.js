@@ -4,7 +4,7 @@ import updateSetStatus from './updateSetStatus.js'
 
 export default function addDraggedCard({ playersCards }) {
   const { username } = window.getRoomInfo()
-  const newCardsList = getPlayerCardsList(playersCards, username)
+  const newCardsList = getPlayerCardsList()
   const oldCardsList = playersCards[username]
   const targetCard = getTargetCard(oldCardsList, newCardsList)
 
@@ -14,7 +14,7 @@ export default function addDraggedCard({ playersCards }) {
     cardElement.setAttribute('draggable', true)
     arrangeCards(cardElement)
 
-    const playerElement = document.getElementsByClassName(`player ${username}`)[0].childNodes
+    const playerElement = document.getElementById('player').childNodes
     const minSetIndex = getMinSetIndex(playerElement)
     const nodeSetContainer = playerElement[minSetIndex]
     updateSetStatus(nodeSetContainer)

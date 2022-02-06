@@ -1,19 +1,19 @@
 import suiteValidator from './suiteValidator.js'
 
-export default async function updateSetStatus(suiteContainer) {
-  const handSet = await extarctHandSet(suiteContainer)
-  const oldSetClass = suiteContainer.classList[1]
+export default async function updateSetStatus(cartsContainer) {
+  const handSet = await extarctHandSet(cartsContainer)
+  const oldSetClass = cartsContainer.classList[1]
   const newSetClass = suiteValidator(handSet)
-  suiteContainer.classList.replace(oldSetClass, newSetClass)
+  cartsContainer.classList.replace(oldSetClass, newSetClass)
 }
 
-function extarctHandSet(suiteContainer) {
-  const nodeSetCards = suiteContainer.childNodes
+function extarctHandSet(cartsContainer) {
+  const setElement = cartsContainer.childNodes
   const handSet = []
 
   return new Promise((reslove) => {
     setTimeout(() => {
-      for (let card of nodeSetCards) {
+      for (let card of setElement) {
         const cardIndex = card.classList.length - 1
         handSet.push(card.classList[cardIndex])
         reslove(handSet)
