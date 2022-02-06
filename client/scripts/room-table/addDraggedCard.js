@@ -3,7 +3,7 @@ import arrangeCards from './arrangeCards.js'
 import updateSetStatus from './updateSetStatus.js'
 
 export default function addDraggedCard({ playersCards }) {
-  const { username } = getRoomInfo()
+  const { username } = window.getRoomInfo()
   const newCardsList = getPlayerCardsList(playersCards, username)
   const oldCardsList = playersCards[username]
   const targetCard = getTargetCard(oldCardsList, newCardsList)
