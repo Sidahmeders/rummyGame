@@ -51,7 +51,11 @@ server.listen(PORT, console.log(`server running on port ${PORT}..`))
  */
 
 /**
- * Pure Sequence (10_SPADE, J_SPADE, Q_SPADE)
- * SET (2_CLOVER, 2_HEART, 2_SPADE)
- * INVALID (4_SPADE, 5_SPADE, 8_SPADE)
+ * valid sets (10_S, J_S, Q_S) || (2_C, 2_H, 2_S) || (4_S, 5_S, 8_S)
+ *
+ * 91++ point can drop
+ * n_i++ can beat n_i
+ * a complete set can beat em all
+ * 200 point for the winning team
+ * the losing team can only take 10 point for each card left in his hand
  */
