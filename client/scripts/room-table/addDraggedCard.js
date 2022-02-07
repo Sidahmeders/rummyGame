@@ -1,5 +1,5 @@
 import { getPlayerCardsList, getTargetCard } from './utils.js'
-import arrangeCards from './arrangeCards.js'
+import addDragableEvents from './addDragableEvents.js'
 import updateSetStatus from './updateSetStatus.js'
 
 export default function addDraggedCard({ playersCards }) {
@@ -12,7 +12,7 @@ export default function addDraggedCard({ playersCards }) {
     const cardElement = document.createElement('div')
     cardElement.classList.add('player-card', targetCard)
     cardElement.setAttribute('draggable', true)
-    arrangeCards(cardElement)
+    addDragableEvents(cardElement)
 
     const playerElement = document.getElementById('player').childNodes
     const minSetIndex = getMinSetIndex(playerElement)

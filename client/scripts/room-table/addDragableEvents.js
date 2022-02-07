@@ -1,6 +1,6 @@
 import updateSetStatus from './updateSetStatus.js'
 
-export default function arrangeCards(cardElement) {
+export default function addDragableEvents(cardElement) {
   cardElement.addEventListener('dragstart', dragStart)
   cardElement.addEventListener('dragend', dragEnd)
   cardElement.addEventListener('dragover', dragOver)
