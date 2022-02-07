@@ -7,6 +7,18 @@ export default function displayCards(playerCards) {
   createHandCards(playerCards, playerElement)
 }
 
+function createHandCards(playerCards, playerElement) {
+  while (playerCards.length) {
+    const card = playerCards.pop()
+    const cardElement = document.createElement('div')
+    cardElement.className = `player-card ${card}`
+    cardElement.setAttribute('draggable', true)
+    addDragableEvents(cardElement)
+
+    playerElement.appendChild(cardElement)
+  }
+}
+
 // function createHandSet(playerCards, playerElement) {
 //   const handSets = splitCards(playerCards)
 
@@ -27,7 +39,6 @@ export default function displayCards(playerCards) {
 //   }
 // }
 
-// // FIXME: ADD or REMOVE
 // function splitCards(cards) {
 //   let subArrays = []
 //   let k = 0
@@ -42,15 +53,3 @@ export default function displayCards(playerCards) {
 //   }
 //   return subArrays
 // }
-
-function createHandCards(playerCards, playerElement) {
-  while (playerCards.length) {
-    const card = playerCards.pop()
-    const cardElement = document.createElement('div')
-    cardElement.classList.add('player-card', card)
-    cardElement.setAttribute('draggable', true)
-    addDragableEvents(cardElement)
-
-    playerElement.appendChild(cardElement)
-  }
-}
