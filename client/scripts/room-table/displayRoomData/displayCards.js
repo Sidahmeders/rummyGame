@@ -3,10 +3,26 @@ import suiteValidator from '../suiteValidator.js'
 
 export default function displayCards(playerCards) {
   const playerElement = document.getElementById('player')
+
+  createHandSet(playerCards, playerElement)
+}
+
+function createHandSet(playerCards, playerElement) {
   const handSets = splitCards(playerCards)
 
   for (let handSet of handSets) {
-    const handSetElement = createHandSet(handSet)
+    const handSetElement = document.createElement('div')
+    const handSetClass = suiteValidator(handSet)
+    handSetElement.classList.add('hand-set', handSetClass)
+
+    handSet.forEach((card) => {
+      const cardElement = document.createElement('div')
+      cardElement.classList.add('player-card', card)
+      cardElement.setAttribute('draggable', true)
+      arrangeCards(cardElement)
+      handSetElement.append(cardElement)
+    })
+
     playerElement.appendChild(handSetElement)
   }
 }
@@ -26,28 +42,3 @@ function splitCards(cards) {
   }
   return subArrays
 }
-
-function createHandSet(handSet) {
-  const handSetElement = document.createElement('div')
-  const handSetClass = suiteValidator(handSet)
-  handSetElement.classList.add('hand-set', handSetClass)
-
-  handSet.forEach((card) => {
-    const cardElement = document.createElement('div')
-    cardElement.classList.add('player-card', card)
-    cardElement.setAttribute('draggable', true)
-    arrangeCards(cardElement)
-    handSetElement.append(cardElement)
-  })
-  return handSetElement
-}
-
-// function createHandCardsContainer(playerCards) {
-//   while (playerCards.length) {
-//     const card = playerCards.pop()
-//     const cardElement = document.createElement('div')
-//     cardElement.classList.add('player-card', card)
-//     cardElement.setAttribute('draggable', true)
-
-//   }
-// }
