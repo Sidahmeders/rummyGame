@@ -14,74 +14,19 @@
  * D6 D5 JK -> valid SeQuance (Impure)
  */
 
-const setClassName = {
-  invalid: 'invalid',
-  pureSequance: 'pure-sequance',
-  validTunnela: 'tunnela',
-  validSet: 'valid-set',
-}
+import isValidSequence from './isValidSequence.js'
+import isValidSet from './isValidSet.js'
 
-function isValidSet(cards) {
-  let isValidRank = true
-  let prevRank
-  let suitSet = new Set()
+const rummyMethods = [isValidSet, isValidSequence]
 
-  for (let card of cards) {
-    let [suit, rank] = [card[0], card[1]]
-    if (rank === 'A') rank = '1'
+export default function suiteValidator(playerCards, methods = rummyMethods) {
+  if (typeof playerCards !== 'object') return false
+  const results = []
 
-    if (prevRank && prevRank != rank) isValidRank = false
-    suitSet.add(suit)
-
-    prevRank = rank
-  }
-
-  return isValidRank && suitSet.size === 3 ? setClassName.validSet : false
-}
-
-function isValidSequence(cards) {
-  const validSequenceMap = {}
-  let prevRank, prevSuit, startIndex
-  let cardIndex = 0
-
-  while (cardIndex++ < cards.length) {
-    let card = cards[cardIndex]
-    let [suit, rank] = [card[0], card[1]]
-
-    if (prevRank && prevSuit) {
-      if (suit === prevSuit && parseInt(rank) === parseInt(prevRank) + 1 && cardIndex - startIndex >= 3) {
-        validSequenceMap[startIndex] = cards.slice(startIndex, cardIndex)
-      } else startIndex = cardIndex
-    }
-
-    prevSuit = suit
-    prevRank = rank
-  }
-
-  return validSequenceMap
-}
-
-function isValidTunnela(cards) {
-  let prevoiusCard
-  let isValidTunnela = true
-
-  for (let currentCard of cards) {
-    if (prevoiusCard && currentCard !== prevoiusCard) {
-      isValidTunnela = false
-    }
-    prevoiusCard = currentCard
-  }
-
-  return isValidTunnela ? setClassName.validTunnela : false
-}
-
-const rummyMethods = [isValidTunnela, isValidSet, isValidSequence]
-
-export default function suiteValidator(handSet, methods = rummyMethods) {
-  if (typeof handSet !== 'object') return false
   for (let method of methods) {
-    let result = method(handSet)
+    let result = method(playerCards)
     if (result) return result
   }
-  return setClassName.invalid
+
+  return results
 }
