@@ -8,8 +8,7 @@ export default function displayCards(playerCards) {
 }
 
 function createHandCards(playerCards, playerElement) {
-  while (playerCards.length) {
-    const card = playerCards.pop()
+  for (let card of playerCards) {
     const cardElement = document.createElement('div')
     cardElement.className = `player-card ${card}`
     cardElement.setAttribute('draggable', true)

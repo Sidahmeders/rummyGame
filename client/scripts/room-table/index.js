@@ -17,13 +17,13 @@ window.socket.on('user-joined-room', (userData) => {
   displayRoomData(userData)
 })
 
-window.socket.on('card-dragged', (updatedDeck) => {
-  const { playerCards } = updatedDeck
+window.socket.on('card-dragged', (userData) => {
+  const { playerCards } = userData
   addDraggedCard(playerCards)
 })
 
-window.socket.on('card-dropped', (updatedDeck) => {
-  const { playerCards } = updatedDeck
+window.socket.on('card-dropped', (userData) => {
+  const { playerCards } = userData
   removeDroppedCard(playerCards)
 })
 

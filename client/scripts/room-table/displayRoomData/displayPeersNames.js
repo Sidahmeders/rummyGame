@@ -3,8 +3,7 @@ export default function displayPeersNames(players) {
   const peersContainer = document.createElement('div')
   peersContainer.id = 'peers-container'
 
-  while (players.length) {
-    let peerName = players.pop()
+  for (let peerName of players) {
     if (peerName !== window.localUserName) {
       const peerElement = document.createElement('div')
       peerElement.className = 'peername'

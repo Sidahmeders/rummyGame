@@ -1,8 +1,7 @@
 export default function deckUIHandler(cards) {
   const cardsContainer = document.getElementById('cards')
 
-  while (cards.length) {
-    const card = cards.pop()
+  for (let card of cards) {
     const cardElement = document.createElement('div')
     cardElement.classList.add('card', card)
     cardsContainer.appendChild(cardElement)
