@@ -1,4 +1,4 @@
-import suiteValidator from './suiteValidator.js'
+import suiteValidator from './suiteValidator/index.js'
 
 export default async function updateSetStatus(cartsContainer) {
   const handSet = await extarctHandSet(cartsContainer)

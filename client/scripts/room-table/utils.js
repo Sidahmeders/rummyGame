@@ -1,17 +1,15 @@
 export function getPlayerCardsList() {
-  const cardsList = []
+  const cardsClassList = []
   const playerElement = document.getElementById('player')
-  const setsNodes = playerElement.childNodes
+  const cardsNodes = playerElement.childNodes
 
-  for (let k = 1; k < setsNodes.length; k++) {
-    let setNodeList = setsNodes[k].childNodes
-    for (let node of setNodeList) {
-      const nodeClass = node.classList[1]
-      cardsList.push(nodeClass)
-    }
+  for (let k = 1; k < cardsNodes.length; k++) {
+    let node = cardsNodes[k]
+    const nodeClass = node.classList[1]
+    cardsClassList.push(nodeClass)
   }
 
-  return cardsList
+  return cardsClassList
 }
 
 export function getTargetCard(oldCardsList, newCardsList) {

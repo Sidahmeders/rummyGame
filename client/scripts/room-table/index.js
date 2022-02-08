@@ -14,12 +14,12 @@ function fetchRoomNameData() {
 }
 
 window.socket.on('user-joined-room', (userData) => {
-  console.log(userData) // FIXME: REMOVE
   displayRoomData(userData)
 })
 
 window.socket.on('card-dragged', (updatedDeck) => {
-  addDraggedCard(updatedDeck)
+  const { playerCards } = updatedDeck
+  addDraggedCard(playerCards)
 })
 
 window.socket.on('card-dropped', (updatedDeck) => {

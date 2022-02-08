@@ -1,5 +1,5 @@
 import addDragableEvents from '../addDragableEvents.js'
-// import suiteValidator from '../suiteValidator.js'
+// import suiteValidator from '../suiteValidator/index.js'
 
 export default function displayCards(playerCards) {
   const playerElement = document.getElementById('player')

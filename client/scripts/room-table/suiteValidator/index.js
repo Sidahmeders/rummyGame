@@ -23,40 +23,42 @@ const setClassName = {
 
 function isValidSet(cards) {
   let isValidRank = true
-  let previousRank
+  let prevRank
   let suitSet = new Set()
 
   for (let card of cards) {
-    let [currentSuit, currentRank] = [card[0], card[1]]
-    if (currentRank === 'A') currentRank = '1'
+    let [suit, rank] = [card[0], card[1]]
+    if (rank === 'A') rank = '1'
 
-    if (previousRank && previousRank != currentRank) isValidRank = false
-    suitSet.add(currentSuit)
+    if (prevRank && prevRank != rank) isValidRank = false
+    suitSet.add(suit)
 
-    previousRank = currentRank
+    prevRank = rank
   }
 
   return isValidRank && suitSet.size === 3 ? setClassName.validSet : false
 }
 
 function isValidSequence(cards) {
-  let isValidSuit = true,
-    isValidRank = true
+  const validSequenceMap = {}
+  let prevRank, prevSuit, startIndex
+  let cardIndex = 0
 
-  let previousRank, previousSuit
+  while (cardIndex++ < cards.length) {
+    let card = cards[cardIndex]
+    let [suit, rank] = [card[0], card[1]]
 
-  for (let card of cards) {
-    let [currentSuit, currentRank] = [card[0], card[1]]
-    if (currentRank === 'A') currentRank = '1'
-    if (previousSuit && previousRank) {
-      if (previousRank != currentRank - 1) isValidRank = false
-      if (previousSuit != currentSuit) isValidSuit = false
+    if (prevRank && prevSuit) {
+      if (suit === prevSuit && parseInt(rank) === parseInt(prevRank) + 1 && cardIndex - startIndex >= 3) {
+        validSequenceMap[startIndex] = cards.slice(startIndex, cardIndex)
+      } else startIndex = cardIndex
     }
-    previousSuit = currentSuit
-    previousRank = currentRank
+
+    prevSuit = suit
+    prevRank = rank
   }
 
-  return isValidSuit && isValidRank ? setClassName.pureSequance : false
+  return validSequenceMap
 }
 
 function isValidTunnela(cards) {
@@ -75,7 +77,7 @@ function isValidTunnela(cards) {
 
 const rummyMethods = [isValidTunnela, isValidSet, isValidSequence]
 
-export default function handSetValidator(handSet, methods = rummyMethods) {
+export default function suiteValidator(handSet, methods = rummyMethods) {
   if (typeof handSet !== 'object') return false
   for (let method of methods) {
     let result = method(handSet)
