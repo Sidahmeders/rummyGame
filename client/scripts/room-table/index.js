@@ -23,7 +23,8 @@ window.socket.on('card-dragged', (updatedDeck) => {
 })
 
 window.socket.on('card-dropped', (updatedDeck) => {
-  removeDroppedCard(updatedDeck)
+  const { playerCards } = updatedDeck
+  removeDroppedCard(playerCards)
 })
 
 window.socket.on('room-error', (error) => {

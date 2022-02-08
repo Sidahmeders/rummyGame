@@ -1,10 +1,8 @@
 import { getPlayerCardsList, getTargetCard } from './utils.js'
 
-const { username } = window.getRoomInfo()
-
-export default function removeDroppedCard({ playersCards }) {
+export default function removeDroppedCard(playerCards) {
   const oldCardsList = getPlayerCardsList()
-  const newCardsList = playersCards[username]
+  const newCardsList = playerCards
 
   const targetCard = getTargetCard(oldCardsList, newCardsList)
   if (targetCard) {

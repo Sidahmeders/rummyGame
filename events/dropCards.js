@@ -1,3 +1,4 @@
+const getPlayerData = require('../utils/getPlayerData.js')
 const inMemoryActiveGames = require('../store/inMemoryGames')
 
 module.exports = function dropCards({ socket, roomName, username, selectedCard }) {
@@ -5,11 +6,11 @@ module.exports = function dropCards({ socket, roomName, username, selectedCard }
   if (!targetRoom) {
     socket.emit('room-error', 'something unexpected happens. please refresh the page')
   } else {
-    dropCard({ socket, username, targetRoom, selectedCard })
+    dropCard({ socket, username, roomName, targetRoom, selectedCard })
   }
 }
 
-function dropCard({ socket, username, targetRoom, selectedCard }) {
+function dropCard({ socket, username, roomName, targetRoom, selectedCard }) {
   const { playersCards } = targetRoom
   let playerHand = playersCards[username]
 
@@ -18,6 +19,8 @@ function dropCard({ socket, username, targetRoom, selectedCard }) {
   } else {
     playerHand = playerHand.filter((card) => card !== selectedCard)
     targetRoom.playersCards[username] = playerHand
-    socket.emit('card-dropped', targetRoom)
+
+    const userData = getPlayerData(username, roomName)
+    socket.emit('card-dropped', userData)
   }
 }
