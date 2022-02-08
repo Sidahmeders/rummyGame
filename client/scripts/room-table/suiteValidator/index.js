@@ -25,7 +25,7 @@ export default function suiteValidator(playerCards, methods = rummyMethods) {
 
   for (let method of methods) {
     let result = method(playerCards)
-    if (result) return result
+    results.push(result)
   }
 
   return results
