@@ -1,4 +1,4 @@
-.hand-set {
+/* .hand-set {
   display: flex;
   max-width: 14vw;
 }
@@ -33,7 +33,7 @@
 .hand-set.tunnela::before {
   content: 'tunnela';
   background: limegreen;
-}
+} */
 
 .card,
 .player-card {
@@ -54,6 +54,16 @@
 
 .player-card {
   z-index: 9;
+  position: relative;
+}
+
+.player-card span {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 12px;
+  background-color: green;
+  transform: translateY(10px);
 }
 
 .hidden {

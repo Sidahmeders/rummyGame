@@ -1,6 +1,4 @@
-// import updateSetStatus from './updateSetStatus.js'
-
-// import suiteValidator from './suiteValidator/index.js'
+import updateSuitesStatus from './updateSuiteStatus.js'
 
 export default function addDragableEvents(cardElement) {
   cardElement.addEventListener('dragstart', dragStart)
@@ -51,21 +49,22 @@ function dragDrop() {
   roomState.pickedCardElement.classList.remove(roomState.pickedCardClass)
   roomState.pickedCardElement.classList.add(roomState.droppedCardClass)
   // handleSuitesStatus(this)
-  handleHandSets()
+  playerSuitesValidation()
 }
 
-function handleHandSets() {
+function playerSuitesValidation() {
   const playerElement = document.getElementById('player').childNodes
+  const playerCardsClasses = extractPlayerCardsClasses(playerElement)
 
+  updateSuitesStatus(playerCardsClasses)
+}
+
+function extractPlayerCardsClasses(playerElement) {
   const playerCardsClasses = []
-  // const results = suiteValidator()
-  // console.log(results) // FIXME:
-
   playerElement.forEach((node) => {
-    const cardClassList = node?.className?.split(' ')
+    const cardClassList = node.classList
     const cardClass = cardClassList[cardClassList.length - 1]
     playerCardsClasses.push(cardClass)
   })
-
-  console.log(playerCardsClasses)
+  return playerCardsClasses
 }
