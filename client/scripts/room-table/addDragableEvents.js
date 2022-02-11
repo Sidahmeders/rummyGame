@@ -1,5 +1,7 @@
 // import updateSetStatus from './updateSetStatus.js'
 
+// import suiteValidator from './suiteValidator/index.js'
+
 export default function addDragableEvents(cardElement) {
   cardElement.addEventListener('dragstart', dragStart)
   cardElement.addEventListener('dragend', dragEnd)
@@ -48,12 +50,22 @@ function dragDrop() {
 
   roomState.pickedCardElement.classList.remove(roomState.pickedCardClass)
   roomState.pickedCardElement.classList.add(roomState.droppedCardClass)
-  // updateSwappedSetsStatus(this)
+  // handleSuitesStatus(this)
+  handleHandSets()
 }
 
-// function updateSwappedSetsStatus(targetCard) {
-//   let sourceNode = roomState.pickedCardElement.parentNode
-//   let targetNode = targetCard.parentNode
-//   updateSetStatus(sourceNode)
-//   updateSetStatus(targetNode)
-// }
+function handleHandSets() {
+  const playerElement = document.getElementById('player').childNodes
+
+  const playerCardsClasses = []
+  // const results = suiteValidator()
+  // console.log(results) // FIXME:
+
+  playerElement.forEach((node) => {
+    const cardClassList = node?.className?.split(' ')
+    const cardClass = cardClassList[cardClassList.length - 1]
+    playerCardsClasses.push(cardClass)
+  })
+
+  console.log(playerCardsClasses)
+}
