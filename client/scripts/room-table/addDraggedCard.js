@@ -1,16 +1,11 @@
 import { getPlayerCardsList, getTargetCard } from './utils.js'
 import addDragableEvents from './addDragableEvents.js'
-// import updateSetStatus from './updateSetStatus.js'
-
-import suiteValidator from './suiteValidator/index.js'
+import updateSuitesStatus from './updateSuiteStatus.js'
 
 export default function addDraggedCard(playerCards) {
   const newCardsList = playerCards
   const oldCardsList = getPlayerCardsList()
   const targetCard = getTargetCard(newCardsList, oldCardsList)
-
-  const results = suiteValidator(playerCards)
-  console.log(results) // FIXME:
 
   if (targetCard) {
     const playerElement = document.getElementById('player')
@@ -21,4 +16,6 @@ export default function addDraggedCard(playerCards) {
 
     playerElement.appendChild(cardElement)
   }
+
+  updateSuitesStatus()
 }

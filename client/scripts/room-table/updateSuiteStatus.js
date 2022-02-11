@@ -1,9 +1,9 @@
 import suiteValidator from './suiteValidator/index.js'
 
 export default async function updateSuitesStatus() {
-  const playerElement = document.getElementById('player')
-  const playerCards = playerElement.childNodes
+  const playerCards = document.getElementById('player').childNodes
   const playerCardsClasses = extractPlayerCardsClasses(playerCards)
+
   const suitesMap = suiteValidator(playerCardsClasses)
 
   suitesMap.forEach((suite) => {
@@ -20,6 +20,7 @@ export default async function updateSuitesStatus() {
 function extractPlayerCardsClasses(playerCards) {
   const playerCardsClasses = []
   playerCards.forEach((node) => {
+    node.innerHTML = '' // reset the cards status
     const cardClassList = node.classList
     const cardClass = cardClassList[cardClassList.length - 1]
     playerCardsClasses.push(cardClass)
