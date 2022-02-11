@@ -11,7 +11,7 @@ export default async function updateSuitesStatus() {
       let validSuite = suite[key]
       for (let cardClass of validSuite) {
         const cardElement = document.getElementsByClassName(`player-card ${cardClass}`)[0]
-        cardElement.innerHTML = '<span></span>'
+        cardsFlag.addValidFlag(cardElement)
       }
     }
   })
@@ -19,11 +19,18 @@ export default async function updateSuitesStatus() {
 
 function extractPlayerCardsClasses(playerCards) {
   const playerCardsClasses = []
-  playerCards.forEach((node) => {
-    node.innerHTML = '' // reset the cards status
-    const cardClassList = node.classList
+
+  playerCards.forEach((cardElement) => {
+    cardsFlag.removeValidFlag(cardElement)
+    const cardClassList = cardElement.classList
     const cardClass = cardClassList[cardClassList.length - 1]
     playerCardsClasses.push(cardClass)
   })
+
   return playerCardsClasses
+}
+
+const cardsFlag = {
+  addValidFlag: (cardElement) => (cardElement.innerHTML = '<span></span>'),
+  removeValidFlag: (cardElement) => (cardElement.innerHTML = ''),
 }
