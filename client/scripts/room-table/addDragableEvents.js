@@ -48,23 +48,6 @@ function dragDrop() {
 
   roomState.pickedCardElement.classList.remove(roomState.pickedCardClass)
   roomState.pickedCardElement.classList.add(roomState.droppedCardClass)
-  // handleSuitesStatus(this)
-  playerSuitesValidation()
-}
 
-function playerSuitesValidation() {
-  const playerElement = document.getElementById('player').childNodes
-  const playerCardsClasses = extractPlayerCardsClasses(playerElement)
-
-  updateSuitesStatus(playerCardsClasses)
-}
-
-function extractPlayerCardsClasses(playerElement) {
-  const playerCardsClasses = []
-  playerElement.forEach((node) => {
-    const cardClassList = node.classList
-    const cardClass = cardClassList[cardClassList.length - 1]
-    playerCardsClasses.push(cardClass)
-  })
-  return playerCardsClasses
+  updateSuitesStatus()
 }

@@ -1,7 +1,11 @@
 import suiteValidator from './suiteValidator/index.js'
 
-export default async function updateSuitesStatus(playerCardsClasses) {
+export default async function updateSuitesStatus() {
+  const playerElement = document.getElementById('player')
+  const playerCards = playerElement.childNodes
+  const playerCardsClasses = extractPlayerCardsClasses(playerCards)
   const suitesMap = suiteValidator(playerCardsClasses)
+
   suitesMap.forEach((suite) => {
     for (let key in suite) {
       let validSuite = suite[key]
@@ -11,4 +15,14 @@ export default async function updateSuitesStatus(playerCardsClasses) {
       }
     }
   })
+}
+
+function extractPlayerCardsClasses(playerCards) {
+  const playerCardsClasses = []
+  playerCards.forEach((node) => {
+    const cardClassList = node.classList
+    const cardClass = cardClassList[cardClassList.length - 1]
+    playerCardsClasses.push(cardClass)
+  })
+  return playerCardsClasses
 }

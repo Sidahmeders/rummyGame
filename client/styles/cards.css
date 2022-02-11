@@ -60,9 +60,9 @@
 .player-card span {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 105%;
   height: 12px;
-  background-color: green;
+  background-color: #44e044;
   transform: translateY(10px);
 }
 
