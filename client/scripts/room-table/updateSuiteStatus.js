@@ -1,4 +1,4 @@
-import suiteValidator from './suiteValidator'
+import suiteValidator from './suiteValidator/index.js'
 
 export default async function updateSuitesStatus(playerCardsClasses) {
   const suitesMap = suiteValidator(playerCardsClasses)
