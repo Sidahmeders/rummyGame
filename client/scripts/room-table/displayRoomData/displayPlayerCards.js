@@ -1,8 +1,11 @@
 import addDragableEvents from '../addDragableEvents.js'
 // import suiteValidator from '../suiteValidator/index.js'
 
-export default function displayCards(playerCards) {
-  const playerElement = document.getElementById('player')
+export default function displayPlayerCards(playerCards) {
+  const tableElement = document.getElementById('table')
+  const playerElement = document.createElement('div')
+  playerElement.id = 'player'
+  tableElement.appendChild(playerElement)
 
   createHandCards(playerCards, playerElement)
 }
