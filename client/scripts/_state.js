@@ -23,7 +23,7 @@ var localUserName
 
 var turnReady
 var STUNServers = null
-var mediaConstraint = { audio: true, video: true }
+var mediaConstraint = { audio: false, video: true }
 var peerConfig = {
   iceServers: [
     {
