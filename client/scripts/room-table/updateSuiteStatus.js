@@ -16,9 +16,12 @@ function resetPlayerCardsStatus() {
 function setPlayerCardsStatus(suitesMap) {
   suitesMap.forEach((suite) => {
     for (let key in suite) {
-      let validSuite = suite[key]
-      for (let cardClass of validSuite) {
-        const cardElement = document.getElementsByClassName(`player-card ${cardClass}`)[0]
+      const playerCardsNodes = document.getElementById('player').childNodes
+      const startIndex = parseInt(key)
+      const endIndex = startIndex + suite[key].length
+
+      for (let i = startIndex; i < endIndex; i++) {
+        const cardElement = playerCardsNodes[i]
         cardsFlag.addValidFlag(cardElement)
       }
     }
