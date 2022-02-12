@@ -1,11 +1,19 @@
+import { getPlayerCards } from './utils.js'
 import suiteValidator from './suiteValidator/index.js'
 
 export default async function updateSuitesStatus() {
-  const playerCards = document.getElementById('player').childNodes
-  const playerCardsClasses = extractPlayerCardsClasses(playerCards)
-
+  resetPlayerCardsStatus()
+  const playerCardsClasses = getPlayerCards()
   const suitesMap = suiteValidator(playerCardsClasses)
+  setPlayerCardsStatus(suitesMap)
+}
 
+function resetPlayerCardsStatus() {
+  const cardsNodes = document.getElementById('player').childNodes
+  cardsNodes.forEach((cardElement) => cardsFlag.removeValidFlag(cardElement))
+}
+
+function setPlayerCardsStatus(suitesMap) {
   suitesMap.forEach((suite) => {
     for (let key in suite) {
       let validSuite = suite[key]
@@ -15,19 +23,6 @@ export default async function updateSuitesStatus() {
       }
     }
   })
-}
-
-function extractPlayerCardsClasses(playerCards) {
-  const playerCardsClasses = []
-
-  playerCards.forEach((cardElement) => {
-    cardsFlag.removeValidFlag(cardElement)
-    const cardClassList = cardElement.classList
-    const cardClass = cardClassList[cardClassList.length - 1]
-    playerCardsClasses.push(cardClass)
-  })
-
-  return playerCardsClasses
 }
 
 const cardsFlag = {

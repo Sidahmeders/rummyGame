@@ -15,7 +15,7 @@ export function getTargetCard(updatedPlayerCards) {
   return undefined
 }
 
-function getPlayerCards() {
+export function getPlayerCards() {
   const cardsClassList = []
   const cardsNodes = document.getElementById('player').childNodes
 
