@@ -20,7 +20,7 @@ export function getPlayerCards() {
   const cardsNodes = document.getElementById('player').childNodes
 
   for (let node of cardsNodes) {
-    const nodeClass = node.classList[1]
+    const nodeClass = node.classList[node.classList.length - 1]
     cardsClassList.push(nodeClass)
   }
   return cardsClassList

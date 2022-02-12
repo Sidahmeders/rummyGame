@@ -4,6 +4,7 @@ import suiteValidator from './suiteValidator/index.js'
 export default async function updateSuitesStatus() {
   resetPlayerCardsStatus()
   const playerCardsClasses = getPlayerCards()
+  console.log(playerCardsClasses) // FIXME: remove the hold class
   const suitesMap = suiteValidator(playerCardsClasses)
   setPlayerCardsStatus(suitesMap)
 }
@@ -14,7 +15,7 @@ function resetPlayerCardsStatus() {
 }
 
 function setPlayerCardsStatus(suitesMap) {
-  const colors = ['#43fd', '#2f6d']
+  const colors = ['#2f69', '#f359']
   suitesMap.forEach((suite, index) => {
     const bgColor = colors[index]
 
