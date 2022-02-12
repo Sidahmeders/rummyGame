@@ -1,8 +1,8 @@
 const readJsonData = require('../utils/readJsonData')
 const writeJsonData = require('../utils/writeJsonData')
 
-module.exports = function joinRoom({ socket, roomInfo }) {
-  let { roomName, password, username } = roomInfo
+module.exports = function joinRoom(io, socket, payload) {
+  let { roomName, password, username } = payload
 
   if (!roomName || !password || !username) {
     socket.emit('join-room-error', 'please fill in the password and username')

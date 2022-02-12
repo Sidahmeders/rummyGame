@@ -1,7 +1,9 @@
 const getPlayerData = require('../utils/getPlayerData')
 const inMemoryActiveGames = require('../store/inMemoryGames')
 
-module.exports = function dragCards({ socket, roomName, username }) {
+module.exports = function dragCards(io, socket, payload) {
+  const { roomName, username } = payload
+
   try {
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {

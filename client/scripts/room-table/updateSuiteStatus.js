@@ -4,7 +4,6 @@ import suiteValidator from './suiteValidator/index.js'
 export default async function updateSuitesStatus() {
   resetPlayerCardsStatus()
   const playerCardsClasses = getPlayerCards()
-  console.log(playerCardsClasses) // FIXME: remove the hold class
   const suitesMap = suiteValidator(playerCardsClasses)
   setPlayerCardsStatus(suitesMap)
 }

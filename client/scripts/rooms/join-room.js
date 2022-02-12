@@ -6,14 +6,14 @@ export default function joinRoom(event) {
   event.preventDefault()
   const roomId = event.target.id
   const room = document.getElementById(roomId).children
-  const roomInfo = {}
+  const payload = {}
 
   for (let input of room) {
     let { name, value } = input
-    roomInfo[name] = value
+    payload[name] = value
   }
 
-  socket.emit('join-room', roomInfo)
+  socket.emit('join-room', payload)
 }
 
 socket.on('join-room-error', (error) => {

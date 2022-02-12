@@ -13,7 +13,7 @@ export default function deckUIHandler(cards) {
 function hiddenCard() {
   const hiddenCardElement = document.createElement('div')
   hiddenCardElement.className = 'card hidden'
-  const { roomName, username } = window.getRoomInfo()
-  hiddenCardElement.onclick = () => window.socket.emit('drag-card', roomName, username)
+  const payload = window.getRoomInfo()
+  hiddenCardElement.onclick = () => window.socket.emit('drag-card', payload)
   return hiddenCardElement
 }

@@ -3,7 +3,9 @@ const readJsonData = require('../utils/readJsonData')
 const getPlayerData = require('../utils/getPlayerData')
 const inMemoryGames = require('../store/inMemoryGames.js')
 
-module.exports = function getRoomNameData({ io, socket, roomName, username }) {
+module.exports = function getRoomNameData(io, socket, payload) {
+  const { roomName, username } = payload
+
   socket.join(roomName)
 
   if (!roomName) {

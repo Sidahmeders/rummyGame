@@ -4,22 +4,8 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const { joinRoom, dragCards, dropCards, getRoomNameData, webrtcSignaling } = require('./events/index')
-
-io.on('connection', (socket) => {
-  console.log(`user:: ${socket.id} ::connected`)
-
-  socket.on('join-room', (roomInfo) => joinRoom({ socket, roomInfo }))
-  socket.on('get-room-data', ({ roomName, username }) => getRoomNameData({ io, socket, roomName, username }))
-
-  socket.on('drag-card', (roomName, username) => dragCards({ socket, roomName, username }))
-  socket.on('drop-card', (roomName, username, selectedCard) => dropCards({ socket, roomName, username, selectedCard }))
-
-  socket.on('peer-join', (room) => webrtcSignaling({ socket }).onPeerJoin(room))
-  socket.on('peer-message', (message) => webrtcSignaling({ socket }).onPeerMessage(message))
-
-  socket.on('disconnect', () => console.log(`A user ${socket.id} disconnected`))
-})
+const initListner = require('./listeners')
+initListner(io)
 
 app.use(express.static(__dirname + '/client'))
 app.use(express.json())
