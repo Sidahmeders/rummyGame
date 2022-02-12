@@ -1,22 +1,27 @@
-export function getPlayerCardsList() {
-  const cardsClassList = []
-  const playerElement = document.getElementById('player')
-  const cardsNodes = playerElement.childNodes
+export function getTargetCard(updatedPlayerCards) {
+  const domPlayerCards = getPlayerCards()
 
-  for (let k = 1; k < cardsNodes.length; k++) {
-    let node = cardsNodes[k]
+  const domLength = domPlayerCards.length
+  const paramLength = updatedPlayerCards.length
+
+  const newCards = domLength < paramLength ? updatedPlayerCards : domPlayerCards
+  const oldCards = domLength > paramLength ? updatedPlayerCards : domPlayerCards
+
+  for (let card of newCards) {
+    if (oldCards.indexOf(card) === -1) return card
+  }
+
+  console.warn('Target card not Found')
+  return undefined
+}
+
+function getPlayerCards() {
+  const cardsClassList = []
+  const cardsNodes = document.getElementById('player').childNodes
+
+  for (let node of cardsNodes) {
     const nodeClass = node.classList[1]
     cardsClassList.push(nodeClass)
   }
-
   return cardsClassList
-}
-
-export function getTargetCard(oldCardsList, newCardsList) {
-  for (let oldCard of oldCardsList) {
-    if (newCardsList.indexOf(oldCard) === -1) {
-      return oldCard
-    }
-  }
-  return undefined
 }
