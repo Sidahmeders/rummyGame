@@ -14,7 +14,10 @@ function resetPlayerCardsStatus() {
 }
 
 function setPlayerCardsStatus(suitesMap) {
-  suitesMap.forEach((suite) => {
+  const colors = ['#43fd', '#2f6d']
+  suitesMap.forEach((suite, index) => {
+    const bgColor = colors[index]
+
     for (let key in suite) {
       const playerCardsNodes = document.getElementById('player').childNodes
       const startIndex = parseInt(key)
@@ -22,13 +25,15 @@ function setPlayerCardsStatus(suitesMap) {
 
       for (let i = startIndex; i < endIndex; i++) {
         const cardElement = playerCardsNodes[i]
-        cardsFlag.addValidFlag(cardElement)
+        cardsFlag.addValidFlag(cardElement, bgColor)
       }
     }
   })
 }
 
 const cardsFlag = {
-  addValidFlag: (cardElement) => (cardElement.innerHTML = '<span></span>'),
+  addValidFlag: (cardElement, color) => {
+    cardElement.innerHTML = `<span style="background:${color};"></span>`
+  },
   removeValidFlag: (cardElement) => (cardElement.innerHTML = ''),
 }
