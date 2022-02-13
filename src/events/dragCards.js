@@ -1,34 +1,35 @@
 const getPlayerData = require('../utils/getPlayerData')
 const inMemoryActiveGames = require('../store/inMemoryGames')
 
-module.exports = function dragCards(io, socket, payload) {
-  const { roomName, username } = payload
+module.exports = ({ socket, payload, events }) => {
+  const { roomName } = payload
 
   try {
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {
-      socket.emit('rooms:error', 'something unexpected happens. please refresh the page')
+      socket.emit(events.roomsError, 'something unexpected happens. please refresh the page')
     } else {
-      appendCard({ socket, username, targetRoom, roomName })
+      appendCard({ socket, payload, events, targetRoom })
     }
   } catch (err) {
-    socket.emit('rooms:error', err.message)
+    socket.emit(events.roomsError, err.message)
   }
 }
 
-function appendCard({ socket, username, targetRoom, roomName }) {
+function appendCard({ socket, payload, events, targetRoom }) {
+  const { username, roomName } = payload
   const { cards, playersCards } = targetRoom
   const pickedCard = cards.pop()
   const playerHand = playersCards[username]
 
   if (playerHand.length >= 15) {
-    socket.emit('rooms:error', 'please drop a card before you can pick again')
+    socket.emit(events.roomsError, 'please drop a card before you can pick again')
   } else if (!pickedCard) {
-    socket.emit('rooms:error', 'the cards deck is empty')
+    socket.emit(events.roomsError, 'the cards deck is empty')
   } else {
     playerHand.push(pickedCard)
 
     const playerData = getPlayerData(username, roomName)
-    socket.emit('cards:dragged', playerData)
+    socket.emit(events.cardsDragged, playerData)
   }
 }

@@ -1,18 +1,19 @@
 const readJsonData = require('../utils/readJsonData')
 const writeJsonData = require('../utils/writeJsonData')
 
-module.exports = function joinRoom(io, socket, payload) {
+module.exports = ({ socket, payload, events }) => {
   let { roomName, password, username } = payload
 
   if (!roomName || !password || !username) {
-    socket.emit('rooms:error', 'please fill in the password and username')
+    socket.emit(events.roomsError, 'please fill in the password and username')
   } else {
     username = username.replace(/\s/g, '') // remove spaces from the username
-    validateAndJoinRoom({ socket, roomName, password, username })
+    validateAndJoinRoom({ socket, payload, events })
   }
 }
 
-async function validateAndJoinRoom({ socket, roomName, password, username }) {
+async function validateAndJoinRoom({ socket, payload, events }) {
+  const { roomName, password, username } = payload
   const roomsData = JSON.parse(readJsonData())
   const room = roomsData[roomName]
 
@@ -24,14 +25,14 @@ async function validateAndJoinRoom({ socket, roomName, password, username }) {
   const isValidRoom = roomPlayers.length < 4
 
   if (!isValidRoom) {
-    socket.emit('rooms:error', 'this room is full, please try another one')
+    socket.emit(events.roomsError, 'this room is full, please try another one')
   } else if (!isValidUsername) {
-    socket.emit('rooms:error', 'this username already exist')
+    socket.emit(events.roomsError, 'this username already exist')
   } else if (!isValidPassword) {
-    socket.emit('rooms:error', 'the given password is wrong')
+    socket.emit(events.roomsError, 'the given password is wrong')
   } else {
     roomPlayers.push(username)
     await writeJsonData(roomsData, 'new player has been added...')
-    socket.emit('rooms:joined', roomName, username)
+    socket.emit(events.roomsJoined, roomName, username)
   }
 }

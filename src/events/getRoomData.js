@@ -3,15 +3,15 @@ const readJsonData = require('../utils/readJsonData')
 const getPlayerData = require('../utils/getPlayerData')
 const inMemoryGames = require('../store/inMemoryGames.js')
 
-module.exports = function getRoomData(io, socket, payload) {
+module.exports = ({ io, socket, payload, events }) => {
   const { roomName, username } = payload
 
   if (!roomName) {
-    socket.emit('rooms:error', 'roomName is null or undefined')
+    socket.emit(events.roomsError, 'roomName is null or undefined')
   } else {
     setRoomData(roomName, inMemoryGames)
     const userData = getPlayerData(username, roomName)
-    io.in(roomName).emit('rooms:joined', userData)
+    io.in(roomName).emit(events.roomsJoined, userData)
   }
 }
 

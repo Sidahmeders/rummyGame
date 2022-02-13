@@ -1,18 +1,19 @@
+const listners = require('../constant/listeners')
 const { joinRoom, dragCards, dropCards, getRoomData, peerJoin, peerMessage } = require('../events')
 
 const onConnection = (io, socket) => {
   console.log(`user:: ${socket.id} ::connected`)
 
-  socket.on('rooms:join', (payload) => joinRoom(io, socket, payload))
-  socket.on('rooms:data', (payload) => getRoomData(io, socket, payload))
+  socket.on(listners.joinRoom, (payload) => joinRoom(io, socket, payload))
+  socket.on(listners.roomsData, (payload) => getRoomData(io, socket, payload))
 
-  socket.on('cards:drag', (payload) => dragCards(io, socket, payload))
-  socket.on('cards:drop', (payload) => dropCards(io, socket, payload))
+  socket.on(listners.cardsDrag, (payload) => dragCards(io, socket, payload))
+  socket.on(listners.cardsDrop, (payload) => dropCards(io, socket, payload))
 
-  socket.on('peers:join', (payload) => peerJoin(io, socket, payload))
-  socket.on('peers:message', (payload) => peerMessage(io, socket, payload))
+  socket.on(listners.peersJoin, (payload) => peerJoin(io, socket, payload))
+  socket.on(listners.peersMessage, (payload) => peerMessage(io, socket, payload))
 
-  socket.on('disconnect', () => console.log(`user:: ${socket.id} ::disconnected`))
+  socket.on(listners.disconnect, () => console.log(`user:: ${socket.id} ::disconnected`))
 }
 
 module.exports = (io) => io.on('connection', (socket) => onConnection(io, socket))
