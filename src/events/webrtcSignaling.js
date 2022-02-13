@@ -1,4 +1,4 @@
-module.exports = function handleWebRtcSignaling({ socket, events }) {
+module.exports = ({ socket, events }) => {
   return {
     onPeerJoin: (room) => {
       const clientsInRoom = socket.adapter.rooms.get(room)

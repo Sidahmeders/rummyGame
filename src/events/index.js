@@ -5,12 +5,15 @@ const makeDragCards = require('./dragCards.js')
 const makeDropCards = require('./dropCards.js')
 const makeWebrtcSignaling = require('./webrtcSignaling.js')
 
-const joinRoom = (io, socket, payload) => makeJoinRoom({ socket, payload, events })
-const getRoomData = (io, socket, payload) => makeGetRoomData({ io, socket, payload, events })
-const dragCards = (io, socket, payload) => makeDragCards({ socket, payload, events })
-const dropCards = (io, socket, payload) => makeDropCards({ socket, payload, events })
+module.exports = (io, socket) => {
+  const joinRoom = (payload) => makeJoinRoom({ socket, payload, events })
+  const getRoomData = (payload) => makeGetRoomData({ io, socket, payload, events })
+  const dragCards = (payload) => makeDragCards({ socket, payload, events })
+  const dropCards = (payload) => makeDropCards({ socket, payload, events })
 
-const peerJoin = (io, socket, room) => makeWebrtcSignaling({ socket, events }).onPeerJoin(room)
-const peerMessage = (io, socket, message) => makeWebrtcSignaling({ socket, events }).onPeerMessage(message)
+  const webrtcSignal = makeWebrtcSignaling({ socket, events })
+  const peerJoin = (room) => webrtcSignal.onPeerJoin(room)
+  const peerMessage = (message) => webrtcSignal.onPeerMessage(message)
 
-module.exports = { joinRoom, getRoomData, dragCards, dropCards, peerJoin, peerMessage }
+  return { joinRoom, getRoomData, dragCards, dropCards, peerJoin, peerMessage }
+}
