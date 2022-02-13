@@ -14,6 +14,6 @@ function hiddenCard() {
   const hiddenCardElement = document.createElement('div')
   hiddenCardElement.className = 'card hidden'
   const payload = window.getRoomInfo()
-  hiddenCardElement.onclick = () => window.socket.emit('drag-card', payload)
+  hiddenCardElement.onclick = () => window.socket.emit('cards:drag', payload)
   return hiddenCardElement
 }

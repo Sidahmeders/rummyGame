@@ -13,13 +13,13 @@ export default function joinRoom(event) {
     payload[name] = value
   }
 
-  socket.emit('join-room', payload)
+  socket.emit('rooms:join', payload)
 }
 
-socket.on('join-room-error', (error) => {
+socket.on('rooms:error', (error) => {
   errorNotification(error)
 })
 
-socket.on('user-joined-room', (roomName, username) => {
+socket.on('rooms:joined', (roomName, username) => {
   location.href = `/room/${roomName}?username=${username}`
 })

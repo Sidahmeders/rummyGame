@@ -7,11 +7,11 @@ module.exports = function getRoomData(io, socket, payload) {
   const { roomName, username } = payload
 
   if (!roomName) {
-    socket.emit('room-error', 'roomName is null or undefined')
+    socket.emit('rooms:error', 'roomName is null or undefined')
   } else {
     setRoomData(roomName, inMemoryGames)
     const userData = getPlayerData(username, roomName)
-    io.in(roomName).emit('user-joined-room', userData)
+    io.in(roomName).emit('rooms:joined', userData)
   }
 }
 

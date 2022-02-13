@@ -20,7 +20,7 @@ function dragDrop() {
   const { roomName, username } = window.getRoomInfo()
   const { pickedCardClass } = window.roomState
   const payload = { roomName, username, pickedCardClass }
-  window.socket.emit('drop-card', payload)
+  window.socket.emit('cards:drop', payload)
 }
 
 dropBoxHandler()

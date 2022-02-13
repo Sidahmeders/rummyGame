@@ -10,23 +10,23 @@ document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
   const { roomName, username } = window.getRoomInfo()
-  window.socket.emit('get-room-data', { username, roomName })
+  window.socket.emit('rooms:data', { username, roomName })
 }
 
-window.socket.on('user-joined-room', (userData) => {
+window.socket.on('rooms:joined', (userData) => {
   displayRoomData(userData)
 })
 
-window.socket.on('card-dragged', (userData) => {
+window.socket.on('cards:dragged', (userData) => {
   const { playerCards } = userData
   addDraggedCard(playerCards)
 })
 
-window.socket.on('card-dropped', (userData) => {
+window.socket.on('cards:dropped', (userData) => {
   const { playerCards } = userData
   removeDroppedCard(playerCards)
 })
 
-window.socket.on('room-error', (error) => {
+window.socket.on('rooms:error', (error) => {
   errorNotification(error)
 })

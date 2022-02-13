@@ -7,12 +7,12 @@ module.exports = function dragCards(io, socket, payload) {
   try {
     const targetRoom = inMemoryActiveGames[roomName]
     if (!targetRoom) {
-      socket.emit('room-error', 'something unexpected happens. please refresh the page')
+      socket.emit('rooms:error', 'something unexpected happens. please refresh the page')
     } else {
       appendCard({ socket, username, targetRoom, roomName })
     }
   } catch (err) {
-    socket.emit('room-error', err.message)
+    socket.emit('rooms:error', err.message)
   }
 }
 
@@ -22,13 +22,13 @@ function appendCard({ socket, username, targetRoom, roomName }) {
   const playerHand = playersCards[username]
 
   if (playerHand.length >= 15) {
-    socket.emit('room-error', 'please drop a card before you can pick again')
+    socket.emit('rooms:error', 'please drop a card before you can pick again')
   } else if (!pickedCard) {
-    socket.emit('room-error', 'the cards deck is empty')
+    socket.emit('rooms:error', 'the cards deck is empty')
   } else {
     playerHand.push(pickedCard)
 
     const playerData = getPlayerData(username, roomName)
-    socket.emit('card-dragged', playerData)
+    socket.emit('cards:dragged', playerData)
   }
 }

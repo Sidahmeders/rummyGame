@@ -5,7 +5,7 @@ module.exports = function joinRoom(io, socket, payload) {
   let { roomName, password, username } = payload
 
   if (!roomName || !password || !username) {
-    socket.emit('join-room-error', 'please fill in the password and username')
+    socket.emit('rooms:error', 'please fill in the password and username')
   } else {
     username = username.replace(/\s/g, '') // remove spaces from the username
     validateAndJoinRoom({ socket, roomName, password, username })
@@ -24,14 +24,14 @@ async function validateAndJoinRoom({ socket, roomName, password, username }) {
   const isValidRoom = roomPlayers.length < 4
 
   if (!isValidRoom) {
-    socket.emit('join-room-error', 'this room is full, please try another one')
+    socket.emit('rooms:error', 'this room is full, please try another one')
   } else if (!isValidUsername) {
-    socket.emit('join-room-error', 'this username already exist')
+    socket.emit('rooms:error', 'this username already exist')
   } else if (!isValidPassword) {
-    socket.emit('join-room-error', 'the given password is wrong')
+    socket.emit('rooms:error', 'the given password is wrong')
   } else {
     roomPlayers.push(username)
     await writeJsonData(roomsData, 'new player has been added...')
-    socket.emit('user-joined-room', roomName, username)
+    socket.emit('rooms:joined', roomName, username)
   }
 }

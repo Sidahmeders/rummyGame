@@ -1,11 +1,11 @@
 export const EventTypes = {
-  join: 'peer-join',
-  joined: 'peer-joined',
-  call: 'peer-call',
-  offer: 'peer-offer',
-  answer: 'peer-answer',
-  candidate: 'peer-candidate',
-  message: 'peer-message',
+  join: 'peers:join',
+  joined: 'peers:joined',
+  call: 'peers:call',
+  offer: 'peers:offer',
+  answer: 'peers:answer',
+  candidate: 'peers:candidate',
+  message: 'peers:message',
 }
 
 export function sendMessage(payload) {
