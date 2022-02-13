@@ -9,13 +9,13 @@ export const EventTypes = {
 }
 
 export function sendMessage(payload) {
-  const message = JSON.stringify({ room, payload })
-  socket.emit(EventTypes.message, message)
+  const message = JSON.stringify({ room: window.room, payload })
+  window.socket.emit(EventTypes.message, message)
 }
 
 export function onIceCandidate(event) {
   if (event.candidate) {
-    sendMessage({ type: EventTypes.candidate, peerUuid: localUuid, candidate: event.candidate })
+    sendMessage({ type: EventTypes.candidate, peerUuid: window.localUuid, candidate: event.candidate })
   }
 }
 
@@ -30,9 +30,9 @@ export function onRemoteMediaStream(event, peerUuid) {
 }
 
 export function onPeerDisconnect(event, peerUuid) {
-  const state = peersMap[peerUuid].pc.iceConnectionState
+  const state = window.peersMap[peerUuid].pc.iceConnectionState
   if (state === 'failed' || state === 'closed' || state === 'disconnected') {
-    delete peersMap[peerUuid]
+    delete window.peersMap[peerUuid]
     const remoteVideosContainer = document.getElementById('videos')
     const targetVideoElement = document.getElementById(`remoteVideo-${peerUuid}`)
     remoteVideosContainer.removeChild(targetVideoElement)

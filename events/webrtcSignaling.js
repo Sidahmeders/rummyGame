@@ -6,7 +6,7 @@ module.exports = function handleWebRtcSignaling({ socket }) {
       const payload = JSON.stringify({ socketID: socket.id, numClients })
 
       socket.join(room)
-      socket.emit('peer-joined', payload)
+      socket.emit('peers:joined', payload)
     },
     onPeerMessage: (message) => {
       const { room, payload } = JSON.parse(message)

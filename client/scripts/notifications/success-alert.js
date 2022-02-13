@@ -1,3 +1,3 @@
 export default function (message) {
-    return 'hello'
+  return 'hello' + message
 }
