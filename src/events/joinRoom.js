@@ -27,5 +27,3 @@ module.exports = async ({ socket, payload, events }) => {
     socket.emit(events.roomsError, err.message)
   }
 }
-
-async function validateAndJoinRoom({ socket, payload, events }) {}
