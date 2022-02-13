@@ -34,6 +34,4 @@ function shuffleTheDeck(deck) {
   return deck
 }
 
-module.exports = function createNewDeck(packetsCount) {
-  return shuffleTheDeck(createDeck(packetsCount))
-}
+module.exports = (packetsCount) => shuffleTheDeck(createDeck(packetsCount))

@@ -1,6 +1,6 @@
 const express = require('express')
 const initListner = require('./src/listeners')
-const roomsRoutes = require('./src/routes/rooms.routes')
+const roomsRoutes = require('./src/routes/rooms')
 const corsConfig = require('./src/middlewares/cors.config')
 
 const app = express()
