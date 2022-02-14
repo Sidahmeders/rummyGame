@@ -1,11 +1,13 @@
 const readJsonData = require('../utils/readJsonData')
 const writeJsonData = require('../utils/writeJsonData')
+const joinRooms = require('../utils/joinRooms')
 
 module.exports = async ({ socket, payload, events }) => {
   try {
     let { roomName, password, username } = payload
     if (!roomName || !password || !username) throw Error('please fill in the password and username')
     username = username.replace(/\s/g, '') // remove spaces from the username
+    joinRooms(socket, roomName, username)
 
     const roomsData = JSON.parse(readJsonData())
     const room = roomsData[roomName]
