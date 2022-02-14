@@ -43,7 +43,11 @@
 }
 
 #table #peers-container .peername {
+  min-width: 100px;
   font-size: 20px;
   color: whitesmoke;
   padding: 5px 10px;
+  margin: 0 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
 }

@@ -9,7 +9,7 @@ const makeWebrtcSignaling = require('./webrtcSignaling.js')
 
 module.exports = (io, socket) => {
   const connection = () => makeConnect(socket)
-  const disconnect = () => makeDisConnect(socket)
+  const disconnect = () => makeDisConnect(io, socket)
 
   const joinRoom = (payload) => makeJoinRoom({ socket, payload, events })
   const getRoomData = (payload) => makeGetRoomData({ io, socket, payload, events })
