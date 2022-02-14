@@ -5,7 +5,6 @@ module.exports = ({ socket, events }) => {
       const numClients = clientsInRoom ? clientsInRoom.size : 0
       const payload = JSON.stringify({ socketID: socket.id, numClients })
 
-      socket.join(room)
       socket.emit(events.peersJoined, payload)
     },
     onPeerMessage: (message) => {
