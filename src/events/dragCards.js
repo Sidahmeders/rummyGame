@@ -1,10 +1,9 @@
-const getPlayerData = require('../utils/getPlayerData')
-const inMemoryActiveGames = require('../store/inMemoryGames')
+const store = require('../store')
 
 module.exports = ({ socket, payload, events }) => {
   try {
     const { roomName, username } = payload
-    const targetRoom = inMemoryActiveGames[roomName]
+    const targetRoom = store.getRoomByName(roomName)
     if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
 
     const { cards, playersCards } = targetRoom
@@ -16,7 +15,7 @@ module.exports = ({ socket, payload, events }) => {
     if (!pickedCard) throw Error('the cards deck is empty')
 
     playerHand.push(pickedCard)
-    const playerData = getPlayerData(username, roomName)
+    const playerData = store.getPlayerRoomData(roomName, username)
     socket.emit(events.cardsDragged, playerData)
   } catch (err) {
     socket.emit(events.roomsError, err.message)
