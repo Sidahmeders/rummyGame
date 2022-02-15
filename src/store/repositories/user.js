@@ -1,4 +1,4 @@
-const { makeUser } = require('../../../domain/index.js')
+const { makeUser } = require('../../domain/index.js')
 
 module.exports = function makeUsersDB({ model }) {
   return Object.freeze({
