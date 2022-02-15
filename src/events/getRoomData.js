@@ -8,7 +8,6 @@ module.exports = ({ io, socket, payload, events }) => {
     store.joinSocketRooms(io, socket, roomName, username)
     store.setRoomData(roomName)
     const userData = store.getPlayerRoomData(roomName, username)
-    console.log(userData, '>>>>>>>')
 
     io.in(roomName).emit(events.roomsJoined, userData)
   } catch (err) {

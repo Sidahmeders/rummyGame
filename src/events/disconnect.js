@@ -1,8 +1,8 @@
-const inMemoryGames = require('../store/inMemoryGames')
+const store = require('../store')
 
 module.exports = (io, socket) => {
   console.log(`user:: ${socket.id} ::disconnected`)
-  const playersIds = inMemoryGames.playersIds
+  const playersIds = store.getPlayersIds()
 
   for (let username in playersIds) {
     let id = playersIds[username]

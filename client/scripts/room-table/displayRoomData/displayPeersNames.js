@@ -1,7 +1,6 @@
 export default function displayPeersNames(players) {
-  const tableContainer = document.getElementById('table')
-  const peersContainer = document.createElement('div')
-  peersContainer.id = 'peers-container'
+  const peersContainer = document.getElementById('peers-container')
+  peersContainer.innerHTML = ''
 
   for (let peerName of players) {
     if (peerName !== window.localUserName) {
@@ -9,8 +8,11 @@ export default function displayPeersNames(players) {
       peerElement.className = 'peername'
       peerElement.innerText = peerName
 
+      const statusElement = document.createElement('div')
+      statusElement.className = 'peername-status'
+
+      peerElement.appendChild(statusElement)
       peersContainer.appendChild(peerElement)
     }
   }
-  tableContainer.appendChild(peersContainer)
 }

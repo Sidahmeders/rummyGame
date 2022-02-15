@@ -5,6 +5,7 @@ import { errorNotification } from '../notifications/index.js'
 import displayRoomData from './displayRoomData/index.js'
 import addDraggedCard from './addDraggedCard.js'
 import removeDroppedCard from './removeDroppedCard.js'
+import displayPeersOnlineStatus from './displayPeersOnlineStatus.js'
 
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
@@ -13,56 +14,12 @@ function fetchRoomNameData() {
   window.socket.emit('rooms:data', { username, roomName })
 }
 
-window.socket.on('rooms:joined', (userData) => {
-  displayRoomData(userData)
-})
+window.socket.on('rooms:joined', displayRoomData)
 
-window.socket.on('cards:dragged', (userData) => {
-  const { playerCards } = userData
-  addDraggedCard(playerCards)
-})
+window.socket.on('cards:dragged', addDraggedCard)
+window.socket.on('cards:dropped', removeDroppedCard)
 
-window.socket.on('cards:dropped', (userData) => {
-  const { playerCards } = userData
-  removeDroppedCard(playerCards)
-})
+window.socket.on('peers:disconnect', displayPeersOnlineStatus)
+window.socket.on('peers:connect', displayPeersOnlineStatus)
 
-// TODO: handle players online status
-//////////////////////////////////////////////////////////////
-window.socket.on('peers:disconnect', (onlinePlayers) => {
-  console.log(onlinePlayers, 'disconnect')
-})
-
-window.socket.on('peers:connect', (onlinePlayers) => {
-  console.log(onlinePlayers, 'connect')
-})
-
-function displayPeersOnlineStatus() {
-  const peersNodes = document.getElementById('peers-container').childNodes
-
-  peersNodes.forEach((peerNode) => {
-    const statusElement = document.createElement('div')
-    const someVar = true
-    const onlineStatusColor = someVar ? '#5f5' : '#ddd'
-
-    peerNode.style.position = 'relative'
-    statusElement.style = `
-      width: 13px;
-      height: 13px;
-      background: ${onlineStatusColor};
-      border-radius: 50%;
-      position: absolute;
-      top: 34%;
-      right: 0%;
-    `
-
-    peerNode.appendChild(statusElement)
-  })
-}
-
-setTimeout(() => displayPeersOnlineStatus(), 500)
-//////////////////////////////////////////////////////////////
-
-window.socket.on('rooms:error', (error) => {
-  errorNotification(error)
-})
+window.socket.on('rooms:error', errorNotification)

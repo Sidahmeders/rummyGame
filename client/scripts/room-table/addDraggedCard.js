@@ -2,7 +2,8 @@ import { getTargetCard } from './utils.js'
 import addDragableEvents from './addDragableEvents.js'
 import updateSuitesStatus from './updateSuiteStatus.js'
 
-export default function addDraggedCard(playerCards) {
+export default function addDraggedCard(userData) {
+  const { playerCards } = userData
   const targetCard = getTargetCard(playerCards)
 
   if (targetCard) {

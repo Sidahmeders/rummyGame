@@ -85,6 +85,10 @@ class FakeStore {
     return inMemoryGames[roomName]
   }
 
+  getPlayersIds() {
+    return inMemoryGames.playersIds
+  }
+
   getAllRooms() {
     const roomsData = readJsonData()
     const rooms = JSON.parse(roomsData)
