@@ -8,13 +8,8 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../../client/index.html`))
 })
 
-router.post('/create-rooms', (req, res) => {
-  createRooms(req, res)
-})
-
-router.get('/get-rooms', (req, res) => {
-  getAllRooms(req, res)
-})
+router.post('/rooms', createRooms)
+router.get('/rooms', getAllRooms)
 
 router.get('/room/:roomId', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../../client/room.html`))

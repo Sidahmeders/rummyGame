@@ -14,7 +14,7 @@ async function hanldeRoomSubmition(event) {
   event.preventDefault()
   const roomInfo = getNewRoomInfo()
   try {
-    let response = await fetch('http://localhost:5000/create-rooms', {
+    let response = await fetch('http://localhost:5000/rooms', {
       method: 'POST',
       body: JSON.stringify(roomInfo),
       headers: {
