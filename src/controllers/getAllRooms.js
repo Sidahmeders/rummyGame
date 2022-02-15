@@ -1,8 +1,6 @@
-// const readJsonData = require('../utils/readJsonData')
+const store = require('../store')
 
 module.exports = function getAllRooms(req, res) {
-  // const roomsData = readJsonData()
-  // const rooms = JSON.parse(roomsData)
-
+  const rooms = store.getAllRooms()
   res.status(200).json({ rooms })
 }
