@@ -1,1 +1,5 @@
-{"gunjack":{"password":"1234","players":["ahmed","sodium","kaiba"]},"ragnar":{"password":"1234","players":[]},"simba":{"password":"1234","players":["kana"]}}
+{
+  "gunjack": { "password": "1234", "players": ["ahmed", "sodium", "kaiba"] },
+  "ragnar": { "password": "1234", "players": [] },
+  "simba": { "password": "1234", "players": ["kana"] }
+}
