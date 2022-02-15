@@ -1,9 +1,12 @@
+import state from '../../state/index.js'
+const { localUserName } = state
+
 export default function displayPeersNames(players) {
   const peersContainer = document.getElementById('peers-container')
   peersContainer.innerHTML = ''
 
   for (let peerName of players) {
-    if (peerName !== window.localUserName) {
+    if (peerName !== localUserName) {
       const peerElement = document.createElement('div')
       peerElement.className = 'peername'
       peerElement.innerText = peerName
@@ -16,3 +19,4 @@ export default function displayPeersNames(players) {
     }
   }
 }
+window

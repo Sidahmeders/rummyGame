@@ -1,6 +1,6 @@
 import { errorNotification } from '../notifications/index.js'
-
-const socket = window.socket
+import state from '../state/index.js'
+const { socket } = state
 
 export default function joinRoom(event) {
   event.preventDefault()
@@ -16,9 +16,7 @@ export default function joinRoom(event) {
   socket.emit('rooms:join', payload)
 }
 
-socket.on('rooms:error', (error) => {
-  errorNotification(error)
-})
+socket.on('rooms:error', errorNotification)
 
 socket.on('rooms:joined', (roomName, username) => {
   location.href = `/room/${roomName}?username=${username}`

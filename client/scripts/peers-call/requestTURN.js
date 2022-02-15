@@ -1,9 +1,11 @@
+import state from '../state/index.js'
+
 export default function requestTurn(turnURL) {
   let turnExists = false
   for (let i in window.pcConfig.iceServers) {
     if (window.pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
       turnExists = true
-      window.turnReady = true
+      state.turnReady = true
       break
     }
   }
@@ -18,7 +20,7 @@ export default function requestTurn(turnURL) {
           urls: 'turn:' + turnServer.username + '@' + turnServer.turn,
           credential: turnServer.password,
         })
-        window.turnReady = true
+        state.turnReady = true
       }
     }
     xhr.open('GET', turnURL, true)
