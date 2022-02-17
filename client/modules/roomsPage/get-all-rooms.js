@@ -3,7 +3,7 @@ import { errorNotification } from '../notifications/index.js'
 
 const getRooms = async () => {
   try {
-    let response = await fetch('http://localhost:5000/rooms')
+    let response = await fetch('http://localhost:5000/apis/rooms')
     response = await response.json()
     return response
   } catch (error) {

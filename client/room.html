@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- prevent favicon.ico requests -->
     <link rel="icon" href="data:," />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="stylesheet" href="/styles/peers-call.css" />
-    <link rel="stylesheet" href="/styles/room.css" />
     <link rel="stylesheet" href="/styles/notifications.css" />
-    <link rel="stylesheet" href="/styles/cards.css" />
-    <link rel="stylesheet" href="/styles/drop-box.css" />
-    <title>Room</title>
+    <link rel="stylesheet" href="/styles/peers-call.css" />
+
+    <link rel="stylesheet" href="/modules/roomPage/styles/table.css" />
+    <link rel="stylesheet" href="/modules/roomPage/styles/cards.css" />
+    <link rel="stylesheet" href="/modules/roomPage/styles/drop-box.css" />
+
+    <title>PlayRummy: Room</title>
   </head>
   <body>
     <section id="VC">
@@ -36,6 +38,6 @@
     <!-- <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
 
-    <script type="module" src="/scripts/room-table/index.js"></script>
+    <script type="module" src="/modules/roomPage/index.js"></script>
   </body>
 </html>

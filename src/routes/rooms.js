@@ -4,10 +4,13 @@ const { createRooms, getAllRooms } = require('../controllers')
 
 const router = express.Router()
 
-router.get('/', (req, res) => res.sendFile(path.join(`${__dirname}/../../client/index.html`)))
-router.get('/room/:roomId', (req, res) => res.sendFile(path.join(`${__dirname}/../../client/room.html`)))
-router.get('/rooms', getAllRooms)
+const readFile = (fileName) => path.join(`${__dirname}/../../client/${fileName}`)
 
-router.post('/rooms', createRooms)
+router.get('/', (_, res) => res.sendFile(readFile('index.html')))
+router.get('/rooms', (_, res) => res.sendFile(readFile('rooms.html')))
+router.get('/room/:roomId', (_, res) => res.sendFile(readFile('room.html')))
+
+router.get('/apis/rooms', getAllRooms)
+router.post('/apis/rooms', createRooms)
 
 module.exports = router

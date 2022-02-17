@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- prevent favicon.ico requests -->
     <link rel="icon" href="data:," />
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="stylesheet" href="/styles/home.css" />
-    <link rel="stylesheet" href="/styles/notifications.css" />
-    <title>Home Page</title>
+
+    <link rel="stylesheet" href="/modules/indexPage/styles/signup.css" />
+
+    <title>Signup/SignIn</title>
   </head>
   <body>
-    <h1>Play Rummy</h1>
+    <header></header>
 
-    <div id="alert"></div>
+    <main>
+      <div id="signup"></div>
+      <div id="signin"></div>
+    </main>
 
-    <div id="create-room"></div>
+    <footer></footer>
 
-    <div id="rooms-container"></div>
-
-    <script src="/socket.io/socket.io.js"></script>
-
-    <script type="module" src="/scripts/rooms/create-room.js"></script>
-    <script type="module" src="/scripts/rooms/get-all-rooms.js"></script>
+    <script type="module" src="/modules/indexPage/index.js"></script>
   </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:," />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/notifications.css" />
+    <link rel="stylesheet" href="/modules/roomsPage/styles/main.css" />
+
+    <title>PlayRummy: Rooms</title>
+  </head>
+  <body>
+    <h1>Create & Join Rooms</h1>
+
+    <div id="alert"></div>
+
+    <div id="create-room"></div>
+
+    <div id="rooms-container"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script type="module" src="/modules/roomsPage/create-room.js"></script>
+    <script type="module" src="/modules/roomsPage/get-all-rooms.js"></script>
+  </body>
+</html>
