@@ -12,5 +12,5 @@ module.exports = (io, socket) => {
     }
   }
 
-  io.emit('peers:disconnect', playersIds)
+  io.emit('peers:disconnect', playersIds) //FIXME: send to target rooms only
 }

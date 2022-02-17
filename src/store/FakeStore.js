@@ -7,34 +7,43 @@ const inMemoryGames = {
   testRoom: {
     password: '1234',
     cards: [],
-    playersCards: {
-      yousef: [
-        /*cards Array*/
-      ],
-      amine: [
-        /*cards Array*/
-      ],
-      yassine: [
-        /*cards Array*/
-      ],
-    },
+    playersCards: { yousef: [], amine: [], yassine: [] },
     players: ['yousef', 'amine', 'yassine'],
   },
 }
 
+// const fakeDB = {
+//   users: {
+//     testUser1: {
+//       id: 1,
+//       username: 'testUserName',
+//       socketId: '#44khsXefk!s&kd9',
+//       owendRoomsIds: ['testRoom', 'coolRoom'],
+//       hashPassword: 'pass123',
+//       onlineStatus: false,
+//     },
+//   },
+//   rooms: {
+//     testRoom1: {
+//       password: '1234',
+//       players: ['sodium', 'sidahmed'],
+//     },
+//   },
+//   onlinePlayers: { '89DmrenV23#rm': { userName: 'testUser2', room: 'testRoom99' } },
+// }
+
 class FakeStore {
   async createRoom(roomName, password) {
-    let rooms = JSON.parse(readJsonData())
-    if (rooms[roomName]) throw Error('room name already exist..')
+    let roomsData = this.queryDB('rooms')
+    if (roomsData[roomName]) throw Error('room name already exist..')
     // handle pushing new rooms to database
-    rooms[roomName] = { password, players: [] }
+    roomsData[roomName] = { password, players: [] }
     // write back the new data to our json file
-    await writeJsonData(rooms, 'new room has been added...')
+    await this.persistData('rooms', roomsData, 'new room has been added...')
   }
 
   setRoomData(roomName) {
-    const roomsData = JSON.parse(readJsonData())
-
+    const roomsData = this.queryDB('rooms')
     const targetRoom = inMemoryGames[roomName]
     let deckOfCards = targetRoom ? targetRoom.cards : createDeck54(2)
     let playersCards = targetRoom ? targetRoom.playersCards : new Object()
@@ -64,7 +73,7 @@ class FakeStore {
   }
 
   async joinRoom(roomName, password, username) {
-    const roomsData = JSON.parse(readJsonData())
+    const roomsData = this.queryDB('rooms')
     const room = roomsData[roomName]
     const roomPlayers = room.players
     const roomPassword = room.password
@@ -78,7 +87,7 @@ class FakeStore {
     if (!isValidPassword) throw Error('the given password is wrong')
 
     roomPlayers.push(username)
-    await writeJsonData(roomsData, 'new player has been added...')
+    await this.persistData('rooms', roomsData, 'new player has been added...')
   }
 
   getRoomByName(roomName) {
@@ -90,8 +99,7 @@ class FakeStore {
   }
 
   getAllRooms() {
-    const roomsData = readJsonData()
-    const rooms = JSON.parse(roomsData)
+    const rooms = this.queryDB('rooms')
     return rooms
   }
 
@@ -104,6 +112,15 @@ class FakeStore {
     }
 
     return userData
+  }
+
+  async persistData(fileName, data, message) {
+    await writeJsonData(fileName, data, message)
+  }
+
+  queryDB(fileName) {
+    const data = JSON.parse(readJsonData(fileName))
+    return data
   }
 }
 
