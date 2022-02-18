@@ -20,7 +20,7 @@ module.exports = function makeRoomDB({ model }) {
 
     async getAll() {
       const rooms = await model.findAll()
-      return rooms.map((room) => makeroom(room))
+      return rooms.map((room) => makeRoom(room))
     },
 
     remove(roomId) {
