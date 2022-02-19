@@ -21,13 +21,13 @@ class FakeStore {
     return rooms
   }
 
-  setRoomData(roomName) {
-    const roomsData = this.getAllRooms()
+  async setRoomData(roomName) {
+    const rooms = await this.getAllRooms()
     const targetRoom = inMemoryGames[roomName]
     let deckOfCards = targetRoom ? targetRoom.cards : createDeck54(2)
     let playersCards = targetRoom ? targetRoom.playersCards : new Object()
 
-    const { players } = roomsData[roomName]
+    const { players } = rooms[roomName]
     players.forEach((username) => {
       if (!playersCards[username]) {
         playersCards[username] = deckOfCards.splice(0, 14)
@@ -66,7 +66,6 @@ class FakeStore {
     if (!isValidPassword) throw Error('the given password is wrong')
 
     roomPlayers.push(username)
-
     await roomsDB.updateRoom(roomName, room)
   }
 
