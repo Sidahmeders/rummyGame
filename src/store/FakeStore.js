@@ -2,6 +2,9 @@ const createDeck54 = require('../utils/cards54')
 const writeJsonData = require('../utils/writeJsonData')
 const readJsonData = require('../utils/readJsonData')
 
+const indexXX = require('./index-xx.js')
+const { roomsDB } = indexXX
+
 const inMemoryGames = {
   playersIds: {},
   testRoom: {
@@ -13,13 +16,13 @@ const inMemoryGames = {
 }
 
 class FakeStore {
-  createRoom(roomName, password) {
-    let roomsData = this.queryDB('rooms')
-    if (roomsData[roomName]) throw Error('room name already exist..')
-    // handle pushing new rooms to database
-    roomsData[roomName] = { password, players: [] }
-    // write back the new data to our json file
-    this.persistData('rooms', roomsData, 'new room has been added...')
+  async createRoom(roomName, password) {
+    await roomsDB.addRoom({ roomName, password })
+  }
+
+  async getAllRooms() {
+    const rooms = await roomsDB.listRooms()
+    return rooms
   }
 
   setRoomData(roomName) {
@@ -76,11 +79,6 @@ class FakeStore {
 
   getPlayersIds() {
     return inMemoryGames.playersIds
-  }
-
-  getAllRooms() {
-    const rooms = this.queryDB('rooms')
-    return rooms
   }
 
   getPlayerRoomData(roomName, username) {

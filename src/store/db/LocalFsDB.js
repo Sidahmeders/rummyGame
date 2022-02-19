@@ -2,38 +2,37 @@ const path = require('path')
 const fs = require('fs')
 
 class LocalFsDB {
-  constructor(fakeDb) {
-    this.fakeDb = fakeDb || {
-      users: {
-        testUser1: {
-          id: 1,
-          username: 'testUserName',
-          socketId: '#44khsXefk!s&kd9',
-          owendRoomsIds: ['testRoom', 'coolRoom'],
-          hashPassword: 'pass123',
-          onlineStatus: false,
-        },
+  fakeDb = {
+    users: {
+      testUser1: {
+        id: 1,
+        username: 'testUserName',
+        socketId: '#44khsXefk!s&kd9',
+        owendRoomsIds: ['testRoom', 'coolRoom'],
+        hashPassword: 'pass123',
+        onlineStatus: false,
       },
-      rooms: {
-        testRoom1: {
-          password: '1234',
-          players: ['sodium', 'sidahmed'],
-        },
+    },
+    rooms: {
+      testRoom1: {
+        password: '1234',
+        players: ['sodium', 'sidahmed'],
       },
-      onlinePlayers: { '89DmrenV23#rm': { userName: 'testUser2', room: 'testRoom99' } },
-    }
+    },
+    onlinePlayers: { '89DmrenV23#rm': { userName: 'testUser2', room: 'testRoom99' } },
   }
 
   queryDB(fileName) {
-    const jsonData = fs.readFileSync(path.join(`${__dirname}/store`, `${fileName}.json`), 'utf8', (err, data) => {
-      if (err) throw err
-      return data
+    return new Promise((resolve, reject) => {
+      fs.readFile(path.join(`${__dirname}`, `${fileName}.json`), 'utf8', (err, data) => {
+        if (err) reject(err)
+        else resolve(JSON.parse(data))
+      })
     })
-    return jsonData
   }
 
-  persistDB(fileName, data, message) {
-    fs.writeFileSync(path.join(`${__dirname}/store`, `${fileName}.json`), JSON.stringify(data), (err) => {
+  async persistDB(fileName, data, message) {
+    await fs.writeFile(path.join(`${__dirname}`, `${fileName}.json`), JSON.stringify(data), (err) => {
       if (err) throw Error(err.message)
       console.log(message)
     })

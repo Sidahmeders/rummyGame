@@ -6,10 +6,10 @@ const USER_ROLES = {
 
 module.exports = function buildMakeUser({ getUniqueId }) {
   return function makeUser({ id = getUniqueId(), email, passwordHash, displayName = '', isVerified = false, createdAt = Date.now(), role }) {
-    if (!id) throw new Error('User must have an id')
-    if (!email) throw new Error('User must have an email')
-    if (!passwordHash) throw new Error('User must have a passwordHash')
-    if (!Object.values(USER_ROLES).includes(role)) throw new Error('User must have a valid role')
+    if (!id) throw Error('User must have an id')
+    if (!email) throw Error('User must have an email')
+    if (!passwordHash) throw Error('User must have a passwordHash')
+    if (!Object.values(USER_ROLES).includes(role)) throw Error('User must have a valid role')
 
     return Object.freeze({
       get id() {
