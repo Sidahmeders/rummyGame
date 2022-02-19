@@ -1,9 +1,5 @@
 const createDeck54 = require('../utils/cards54')
-const writeJsonData = require('../utils/writeJsonData')
-const readJsonData = require('../utils/readJsonData')
-
-const indexXX = require('./index-xx.js')
-const { roomsDB } = indexXX
+const { roomsDB } = require('./index-xx.js')
 
 const inMemoryGames = {
   playersIds: {},
@@ -26,7 +22,7 @@ class FakeStore {
   }
 
   setRoomData(roomName) {
-    const roomsData = this.queryDB('rooms')
+    const roomsData = this.getAllRooms()
     const targetRoom = inMemoryGames[roomName]
     let deckOfCards = targetRoom ? targetRoom.cards : createDeck54(2)
     let playersCards = targetRoom ? targetRoom.playersCards : new Object()
@@ -55,9 +51,9 @@ class FakeStore {
     io.in(roomName).emit('peers:connect', playersIds)
   }
 
-  joinRoom(roomName, password, username) {
-    const roomsData = this.queryDB('rooms')
-    const room = roomsData[roomName]
+  async joinRoom(roomName, password, username) {
+    const rooms = await this.getAllRooms()
+    const room = rooms[roomName]
     const roomPlayers = room.players
     const roomPassword = room.password
 
@@ -70,7 +66,8 @@ class FakeStore {
     if (!isValidPassword) throw Error('the given password is wrong')
 
     roomPlayers.push(username)
-    this.persistData('rooms', roomsData, 'new player has been added...')
+
+    await roomsDB.updateRoom(roomName, room)
   }
 
   getRoomByName(roomName) {
@@ -90,14 +87,6 @@ class FakeStore {
     }
 
     return userData
-  }
-
-  persistData(fileName, data, message) {
-    writeJsonData(fileName, data, message)
-  }
-
-  queryDB(fileName) {
-    return JSON.parse(readJsonData(fileName))
   }
 }
 

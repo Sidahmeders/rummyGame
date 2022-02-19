@@ -3,15 +3,17 @@ const { makeRoom } = require('../../domain/index.js')
 module.exports = function makeRoomsDB({ model }) {
   return Object.freeze({
     async addRoom(room) {
-      model.create({
+      const newRoom = makeRoom({
         id: room.id,
         roomName: room.roomName,
         password: room.password,
+        players: room.players,
         createdAt: room.createdAt,
       })
+      await model.create(newRoom)
     },
 
-    async findRoom({ id = '', roomName = '' }) {
+    async findRoom(id) {
       return 'room'
     },
 
@@ -20,9 +22,9 @@ module.exports = function makeRoomsDB({ model }) {
       return rooms
     },
 
-    // updateRoom(id) {
-    //   model.update(id)
-    // },
+    async updateRoom(roomName, newRoom) {
+      await model.update(roomName, newRoom)
+    },
 
     // removeRoom(id = '') {
     //   model.delete(id)
