@@ -7,8 +7,8 @@ class Room extends LocalFsDB {
   // private methods
   #validatePops() {
     if (typeof this.#props !== 'object') throw Error('room type must be an Object')
-    if (Object.prototype.hasOwnProperty.call(this.#props, 'roomName')) throw Error('roomName is required!')
-    if (Object.prototype.hasOwnProperty.call(this.#props, 'password')) throw Error('password is required!')
+    if (!Object.prototype.hasOwnProperty.call(this.#props, 'roomName')) throw Error('roomName is required!')
+    if (!Object.prototype.hasOwnProperty.call(this.#props, 'password')) throw Error('password is required!')
     if (!this.#key) throw Error('key is null or undefined')
   }
 
@@ -20,7 +20,7 @@ class Room extends LocalFsDB {
 
   async save() {
     this.#validatePops()
-    const rooms = this.queryDB('rooms')
+    const rooms = await this.queryDB('rooms')
     const isRoomExist = rooms[this.#key]
     if (isRoomExist) throw Error(`${this.#key} roomName already exist..`)
     // handle pushing a new room to the collection
@@ -37,7 +37,6 @@ class Room extends LocalFsDB {
 
   async findAll() {
     const allRooms = await this.queryDB('rooms')
-    console.log(allRooms, '>>>>>>>>>')
     return allRooms || []
   }
 }
