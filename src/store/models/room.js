@@ -1,4 +1,4 @@
-import LocalFsDB from '../LocalFsDB.js'
+const LocalFsDB = require('../db/LocalFsDB.js')
 
 class Room extends LocalFsDB {
   constructor(id, roomName, password, createdAt) {
@@ -16,7 +16,7 @@ class Room extends LocalFsDB {
     // handle pushing new rooms to database
     rooms[roomName] = { password, players: [] }
     // write back the new data to our json file
-    await this.persistDB('rooms', rooms, 'new room has been added...')
+    this.persistDB('rooms', rooms, 'new room has been added...')
   }
 
   getById(id) {}

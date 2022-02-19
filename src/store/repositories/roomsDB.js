@@ -1,9 +1,9 @@
 const { makeRoom } = require('../../domain/index.js')
 
-module.exports = function makeRoomDB({ model }) {
+module.exports = function makeRoomsDB({ model }) {
   return Object.freeze({
     async add(room) {
-      await model.create({
+      model.create({
         id: room.id,
         roomName: room.roomName,
         password: room.password,
@@ -12,7 +12,7 @@ module.exports = function makeRoomDB({ model }) {
     },
 
     async getAll() {
-      const rooms = await model.findAll()
+      const rooms = model.findAll()
       return rooms.map((room) => makeRoom(room))
     },
 
@@ -21,7 +21,7 @@ module.exports = function makeRoomDB({ model }) {
     },
 
     remove(id = '') {
-      model.delete(roomId)
+      model.delete(id)
     },
   })
 }

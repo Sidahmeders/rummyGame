@@ -12,26 +12,6 @@ const inMemoryGames = {
   },
 }
 
-const fakeDB = {
-  users: {
-    testUser1: {
-      id: 1,
-      username: 'testUserName',
-      socketId: '#44khsXefk!s&kd9',
-      owendRoomsIds: ['testRoom', 'coolRoom'],
-      hashPassword: 'pass123',
-      onlineStatus: false,
-    },
-  },
-  rooms: {
-    testRoom1: {
-      password: '1234',
-      players: ['sodium', 'sidahmed'],
-    },
-  },
-  onlinePlayers: { '89DmrenV23#rm': { userName: 'testUser2', room: 'testRoom99' } },
-}
-
 class FakeStore {
   createRoom(roomName, password) {
     let roomsData = this.queryDB('rooms')
