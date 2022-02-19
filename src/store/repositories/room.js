@@ -5,17 +5,10 @@ module.exports = function makeRoomDB({ model }) {
     async add(room) {
       await model.create({
         id: room.id,
-        email: room.email,
-        passwordHash: room.passwordHash,
-        displayName: room.displayName,
-        isVerified: room.isVerified,
+        roomName: room.roomName,
+        password: room.password,
         createdAt: room.createdAt,
-        role: room.role,
       })
-    },
-
-    async getById({ id = '' }) {
-      return 'room'
     },
 
     async getAll() {
@@ -23,7 +16,11 @@ module.exports = function makeRoomDB({ model }) {
       return rooms.map((room) => makeRoom(room))
     },
 
-    remove(roomId) {
+    async getById(id = '') {
+      return 'room'
+    },
+
+    remove(id = '') {
       model.delete(roomId)
     },
   })

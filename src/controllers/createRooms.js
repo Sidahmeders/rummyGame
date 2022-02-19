@@ -1,6 +1,6 @@
 const store = require('../store')
 
-module.exports = async function createRooms(req, res) {
+module.exports = function createRooms(req, res) {
   try {
     const { roomName, password } = req.body
     if (!roomName || !password) throw Error('please fill in the room name and password')

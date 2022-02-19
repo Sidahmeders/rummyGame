@@ -7,11 +7,14 @@ module.exports = function buildMakeRoom({ getUniqueId }) {
       get id() {
         return id
       },
-      get createdAt() {
-        return createdAt
-      },
       get roomName() {
         return roomName
+      },
+      get password() {
+        return password
+      },
+      get createdAt() {
+        return createdAt
       },
     })
   }

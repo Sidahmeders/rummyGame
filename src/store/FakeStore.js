@@ -33,13 +33,13 @@ const fakeDB = {
 }
 
 class FakeStore {
-  async createRoom(roomName, password) {
+  createRoom(roomName, password) {
     let roomsData = this.queryDB('rooms')
     if (roomsData[roomName]) throw Error('room name already exist..')
     // handle pushing new rooms to database
     roomsData[roomName] = { password, players: [] }
     // write back the new data to our json file
-    await this.persistData('rooms', roomsData, 'new room has been added...')
+    this.persistData('rooms', roomsData, 'new room has been added...')
   }
 
   setRoomData(roomName) {
@@ -72,7 +72,7 @@ class FakeStore {
     io.in(roomName).emit('peers:connect', playersIds)
   }
 
-  async joinRoom(roomName, password, username) {
+  joinRoom(roomName, password, username) {
     const roomsData = this.queryDB('rooms')
     const room = roomsData[roomName]
     const roomPlayers = room.players
@@ -87,7 +87,7 @@ class FakeStore {
     if (!isValidPassword) throw Error('the given password is wrong')
 
     roomPlayers.push(username)
-    await this.persistData('rooms', roomsData, 'new player has been added...')
+    this.persistData('rooms', roomsData, 'new player has been added...')
   }
 
   getRoomByName(roomName) {
@@ -114,8 +114,8 @@ class FakeStore {
     return userData
   }
 
-  async persistData(fileName, data, message) {
-    await writeJsonData(fileName, data, message)
+  persistData(fileName, data, message) {
+    writeJsonData(fileName, data, message)
   }
 
   queryDB(fileName) {
