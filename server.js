@@ -1,12 +1,11 @@
 const express = require('express')
-const initListner = require('./src/listeners')
-const roomsRoutes = require('./src/routes/rooms')
-const corsConfig = require('./src/middlewares/cors.config')
+const initListner = require('./src/infrastructure/eventsListeners')
+const apis = require('./src/apis/routes')
+const corsConfig = require('./src/config/cors')
 
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
-initListner(io)
 
 app.use(express.static(__dirname + '/client'))
 app.use(express.json())
@@ -14,7 +13,8 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use((req, res, next) => corsConfig(req, res, next))
 
-app.use('/', roomsRoutes)
+initListner(io)
+app.use('/', apis)
 
 const PORT = process.env.PORT || 5000
 server.listen(PORT, console.log(`server running on port ${PORT}..`))
