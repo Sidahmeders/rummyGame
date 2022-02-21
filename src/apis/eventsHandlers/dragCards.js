@@ -1,7 +1,7 @@
 const { InMemoryGames } = require('../../infrastructure/store')
 const { getPlayerRoomData } = require('../../domain/services')
 
-module.exports = ({ socket, payload, events }) => {
+module.exports = ({ payload, wsEventEmitter, events }) => {
   try {
     const { roomName, username } = payload
     const targetRoom = InMemoryGames[roomName]
@@ -17,8 +17,8 @@ module.exports = ({ socket, payload, events }) => {
 
     playerHand.push(pickedCard)
     const playerData = getPlayerRoomData(roomName, username)
-    socket.emit(events.cardsDragged, playerData)
+    wsEventEmitter.emit(events.cardsDragged, playerData)
   } catch (err) {
-    socket.emit(events.roomsError, err.message)
+    wsEventEmitter.emit(events.roomsError, err.message)
   }
 }

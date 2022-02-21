@@ -1,17 +1,18 @@
-module.exports = ({ socket, events }) => {
+module.exports = ({ wsEventEmitter, events }) => {
   return {
     onPeerJoin: (room) => {
-      const clientsInRoom = socket.adapter.rooms.get(room)
+      const clientsInRoom = wsEventEmitter.getSocketRooms(room)
       const numClients = clientsInRoom ? clientsInRoom.size : 0
-      const payload = JSON.stringify({ socketID: socket.id, numClients })
+      const socketID = wsEventEmitter.socket.id
+      const payload = JSON.stringify({ socketID, numClients })
 
-      socket.emit(events.peersJoined, payload)
+      wsEventEmitter.emit(events.peersJoined, payload)
     },
     onPeerMessage: (message) => {
       const { room, payload } = JSON.parse(message)
       const event = payload?.type
 
-      socket.to(room).emit(event, payload)
+      wsEventEmitter.broadcastToRoom(room, event, payload)
     },
   }
 }

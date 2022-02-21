@@ -18,6 +18,7 @@ export default function joinRoom(event) {
 
 socket.on('rooms:error', errorNotification)
 
-socket.on('rooms:joined', (roomName, username) => {
+socket.on('rooms:joined', (payload) => {
+  const { roomName, username } = payload
   location.href = `/room/${roomName}?username=${username}`
 })

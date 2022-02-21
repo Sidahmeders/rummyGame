@@ -1,16 +1,18 @@
-const { setRoomData, joinSocketRooms, getPlayerRoomData } = require('../../domain/services')
+const { setRoomData, getPlayerRoomData } = require('../../domain/services')
 
-module.exports = async ({ io, socket, payload, events }) => {
+module.exports = async ({ payload, wsEventEmitter, events }) => {
   try {
     const { roomName, username } = payload
     if (!roomName || !username) throw Error('roomName or username is null or undefined')
 
-    joinSocketRooms(io, socket, roomName, username)
+    wsEventEmitter.joinSocketRooms(username, roomName)
+
     await setRoomData(roomName)
+
     const userData = getPlayerRoomData(roomName, username)
 
-    io.in(roomName).emit(events.roomsJoined, userData)
+    wsEventEmitter.broadcastToRoom(roomName, events.roomsJoined, userData)
   } catch (err) {
-    socket.emit(events.roomsError, err.message)
+    wsEventEmitter.emit(events.roomsError, err.message)
   }
 }

@@ -5,11 +5,9 @@ const { roomsDB } = require('../../infrastructure/store')
 const makeGetPlayerRoomData = require('./getPlayerRoomData')
 const makeSetRoomData = require('./setRoomData')
 const makeJoinRoom = require('./joinRoom')
-const makeJoinSocketRooms = require('./joinSocketRooms')
 
-module.exports = {
-  getPlayerRoomData: makeGetPlayerRoomData({ InMemoryGames }),
-  setRoomData: makeSetRoomData({ roomsDB, createDeck54, InMemoryGames }),
-  joinRoom: makeJoinRoom({ roomsDB }),
-  joinSocketRooms: makeJoinSocketRooms({ InMemoryGames }),
-}
+const getPlayerRoomData = makeGetPlayerRoomData({ InMemoryGames })
+const setRoomData = makeSetRoomData({ roomsDB, InMemoryGames, createDeck54 })
+const joinRoom = makeJoinRoom({ roomsDB })
+
+module.exports = { getPlayerRoomData, setRoomData, joinRoom }

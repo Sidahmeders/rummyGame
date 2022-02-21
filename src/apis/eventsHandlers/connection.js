@@ -1,3 +1,3 @@
-module.exports = (socket) => {
-  console.log(`user:: ${socket.id} ::connected`)
+module.exports = (wsEventEmitter) => {
+  console.log(`user:: ${wsEventEmitter.socket.id} ::connected`)
 }

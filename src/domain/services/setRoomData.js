@@ -1,7 +1,8 @@
-module.exports = ({ roomsDB, createDeck54, InMemoryGames }) => {
+module.exports = ({ roomsDB, InMemoryGames, createDeck54 }) => {
   return async (roomName) => {
     const rooms = await roomsDB.listRooms()
     const targetRoom = InMemoryGames[roomName]
+
     let deckOfCards = targetRoom ? targetRoom.cards : createDeck54(2)
     let playersCards = targetRoom ? targetRoom.playersCards : new Object()
 

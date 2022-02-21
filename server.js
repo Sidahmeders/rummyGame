@@ -1,5 +1,5 @@
 const express = require('express')
-const initListner = require('./src/infrastructure/eventsListeners')
+const initListener = require('./src/infrastructure/wss')
 const apis = require('./src/apis/routes')
 const corsConfig = require('./src/config/cors')
 
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use((req, res, next) => corsConfig(req, res, next))
 
-initListner(io)
+initListener(io)
 app.use('/', apis)
 
 const PORT = process.env.PORT || 5000

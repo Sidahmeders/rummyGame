@@ -7,16 +7,16 @@ const makeDragCards = require('./dragCards.js')
 const makeDropCards = require('./dropCards.js')
 const makeWebrtcSignaling = require('./webrtcSignaling.js')
 
-module.exports = (io, socket) => {
-  const connection = () => makeConnect(socket)
-  const disconnect = () => makeDisConnect(io, socket)
+module.exports = (wsEventEmitter) => {
+  const connection = () => makeConnect(wsEventEmitter)
+  const disconnect = () => makeDisConnect({ wsEventEmitter, events })
 
-  const joinRoom = (payload) => makeJoinRoom({ socket, payload, events })
-  const getRoomData = (payload) => makeGetRoomData({ io, socket, payload, events })
-  const dragCards = (payload) => makeDragCards({ socket, payload, events })
-  const dropCards = (payload) => makeDropCards({ socket, payload, events })
+  const joinRoom = (payload) => makeJoinRoom({ payload, wsEventEmitter, events })
+  const getRoomData = (payload) => makeGetRoomData({ payload, wsEventEmitter, events })
+  const dragCards = (payload) => makeDragCards({ payload, wsEventEmitter, events })
+  const dropCards = (payload) => makeDropCards({ payload, wsEventEmitter, events })
 
-  const webrtcSignal = makeWebrtcSignaling({ socket, events })
+  const webrtcSignal = makeWebrtcSignaling({ wsEventEmitter, events })
   const peerJoin = (room) => webrtcSignal.onPeerJoin(room)
   const peerMessage = (message) => webrtcSignal.onPeerMessage(message)
 
