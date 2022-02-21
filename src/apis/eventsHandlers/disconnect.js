@@ -1,9 +1,9 @@
-const { updateOnlinePlayers } = require('../../domain/services')
+const { removeOnlinePlayers } = require('../../domain/services')
 
 module.exports = ({ wsEventEmitter, events }) => {
   console.log(`user:: ${wsEventEmitter.socket.id} ::disconnected`)
 
-  const onlinePlayers = updateOnlinePlayers.remove(wsEventEmitter.socket.id)
+  const onlinePlayers = removeOnlinePlayers(wsEventEmitter.socket.id)
 
   wsEventEmitter.broadcastAll(events.peersDisconnect, onlinePlayers) // FIXME: send to target rooms only
 }

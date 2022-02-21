@@ -9,7 +9,7 @@ const makeJoinRoom = require('./joinRoom')
 
 const getPlayerRoomData = makeGetPlayerRoomData({ InMemoryGames })
 const updateRoomData = makeUpdateRoomData({ roomsDB, InMemoryGames, createDeck54 })
-const updateOnlinePlayers = makeUpdateOnlinePlayers({ InMemoryGames })
 const joinRoom = makeJoinRoom({ roomsDB })
+const { addOnlinePlayers, removeOnlinePlayers } = makeUpdateOnlinePlayers({ InMemoryGames })
 
-module.exports = { getPlayerRoomData, updateRoomData, updateOnlinePlayers, joinRoom }
+module.exports = { getPlayerRoomData, updateRoomData, joinRoom, addOnlinePlayers, removeOnlinePlayers }

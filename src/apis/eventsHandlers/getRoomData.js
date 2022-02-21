@@ -1,4 +1,4 @@
-const { updateRoomData, updateOnlinePlayers, getPlayerRoomData } = require('../../domain/services')
+const { updateRoomData, addOnlinePlayers, getPlayerRoomData } = require('../../domain/services')
 
 module.exports = async ({ payload, wsEventEmitter, events }) => {
   try {
@@ -6,7 +6,7 @@ module.exports = async ({ payload, wsEventEmitter, events }) => {
     if (!roomName || !username) throw Error('roomName or username is null or undefined')
     wsEventEmitter.joinSocketRooms(roomName)
 
-    const onlinePlayers = updateOnlinePlayers.add(username, wsEventEmitter.socket.id)
+    const onlinePlayers = addOnlinePlayers(username, wsEventEmitter.socket.id)
     wsEventEmitter.broadcastToRoom(roomName, events.peersConnect, onlinePlayers)
 
     await updateRoomData(roomName)
