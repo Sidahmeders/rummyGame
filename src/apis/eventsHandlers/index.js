@@ -16,9 +16,7 @@ module.exports = (wsEventEmitter) => {
   const dragCards = (payload) => makeDragCards({ payload, wsEventEmitter, events })
   const dropCards = (payload) => makeDropCards({ payload, wsEventEmitter, events })
 
-  const webrtcSignal = makeWebrtcSignaling({ wsEventEmitter, events })
-  const peerJoin = (room) => webrtcSignal.onPeerJoin(room)
-  const peerMessage = (message) => webrtcSignal.onPeerMessage(message)
+  const { peerJoin, peerMessage } = makeWebrtcSignaling({ wsEventEmitter, events })
 
   return { connection, disconnect, joinRoom, getRoomData, dragCards, dropCards, peerJoin, peerMessage }
 }

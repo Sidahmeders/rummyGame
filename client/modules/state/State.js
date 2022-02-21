@@ -1,5 +1,6 @@
 export default class State {
   constructor() {
+    // eslint-disable-next-line no-undef
     this.socket = io()
 
     // room table
