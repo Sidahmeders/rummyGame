@@ -19,7 +19,6 @@ class LocalFsDB {
         players: ['sodium', 'sidahmed'],
       },
     },
-    onlinePlayers: { '89DmrenV23#rm': { userName: 'testUser2', room: 'testRoom99' } },
   }
 
   queryDB(fileName) {

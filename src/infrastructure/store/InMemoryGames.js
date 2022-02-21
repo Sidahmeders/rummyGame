@@ -1,5 +1,5 @@
 module.exports = {
-  playersIds: {},
+  onlinePlayers: {},
   testRoom: {
     password: '1234',
     cards: [],

@@ -4,5 +4,6 @@ module.exports = {
   cardsDropped: 'cards:dropped',
   roomsJoined: 'rooms:joined',
   peersJoined: 'peers:joined',
+  peersConnect: 'peers:connect',
   peersDisconnect: 'peers:disconnect',
 }

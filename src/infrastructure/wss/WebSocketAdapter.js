@@ -1,5 +1,3 @@
-const InMemoryGames = require('../store/InMemoryGames')
-
 class WebSocketAdapter {
   constructor(ws, socket) {
     this.ws = ws
@@ -27,14 +25,8 @@ class WebSocketAdapter {
     return socketRooms
   }
 
-  joinSocketRooms(username, room) {
+  joinSocketRooms(room) {
     this.socket.join(room)
-
-    let playersIds = InMemoryGames.playersIds
-    if (!playersIds) InMemoryGames.playersIds = {}
-    else playersIds[username] = this.socket.id
-
-    this.broadcastToRoom(room, 'peers:connect', playersIds)
   }
 }
 

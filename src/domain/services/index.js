@@ -1,13 +1,15 @@
 const createDeck54 = require('./cards54')
-const InMemoryGames = require('../../infrastructure/store/InMemoryGames')
+const { InMemoryGames } = require('../../infrastructure/store')
 const { roomsDB } = require('../../infrastructure/store')
 
 const makeGetPlayerRoomData = require('./getPlayerRoomData')
-const makeSetRoomData = require('./setRoomData')
+const makeUpdateRoomData = require('./updateRoomData')
+const makeUpdateOnlinePlayers = require('./updateOnlinePlayers')
 const makeJoinRoom = require('./joinRoom')
 
 const getPlayerRoomData = makeGetPlayerRoomData({ InMemoryGames })
-const setRoomData = makeSetRoomData({ roomsDB, InMemoryGames, createDeck54 })
+const updateRoomData = makeUpdateRoomData({ roomsDB, InMemoryGames, createDeck54 })
+const updateOnlinePlayers = makeUpdateOnlinePlayers({ InMemoryGames })
 const joinRoom = makeJoinRoom({ roomsDB })
 
-module.exports = { getPlayerRoomData, setRoomData, joinRoom }
+module.exports = { getPlayerRoomData, updateRoomData, updateOnlinePlayers, joinRoom }

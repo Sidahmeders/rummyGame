@@ -1,16 +1,9 @@
-const { InMemoryGames } = require('../../infrastructure/store')
+const { updateOnlinePlayers } = require('../../domain/services')
 
 module.exports = ({ wsEventEmitter, events }) => {
   console.log(`user:: ${wsEventEmitter.socket.id} ::disconnected`)
-  const playersIds = InMemoryGames.playersIds
 
-  for (let username in playersIds) {
-    let id = playersIds[username]
-    if (id === wsEventEmitter.socket.id) {
-      console.log(username + ':' + id, 'is gonna be deleted')
-      delete playersIds[username]
-    }
-  }
+  const onlinePlayers = updateOnlinePlayers.remove(wsEventEmitter.socket.id)
 
-  wsEventEmitter.broadcastAll(events.peersDisconnect, playersIds) // FIXME: send to target rooms only
+  wsEventEmitter.broadcastAll(events.peersDisconnect, onlinePlayers) // FIXME: send to target rooms only
 }
