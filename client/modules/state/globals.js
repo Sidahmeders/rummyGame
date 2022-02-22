@@ -1,6 +1,12 @@
 // eslint-disable-next-line no-undef
 window.socket = io()
 
+window.getRoomInfo = () => {
+  const roomName = location.pathname.split('/')[2]
+  const username = location.search.split('=')[1]
+  return { roomName, username }
+}
+
 // room table
 window.roomState = {
   pickedCardClass: undefined,
@@ -26,10 +32,4 @@ window.peerConfig = {
     },
   ],
   iceCandidatePoolSize: 10,
-}
-
-window.getRoomInfo = () => {
-  const roomName = location.pathname.split('/')[2]
-  const username = location.search.split('=')[1]
-  return { roomName, username }
 }

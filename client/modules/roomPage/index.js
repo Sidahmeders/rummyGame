@@ -7,22 +7,19 @@ import addDraggedCard from './addDraggedCard.js'
 import removeDroppedCard from './removeDroppedCard.js'
 import displayPeersOnlineStatus from './displayPeersOnlineStatus.js'
 
-import state from '../state/index.js'
-const { socket, getRoomInfo } = state
-
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
-  const { roomName, username } = getRoomInfo()
-  socket.emit('rooms:data', { username, roomName })
+  const { roomName, username } = window.getRoomInfo()
+  window.socket.emit('rooms:data', { username, roomName })
 }
 
-socket.on('rooms:joined', displayRoomData)
+window.socket.on('rooms:joined', displayRoomData)
 
-socket.on('cards:dragged', addDraggedCard)
-socket.on('cards:dropped', removeDroppedCard)
+window.socket.on('cards:dragged', addDraggedCard)
+window.socket.on('cards:dropped', removeDroppedCard)
 
-socket.on('peers:disconnect', displayPeersOnlineStatus)
-socket.on('peers:connect', displayPeersOnlineStatus)
+window.socket.on('peers:disconnect', displayPeersOnlineStatus)
+window.socket.on('peers:connect', displayPeersOnlineStatus)
 
-socket.on('rooms:error', errorNotification)
+window.socket.on('rooms:error', errorNotification)

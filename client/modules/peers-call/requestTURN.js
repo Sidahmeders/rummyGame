@@ -1,9 +1,9 @@
 export default function requestTurn(turnURL) {
   let turnExists = false
-  for (let i in window.pcConfig.iceServers) {
-    if (window.pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
+  for (let i in pcConfig.iceServers) {
+    if (pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
       turnExists = true
-      window.turnReady = true
+      turnReady = true
       break
     }
   }
@@ -14,11 +14,11 @@ export default function requestTurn(turnURL) {
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         let turnServer = JSON.parse(xhr.responseText)
-        window.pcConfig.iceServers.push({
+        pcConfig.iceServers.push({
           urls: 'turn:' + turnServer.username + '@' + turnServer.turn,
           credential: turnServer.password,
         })
-        window.turnReady = true
+        turnReady = true
       }
     }
     xhr.open('GET', turnURL, true)

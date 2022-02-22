@@ -1,6 +1,3 @@
-import state from '../state/index.js'
-const { socket, roomState, getRoomInfo } = state
-
 function dropBoxHandler() {
   const dropBoxElement = document.getElementById('drop-box')
 
@@ -20,10 +17,10 @@ function dragLeave() {
 
 function dragDrop() {
   this.classList.remove('hovered')
-  const { roomName, username } = getRoomInfo()
-  const { pickedCardClass } = roomState
+  const { roomName, username } = window.getRoomInfo()
+  const { pickedCardClass } = window.roomState
   const payload = { roomName, username, pickedCardClass }
-  socket.emit('cards:drop', payload)
+  window.socket.emit('cards:drop', payload)
 }
 
 dropBoxHandler()
