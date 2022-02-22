@@ -1,10 +1,11 @@
-export default function displayPeersOnlineStatus(onlinePlayers) {
-  const peersSet = new Set(Object.keys(onlinePlayers || {}))
+export default function displayPeersOnlineStatus(onlinePlayers = {}) {
+  const statusSet = new Set(Object.keys(onlinePlayers))
   const peersNamesNodes = document.getElementsByClassName('peername-status')
+
   setTimeout(() => {
     for (let peerNode of peersNamesNodes) {
-      const isOnline = peersSet.has(peerNode.parentElement.textContent)
+      const isOnline = statusSet.has(peerNode.parentElement.textContent)
       peerNode.style.background = isOnline ? '#5f5' : 'gray'
     }
-  }, 2000) // FIXME: remove the setTimeout
+  }, 1000)
 }
