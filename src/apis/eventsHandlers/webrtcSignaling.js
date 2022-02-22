@@ -13,7 +13,7 @@ module.exports = ({ wsEventEmitter, events }) => {
       const { room, payload } = JSON.parse(message)
       const event = payload?.type
 
-      wsEventEmitter.broadcastToRoom(room, event, payload)
+      wsEventEmitter.socket.to(room).emit(event, payload)
     },
   })
 }
