@@ -1,6 +1,4 @@
 import { errorNotification } from '../notifications/index.js'
-import state from '../state/index.js'
-const { socket } = state
 
 export default function joinRoom(event) {
   event.preventDefault()
