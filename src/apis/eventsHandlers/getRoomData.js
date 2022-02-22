@@ -11,7 +11,7 @@ module.exports = async ({ payload, wsEventEmitter, events }) => {
 
     await updateRoomData(roomName)
     const userData = getPlayerRoomData(roomName, username)
-    wsEventEmitter.broadcastToRoom(roomName, events.roomsJoined, userData)
+    wsEventEmitter.emit(events.roomsJoined, userData)
   } catch (err) {
     wsEventEmitter.emit(events.roomsError, err.message)
   }

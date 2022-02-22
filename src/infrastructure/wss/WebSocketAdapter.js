@@ -12,6 +12,10 @@ class WebSocketAdapter {
     this.socket.emit(event, payload)
   }
 
+  sendToRoom(room, event, payload) {
+    this.socket.to(room).emit(event, payload)
+  }
+
   broadcastToRoom(room, event, payload) {
     this.ws.in(room).emit(event, payload)
   }

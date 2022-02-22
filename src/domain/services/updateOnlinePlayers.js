@@ -12,8 +12,8 @@ module.exports = ({ InMemoryGames }) => {
       for (let key in onlinePlayers) {
         const playerId = onlinePlayers[key]
         if (playerId === socketID) delete onlinePlayers[key]
-        return onlinePlayers
       }
+      return onlinePlayers
     },
   })
 }

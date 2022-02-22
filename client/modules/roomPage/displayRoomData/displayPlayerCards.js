@@ -1,9 +1,6 @@
 import addDragableEvents from '../addDragableEvents.js'
 
 export default function displayPlayerCards(playerCards) {
-  const playerExist = document.getElementById('player')
-  if (playerExist) return //FIXME: handle this on the server
-
   const tableElement = document.getElementById('table')
   const playerElement = document.createElement('div')
   playerElement.id = 'player'
