@@ -1,0 +1,35 @@
+#auth-container .signup,
+#auth-container .signin {
+  min-height: 180px;
+  border: 2px solid transparent;
+  border-bottom-color: gray;
+  margin: 0 25px;
+}
+
+#auth-container .signup form,
+#auth-container .signin form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+}
+
+#auth-container .signup h2,
+#auth-container .signin h2 {
+  color: aliceblue;
+  padding: 10px;
+}
+
+#auth-container .signup form input,
+#auth-container .signin form input {
+  padding: 10px;
+  margin: 5px;
+  outline: none;
+  width: 30%;
+  border: none;
+}
+
+#auth-container .signup.hide,
+#auth-container .signin.hide {
+  display: none;
+}

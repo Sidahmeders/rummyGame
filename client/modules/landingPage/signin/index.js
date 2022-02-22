@@ -1,13 +1,13 @@
-const formTextElements = ['username', 'email', 'password', 'age', 'country', 'city']
+const formTextElements = ['email', 'password']
 
 export default function SignUp() {
   const authContainer = document.getElementById('auth-container')
 
-  const signinContainer = document.createElement('div')
-  signinContainer.className = 'signup'
+  const signupContainer = document.createElement('div')
+  signupContainer.className = 'signin hide'
 
   const h2El = document.createElement('h2')
-  h2El.innerText = 'SignUp'
+  h2El.innerText = 'SignIn'
 
   const signupForm = document.createElement('form')
   formTextElements.forEach((elText) => {
@@ -16,8 +16,8 @@ export default function SignUp() {
     signupForm.appendChild(inputElement)
   })
 
-  signinContainer.appendChild(h2El)
-  signinContainer.appendChild(signupForm)
+  signupContainer.appendChild(h2El)
+  signupContainer.appendChild(signupForm)
 
-  authContainer.appendChild(signinContainer)
+  authContainer.appendChild(signupContainer)
 }

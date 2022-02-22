@@ -1,0 +1,19 @@
+#toggle-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 35px;
+  position: fixed;
+  width: 100%;
+}
+
+#toggle-btn .off {
+  width: 65px;
+  height: 65px;
+  background: url(../../../asset/icons/toggle-off.svg);
+}
+
+#toggle-btn .on {
+  width: 65px;
+  height: 65px;
+  background: url(../../../asset/icons/toggle-on.svg);
+}
