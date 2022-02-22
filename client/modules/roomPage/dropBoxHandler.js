@@ -17,10 +17,10 @@ function dragLeave() {
 
 function dragDrop() {
   this.classList.remove('hovered')
-  const { roomName, username } = window.getRoomInfo()
-  const { pickedCardClass } = window.roomState
+  const { roomName, username } = getRoomInfo()
+  const { pickedCardClass } = roomState
   const payload = { roomName, username, pickedCardClass }
-  window.socket.emit('cards:drop', payload)
+  socket.emit('cards:drop', payload)
 }
 
 dropBoxHandler()

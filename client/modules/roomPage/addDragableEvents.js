@@ -9,8 +9,6 @@ export default function addDragableEvents(cardElement) {
   cardElement.addEventListener('drop', dragDrop)
 }
 
-const roomState = window.roomState
-
 function dragStart() {
   this.classList.add('hold')
   setTimeout(() => {

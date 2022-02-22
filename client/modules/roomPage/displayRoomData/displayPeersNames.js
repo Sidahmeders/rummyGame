@@ -3,7 +3,7 @@ export default function displayPeersNames(players) {
   peersContainer.innerHTML = ''
 
   for (let peerName of players) {
-    if (peerName !== window.localUserName) {
+    if (peerName !== localUserName) {
       const peerElement = document.createElement('div')
       peerElement.className = 'peername'
       peerElement.innerText = peerName
@@ -16,4 +16,3 @@ export default function displayPeersNames(players) {
     }
   }
 }
-window
