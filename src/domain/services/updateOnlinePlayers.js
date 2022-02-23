@@ -7,12 +7,11 @@ module.exports = ({ InMemoryGames }) => {
       const roomData = InMemoryGames.getRoomData(roomName)
       const players = roomData.players || new Object()
 
-      const onlinePlayers = {}
       for (let playerName in players) {
         if (playerName === username) players[playerName].isOnline = true
-        if (players[playerName].isOnline) onlinePlayers[playerName] = true
       }
 
+      const onlinePlayers = InMemoryGames.getOnlinePlayers(roomName)
       return onlinePlayers
     },
 
@@ -23,11 +22,7 @@ module.exports = ({ InMemoryGames }) => {
       const players = roomData.players || new Object()
       if (players[username]) players[username].isOnline = false
 
-      const onlinePlayers = {}
-      for (let playerName in players) {
-        if (players[playerName].isOnline) onlinePlayers[playerName] = true
-      }
-
+      const onlinePlayers = InMemoryGames.getOnlinePlayers(roomName)
       return onlinePlayers
     },
   })
