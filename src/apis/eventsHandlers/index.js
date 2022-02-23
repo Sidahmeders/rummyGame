@@ -8,13 +8,13 @@ const makeDropCards = require('./dropCards.js')
 const makeWebrtcSignaling = require('./webrtcSignaling.js')
 
 module.exports = (wsEventEmitter) => {
-  const connection = () => makeConnect(wsEventEmitter)
-  const disconnect = () => makeDisConnect({ wsEventEmitter, events })
+  const connection = makeConnect({ wsEventEmitter })
+  const disconnect = makeDisConnect({ wsEventEmitter, events })
 
-  const joinRoom = (payload) => makeJoinRoom({ payload, wsEventEmitter, events })
-  const getRoomData = (payload) => makeGetRoomData({ payload, wsEventEmitter, events })
-  const dragCards = (payload) => makeDragCards({ payload, wsEventEmitter, events })
-  const dropCards = (payload) => makeDropCards({ payload, wsEventEmitter, events })
+  const joinRoom = makeJoinRoom({ wsEventEmitter, events })
+  const getRoomData = makeGetRoomData({ wsEventEmitter, events })
+  const dragCards = makeDragCards({ wsEventEmitter, events })
+  const dropCards = makeDropCards({ wsEventEmitter, events })
 
   const { peerJoin, peerMessage } = makeWebrtcSignaling({ wsEventEmitter, events })
 
