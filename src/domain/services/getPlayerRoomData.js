@@ -1,13 +1,12 @@
-module.exports = ({ InMemoryGames }) => {
+module.exports = ({ InMemoryGames, Player }) => {
   return (roomName, username) => {
-    const roomData = InMemoryGames[roomName]
+    const roomData = InMemoryGames.getRoomData(roomName)
 
-    const userData = {
-      playerCards: roomData?.playersCards[username],
-      players: roomData?.players,
-      cards: roomData?.cards,
-    }
+    const players = Object.keys(roomData?.players)
+    const player = new Player(roomData?.players[username])
+    const cards = roomData?.deckCards
 
+    const userData = { playerCards: player.cards, players, cards }
     return userData
   }
 }

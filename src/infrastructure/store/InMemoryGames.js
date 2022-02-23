@@ -2,9 +2,6 @@ module.exports = {
   roomsCollection: {
     onlinePlayers: {},
     testRoom: {
-      // cards: [],
-      // playersCards: { yousef: [], amine: [], yassine: [] },
-
       password: '1234',
       deckCards: [],
       players: {
@@ -47,6 +44,4 @@ module.exports = {
       if (!playerCards) playerCards = deckCards.splice(0, 14)
     })
   },
-
-  createNewRoom({ roomName, dbPlayers, deckCards }) {},
 }

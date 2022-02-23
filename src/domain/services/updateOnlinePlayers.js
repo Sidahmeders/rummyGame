@@ -1,9 +1,9 @@
 module.exports = ({ InMemoryGames }) => {
-  let onlinePlayers = InMemoryGames.onlinePlayers
+  let onlinePlayers = InMemoryGames?.roomsCollection?.onlinePlayers
 
   return Object.freeze({
     addOnlinePlayers: (username, socketID) => {
-      if (!onlinePlayers) InMemoryGames.onlinePlayers = {}
+      if (!onlinePlayers) onlinePlayers = {}
       else onlinePlayers[username] = socketID
       return onlinePlayers
     },

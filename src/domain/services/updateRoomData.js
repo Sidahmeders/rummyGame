@@ -1,22 +1,22 @@
-module.exports = ({ roomsDB, InMemoryGames, createDeck54 }) => {
+module.exports = ({ roomsDB, InMemoryGames, Player, createDeck54 }) => {
   return async (roomName) => {
     const rooms = await roomsDB.listRooms()
-    const targetRoom = InMemoryGames[roomName]
+    const dbPlayers = rooms[roomName]?.players
 
-    let deckOfCards = targetRoom ? targetRoom.cards : createDeck54(2)
-    let playersCards = targetRoom ? targetRoom.playersCards : new Object()
+    const targetRoom = InMemoryGames.getRoomData(roomName)
 
-    const { players } = rooms[roomName]
-    players.forEach((username) => {
-      if (!playersCards[username]) {
-        playersCards[username] = deckOfCards.splice(0, 14)
+    let deckCards = targetRoom ? targetRoom.deckCards : createDeck54(2)
+    let roomPlayers = targetRoom?.players ? targetRoom.players : new Object()
+
+    dbPlayers.forEach((username) => {
+      if (!roomPlayers[username]) {
+        const cards = deckCards.splice(0, 14)
+        const newPlayer = new Player({ cards })
+        roomPlayers[username] = newPlayer
       }
     })
 
-    InMemoryGames[roomName] = {
-      cards: deckOfCards,
-      playersCards,
-      players,
-    }
+    const newRoomData = { deckCards, players: roomPlayers }
+    InMemoryGames.setRoomData(roomName, newRoomData)
   }
 }
