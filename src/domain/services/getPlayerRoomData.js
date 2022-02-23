@@ -4,7 +4,7 @@ module.exports = ({ InMemoryGames, Player }) => {
 
     const players = Object.keys(roomData?.players)
     const player = new Player(roomData?.players[username])
-    const cards = roomData?.deckCards
+    const cards = roomData?.cardsDeck
 
     const userData = { playerCards: player.cards, players, cards }
     return userData

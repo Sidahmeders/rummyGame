@@ -7,10 +7,10 @@ module.exports = ({ payload, wsEventEmitter, events }) => {
     const targetRoom = InMemoryGames.getRoomData(roomName) // FIXME: REMOVE InMemoryGames as dependency
     if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
 
-    const { cards, playersCards } = targetRoom
+    const { cardsDeck, players } = targetRoom
+    const playerHand = players[username]?.cards
 
-    const pickedCard = cards.pop()
-    const playerHand = playersCards[username]
+    const pickedCard = cardsDeck.pop()
 
     if (playerHand.length >= 15) throw Error('please drop a card before you can pick again')
     if (!pickedCard) throw Error('the cards deck is empty')

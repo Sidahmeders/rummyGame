@@ -3,7 +3,7 @@ module.exports = {
     onlinePlayers: {},
     testRoom: {
       password: '1234',
-      deckCards: [],
+      cardsDeck: [],
       players: {
         yousef: {
           cards: [],
@@ -46,14 +46,14 @@ module.exports = {
     return onlinePlayers
   },
 
-  joinPlayers(roomName, dbPlayers, deckCards) {
+  joinPlayers(roomName, dbPlayers, cardsDeck) {
     const targetRoom = this.roomsCollection[roomName]
 
     dbPlayers.forEach((username) => {
       const roomPlayers = targetRoom?.players
       const playerCards = roomPlayers[username]?.cards
 
-      if (!playerCards) playerCards = deckCards.splice(0, 14)
+      if (!playerCards) playerCards = cardsDeck.splice(0, 14)
     })
   },
 }
