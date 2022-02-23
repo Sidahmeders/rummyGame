@@ -1,13 +1,7 @@
-module.exports = function Player({ cards = [], isOnline = false, turnToPick = false }) {
-  return Object.freeze({
-    get cards() {
-      return cards
-    },
-    get isOnline() {
-      return isOnline
-    },
-    get turnToPick() {
-      return turnToPick
-    },
-  })
+module.exports = class Player {
+  constructor({ cards = [], isOnline = false, turnToPick = false }) {
+    this.cards = cards
+    this.isOnline = isOnline
+    this.turnToPick = turnToPick
+  }
 }

@@ -4,12 +4,13 @@ module.exports = async ({ payload, wsEventEmitter, events }) => {
   try {
     const { roomName, username } = payload
     if (!roomName || !username) throw Error('roomName or username is null or undefined')
-    wsEventEmitter.joinSocketRooms(roomName)
 
-    const onlinePlayers = addOnlinePlayers(username, wsEventEmitter.socket.id)
+    wsEventEmitter.joinSocketRooms(roomName)
+    await updateRoomData(roomName)
+
+    const onlinePlayers = addOnlinePlayers(roomName, username, wsEventEmitter.socket)
     wsEventEmitter.broadcastToRoom(roomName, events.peersConnect, onlinePlayers)
 
-    await updateRoomData(roomName)
     const userData = getPlayerRoomData(roomName, username)
     wsEventEmitter.emit(events.roomsJoined, userData)
   } catch (err) {

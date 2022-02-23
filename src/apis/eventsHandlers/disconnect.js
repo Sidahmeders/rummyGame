@@ -3,7 +3,7 @@ const { removeOnlinePlayers } = require('../../domain/services')
 module.exports = ({ wsEventEmitter, events }) => {
   console.log(`user:: ${wsEventEmitter.socket.id} ::disconnected`)
 
-  const onlinePlayers = removeOnlinePlayers(wsEventEmitter.socket.id)
+  const onlinePlayers = removeOnlinePlayers(wsEventEmitter.socket)
 
   /** FIXME: send to target rooms only
    * we can map the users socket-id to the room that they joined

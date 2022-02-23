@@ -1,10 +1,11 @@
 export default function displayPeersOnlineStatus(onlinePlayers = {}) {
-  const statusSet = new Set(Object.keys(onlinePlayers))
-  const peersNamesNodes = document.getElementsByClassName('peername-status')
+  console.log(onlinePlayers, 'ONLINE PLAYER OBJECT')
+  const peerStatusNodes = document.getElementsByClassName('peername-status')
 
   setTimeout(() => {
-    for (let peerNode of peersNamesNodes) {
-      const isOnline = statusSet.has(peerNode.parentElement.textContent)
+    for (let peerNode of peerStatusNodes) {
+      const peerName = peerNode.parentElement.textContent
+      const isOnline = onlinePlayers[peerName]
       peerNode.style.background = isOnline ? '#5f5' : 'gray'
     }
   }, 1000)
