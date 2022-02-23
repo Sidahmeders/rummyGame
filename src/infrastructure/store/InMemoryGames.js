@@ -26,11 +26,11 @@ module.exports = {
 
   getRoomData(roomName) {
     const targetRoom = this.roomsCollection[roomName]
-    return targetRoom
+    return Object(targetRoom)
   },
 
   setRoomData(roomName, newRoomData) {
-    let oldRoomData = new Object(this.roomsCollection[roomName])
+    let oldRoomData = Object(this.roomsCollection[roomName])
     this.roomsCollection[roomName] = Object.assign(oldRoomData, newRoomData)
   },
 

@@ -5,7 +5,7 @@ module.exports = ({ roomsDB, InMemoryGames, Player, createDeck54 }) => {
 
     const targetRoom = InMemoryGames.getRoomData(roomName)
 
-    let deckCards = targetRoom ? targetRoom.deckCards : createDeck54(2)
+    let deckCards = targetRoom?.deckCards ? targetRoom.deckCards : createDeck54(2)
     let roomPlayers = targetRoom?.players ? targetRoom.players : new Object()
 
     dbPlayers.forEach((username) => {
