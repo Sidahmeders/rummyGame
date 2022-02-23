@@ -7,6 +7,7 @@ module.exports = function makeCreateRooms({ roomsDB }) {
       res.status(201).json('new room added successfully')
     } catch (err) {
       res.status(400).json({ errorMsg: err.message })
+      console.error(err)
     }
   }
 }

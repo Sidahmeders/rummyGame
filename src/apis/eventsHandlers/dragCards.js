@@ -4,7 +4,7 @@ const { getPlayerRoomData } = require('../../domain/services')
 module.exports = ({ payload, wsEventEmitter, events }) => {
   try {
     const { roomName, username } = payload
-    const targetRoom = InMemoryGames[roomName]
+    const targetRoom = InMemoryGames.getRoomData(roomName) // FIXME: REMOVE InMemoryGames as dependency
     if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
 
     const { cards, playersCards } = targetRoom
@@ -20,5 +20,6 @@ module.exports = ({ payload, wsEventEmitter, events }) => {
     wsEventEmitter.emit(events.cardsDragged, playerData)
   } catch (err) {
     wsEventEmitter.emit(events.roomsError, err.message)
+    console.error(err)
   }
 }

@@ -5,6 +5,7 @@ module.exports = function makeGetAllRooms({ roomsDB }) {
       res.status(200).json({ rooms })
     } catch (err) {
       res.status(400).json({ errorMsg: err.message })
+      console.error(err)
     }
   }
 }

@@ -14,5 +14,6 @@ module.exports = async ({ payload, wsEventEmitter, events }) => {
     wsEventEmitter.emit(events.roomsJoined, userData)
   } catch (err) {
     wsEventEmitter.emit(events.roomsError, err.message)
+    console.error(err)
   }
 }
