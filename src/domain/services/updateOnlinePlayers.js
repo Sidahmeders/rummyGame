@@ -1,9 +1,6 @@
 module.exports = ({ InMemoryGames }) => {
   return Object.freeze({
-    addOnlinePlayers: (roomName, username, socket) => {
-      socket.roomName = roomName
-      socket.username = username
-
+    addOnlinePlayers: (roomName, username) => {
       const roomData = InMemoryGames.getRoomData(roomName)
       const players = roomData.players || new Object()
 

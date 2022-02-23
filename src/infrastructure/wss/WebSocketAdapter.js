@@ -29,25 +29,27 @@ class WebSocketAdapter {
     this.socket.emit(event, payload)
   }
 
-  sendToRoom(room, event, payload) {
-    this.socket.to(room).emit(event, payload)
+  sendToRoom(roomName, event, payload) {
+    this.socket.to(roomName).emit(event, payload)
   }
 
-  broadcastToRoom(room, event, payload) {
-    this.ws.in(room).emit(event, payload)
+  broadcastToRoom(roomName, event, payload) {
+    this.ws.in(roomName).emit(event, payload)
   }
 
   broadcastAll(event, payload) {
     this.ws.emit(event, payload)
   }
 
-  getSocketRooms(room) {
-    const socketRooms = this.socket.adapter.rooms.get(room)
+  getSocketRooms(roomName) {
+    const socketRooms = this.socket.adapter.rooms.get(roomName)
     return socketRooms
   }
 
-  joinSocketRooms(room) {
-    this.socket.join(room)
+  joinSocketRooms(username, roomName) {
+    this.socket.roomName = roomName
+    this.socket.username = username
+    this.socket.join(roomName)
   }
 }
 
