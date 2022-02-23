@@ -1,21 +1,11 @@
-const { InMemoryGames } = require('../../infrastructure/store')
-const { getPlayerRoomData } = require('../../domain/services')
+const { dragCard, getPlayerRoomData } = require('../../domain/services')
 
 module.exports = ({ payload, wsEventEmitter, events }) => {
   try {
     const { roomName, username } = payload
-    const targetRoom = InMemoryGames.getRoomData(roomName) // FIXME: REMOVE InMemoryGames as dependency
-    if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
 
-    const { cardsDeck, players } = targetRoom
-    const playerHand = players[username]?.cards
+    dragCard(roomName, username)
 
-    const pickedCard = cardsDeck.pop()
-
-    if (playerHand.length >= 15) throw Error('please drop a card before you can pick again')
-    if (!pickedCard) throw Error('the cards deck is empty')
-
-    playerHand.push(pickedCard)
     const playerData = getPlayerRoomData(roomName, username)
     wsEventEmitter.emit(events.cardsDragged, playerData)
   } catch (err) {
