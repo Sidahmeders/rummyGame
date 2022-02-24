@@ -45,15 +45,4 @@ module.exports = {
 
     return onlinePlayers
   },
-
-  joinPlayers(roomName, dbPlayers, cardsDeck) {
-    const targetRoom = this.roomsCollection[roomName]
-
-    dbPlayers.forEach((username) => {
-      const roomPlayers = targetRoom?.players
-      const playerCards = roomPlayers[username]?.cards
-
-      if (!playerCards) playerCards = cardsDeck.splice(0, 14)
-    })
-  },
 }
