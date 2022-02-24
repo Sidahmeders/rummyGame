@@ -5,6 +5,8 @@ module.exports = (roomName, username) => {
   const players = targetRoom?.players || new Object()
   let isPlayerTurn, nextPlayerName
 
+  // TODO: set the players turnToPick to false
+
   for (let playerName in players) {
     if (playerName === username) isPlayerTurn = players[playerName].turnToPick
     else if (isPlayerTurn) {
