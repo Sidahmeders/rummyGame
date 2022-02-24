@@ -8,11 +8,18 @@ export default function displayPeersNames(players) {
       peerElement.className = 'peername'
       peerElement.innerText = peerName
 
-      const statusElement = document.createElement('div')
-      statusElement.className = 'peername-status'
+      const onlineStatusEl = peerStatusElement('peername-online-status')
+      const turnStatusEl = peerStatusElement('peername-turn-status')
 
-      peerElement.appendChild(statusElement)
+      peerElement.appendChild(onlineStatusEl)
+      peerElement.appendChild(turnStatusEl)
       peersContainer.appendChild(peerElement)
     }
   }
+}
+
+function peerStatusElement(className) {
+  const onlineStatusElement = document.createElement('div')
+  onlineStatusElement.className = className
+  return onlineStatusElement
 }
