@@ -1,4 +1,4 @@
-const createDeck54 = require('./createDeck54')
-const checkPlayersTurn = require('./check-players-turn')
+const createDeck = require('./create-deck')
+const shuffleDeck = require('./shuffle-deck')
 
-module.exports = { createDeck54, checkPlayersTurn }
+module.exports = { createDeck, shuffleDeck }

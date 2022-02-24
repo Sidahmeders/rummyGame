@@ -1,10 +1,10 @@
-module.exports = ({ roomsDB, InMemoryGames, Player, createDeck54 }) => {
+module.exports = ({ roomsDB, InMemoryGames, Player, createDeck, shuffleDeck }) => {
   return async (roomName) => {
     const rooms = await roomsDB.listRooms()
     const dbPlayers = rooms[roomName]?.players
     const targetRoom = InMemoryGames.getRoomData(roomName)
 
-    const cardsDeck = targetRoom?.cardsDeck ? targetRoom.cardsDeck : createDeck54(2)
+    const cardsDeck = targetRoom?.cardsDeck ? targetRoom.cardsDeck : shuffleDeck(createDeck(2))
     const roomPlayers = targetRoom?.players ? targetRoom.players : new Object()
     const roomSize = Object.keys(roomPlayers).length
     const isReady = targetRoom.isReady
@@ -15,6 +15,7 @@ module.exports = ({ roomsDB, InMemoryGames, Player, createDeck54 }) => {
         roomPlayers[username] = newPlayer
       }
 
+      // check if the room is full and give permission to one player to start
       if (roomSize == 3 && index === 0 && !isReady) {
         roomPlayers[username].turnToPick = true
         targetRoom.isReady = true

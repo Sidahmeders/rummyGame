@@ -1,10 +1,7 @@
-module.exports = ({ InMemoryGames, checkPlayersTurn }) => {
+module.exports = ({ InMemoryGames }) => {
   return (roomName, username) => {
     const targetRoom = InMemoryGames.getRoomData(roomName)
     if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
-
-    const isPlayerTurn = checkPlayersTurn(roomName, username)
-    if (!isPlayerTurn) throw Error('please wait for your Turn To Pick')
 
     const { cardsDeck, players } = targetRoom
     const playerHand = players[username]?.cards
