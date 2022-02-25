@@ -1,7 +1,7 @@
 module.exports = ({ InMemoryGames }) => {
   return (roomName, username) => {
     const targetRoom = InMemoryGames.getRoomData(roomName)
-    const players = targetRoom?.players || new Object()
+    const players = Object(targetRoom.players)
     let isPlayerTurn, nextPlayerName
 
     for (let playerName in players) {
