@@ -5,7 +5,6 @@ module.exports = ({ InMemoryGames }) => {
 
     const { cardsDeck, players } = targetRoom
     const playerHand = players[username]?.cards
-
     const pickedCard = cardsDeck.pop()
 
     if (playerHand.length >= 15) throw Error('please drop a card before you can pick again')

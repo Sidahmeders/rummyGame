@@ -1,10 +1,10 @@
 module.exports = ({ InMemoryGames, Player }) => {
   return (roomName, username) => {
-    const roomData = InMemoryGames.getRoomData(roomName)
+    const targetRoom = InMemoryGames.getRoomData(roomName)
 
-    const players = Object.keys(roomData?.players)
-    const player = new Player(roomData?.players[username])
-    const cards = roomData?.cardsDeck
+    const players = Object.keys(targetRoom?.players)
+    const player = new Player(targetRoom?.players[username])
+    const cards = targetRoom?.cardsDeck
 
     const userData = { playerCards: player.cards, players, cards }
     return userData

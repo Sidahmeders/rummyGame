@@ -1,8 +1,8 @@
 module.exports = ({ InMemoryGames }) => {
   return Object.freeze({
     addOnlinePlayer: (roomName, username) => {
-      const roomData = InMemoryGames.getRoomData(roomName)
-      const players = roomData.players || new Object()
+      const targetRoom = InMemoryGames.getRoomData(roomName)
+      const players = targetRoom.players || new Object()
 
       for (let playerName in players) {
         if (playerName === username) players[playerName].isOnline = true
@@ -11,9 +11,9 @@ module.exports = ({ InMemoryGames }) => {
 
     removeOnlinePlayer: (socket) => {
       const { roomName, username } = socket
-      const roomData = InMemoryGames.getRoomData(roomName)
+      const targetRoom = InMemoryGames.getRoomData(roomName)
 
-      const players = roomData.players || new Object()
+      const players = targetRoom.players || new Object()
       if (players[username]) players[username].isOnline = false
     },
   })
