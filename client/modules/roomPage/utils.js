@@ -1,14 +1,16 @@
-export function getTargetCard(updatedPlayerCards) {
+export function getTargetCard(updatedPlayerCards = []) {
   const domPlayerCards = getPlayerCards()
 
   const domLength = domPlayerCards.length
   const paramLength = updatedPlayerCards.length
 
-  const newCards = domLength < paramLength ? updatedPlayerCards : domPlayerCards
-  const oldCards = domLength > paramLength ? updatedPlayerCards : domPlayerCards
-
-  for (let card of newCards) {
-    if (oldCards.indexOf(card) === -1) return card
+  if (paramLength > domLength) return updatedPlayerCards.pop()
+  if (domLength > paramLength) {
+    const encounteredCards = []
+    for (let card of domPlayerCards) {
+      if (!updatedPlayerCards.includes(card) || encounteredCards.includes(card)) return card
+      encounteredCards.push(card)
+    }
   }
 
   console.warn('Target card not Found')

@@ -4,10 +4,22 @@ module.exports = ({ InMemoryGames }) => {
     if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
 
     const { players } = targetRoom
-    let playerHand = players[username]?.cards
-    if (playerHand.length <= 14) throw Error('make sure you have picked a card before you can drop')
+    let playerCards = players[username]?.cards
+    if (playerCards.length <= 14) throw Error('make sure you have picked a card before you can drop')
 
-    playerHand = playerHand.filter((card) => card !== cardToDrop)
-    players[username].cards = playerHand
+    const newPlayerHand = removeTargetCard(playerCards, cardToDrop)
+    players[username].cards = newPlayerHand
   }
+}
+
+function removeTargetCard(cardsList, targetCard) {
+  const newCardsList = []
+  let isFound = false
+
+  for (let card of cardsList) {
+    if (!isFound && card === targetCard) isFound = true
+    else newCardsList.push(card)
+  }
+
+  return newCardsList
 }
