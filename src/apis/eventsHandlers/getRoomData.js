@@ -10,8 +10,8 @@ module.exports = ({ wsEventEmitter, events }) => {
       await updateInMemoryRoom(roomName)
 
       addOnlinePlayer(roomName, username)
-      const onlinePlayers = getPlayersStatus(roomName)
-      wsEventEmitter.broadcastToRoom(roomName, events.peersConnect, onlinePlayers)
+      const playersStatus = getPlayersStatus(roomName)
+      wsEventEmitter.broadcastToRoom(roomName, events.peersConnect, playersStatus)
 
       const userData = getPlayerRoomData(roomName, username)
       wsEventEmitter.emit(events.roomsJoined, userData)

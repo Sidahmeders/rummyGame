@@ -1,4 +1,4 @@
-const { checkPlayersTurn, dragCard, getPlayerRoomData } = require('../../domain/services')
+const { checkPlayersTurn, dragCard, getPlayersStatus, getPlayerRoomData } = require('../../domain/services')
 
 module.exports = ({ wsEventEmitter, events }) => {
   return (payload) => {
@@ -8,7 +8,8 @@ module.exports = ({ wsEventEmitter, events }) => {
       if (!isPlayerTurn) throw Error('please wait for your Turn To Pick')
 
       dragCard(roomName, username)
-      wsEventEmitter.broadcastToRoom(roomName, events.peersTrunToPick, {})
+      const playersStatus = getPlayersStatus(roomName)
+      wsEventEmitter.broadcastToRoom(roomName, events.peersTrunToPick, playersStatus)
 
       const playerData = getPlayerRoomData(roomName, username)
       wsEventEmitter.emit(events.cardsDragged, playerData)
