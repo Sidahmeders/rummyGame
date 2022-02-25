@@ -1,8 +1,6 @@
 module.exports = ({ InMemoryGames }) => {
   return (roomName, username) => {
     const targetRoom = InMemoryGames.getRoomData(roomName)
-    if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
-
     const { cardsDeck, players } = targetRoom
     const playerHand = players[username]?.cards
     const pickedCard = cardsDeck.pop()

@@ -1,9 +1,8 @@
 module.exports = ({ InMemoryGames }) => {
   return (roomName, username, cardToDrop) => {
     const targetRoom = InMemoryGames.getRoomData(roomName)
-    if (!targetRoom) throw Error('something unexpected happens. please refresh the page')
-
     const { players } = targetRoom
+
     let playerCards = players[username]?.cards
     if (playerCards.length <= 14) throw Error('make sure you have picked a card before you can drop')
 

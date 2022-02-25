@@ -5,7 +5,7 @@ module.exports = ({ roomsDB, InMemoryGames, Player, createDeck, shuffleDeck }) =
     const targetRoom = InMemoryGames.getRoomData(roomName)
 
     const cardsDeck = targetRoom?.cardsDeck ? targetRoom.cardsDeck : shuffleDeck(createDeck(2))
-    const roomPlayers = targetRoom?.players ? targetRoom.players : new Object()
+    const roomPlayers = Object(targetRoom.players)
     const roomSize = Object.keys(roomPlayers).length
     const isReady = targetRoom.isReady
 
