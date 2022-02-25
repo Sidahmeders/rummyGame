@@ -1,4 +1,4 @@
-const { updateInMemoryRoom, addOnlinePlayers, getPlayerRoomData } = require('../../domain/services')
+const { updateInMemoryRoom, addOnlinePlayer, getPlayerRoomData, getPlayersStatus } = require('../../domain/services')
 
 module.exports = ({ wsEventEmitter, events }) => {
   return async (payload) => {
@@ -9,7 +9,8 @@ module.exports = ({ wsEventEmitter, events }) => {
       wsEventEmitter.joinSocketRooms(username, roomName)
       await updateInMemoryRoom(roomName)
 
-      const onlinePlayers = addOnlinePlayers(roomName, username)
+      addOnlinePlayer(roomName, username)
+      const onlinePlayers = getPlayersStatus(roomName)
       wsEventEmitter.broadcastToRoom(roomName, events.peersConnect, onlinePlayers)
 
       const userData = getPlayerRoomData(roomName, username)

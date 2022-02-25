@@ -8,6 +8,8 @@ module.exports = ({ wsEventEmitter, events }) => {
       if (!isPlayerTurn) throw Error('please wait for your Turn To Pick')
 
       dragCard(roomName, username)
+      wsEventEmitter.broadcastToRoom(roomName, events.peersTrunToPick, {})
+
       const playerData = getPlayerRoomData(roomName, username)
       wsEventEmitter.emit(events.cardsDragged, playerData)
     } catch (err) {

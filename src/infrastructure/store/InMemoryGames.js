@@ -35,16 +35,4 @@ module.exports = {
     let oldRoomData = Object(this.roomsCollection[roomName])
     this.roomsCollection[roomName] = Object.assign(oldRoomData, newRoomData)
   },
-
-  getOnlinePlayers(roomName) {
-    const targetRoom = this.getRoomData(roomName)
-    const roomPlayers = Object(targetRoom.players)
-    const onlinePlayers = JSON.parse(JSON.stringify(roomPlayers))
-
-    for (let playerName in onlinePlayers) {
-      delete onlinePlayers[playerName].cards
-    }
-
-    return onlinePlayers
-  },
 }

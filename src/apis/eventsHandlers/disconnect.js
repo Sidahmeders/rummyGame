@@ -1,9 +1,11 @@
-const { removeOnlinePlayers } = require('../../domain/services')
+const { removeOnlinePlayer, getPlayersStatus } = require('../../domain/services')
 
 module.exports = ({ wsEventEmitter, events }) => {
   return () => {
     console.log(`user:: ${wsEventEmitter.socket.id} ::disconnected`)
-    const onlinePlayers = removeOnlinePlayers(wsEventEmitter.socket)
+
+    removeOnlinePlayer(wsEventEmitter.socket)
+    const onlinePlayers = getPlayersStatus(wsEventEmitter.socket.roomName)
     wsEventEmitter.broadcastToRoom(wsEventEmitter.socket.roomName, events.peersDisconnect, onlinePlayers)
   }
 }
