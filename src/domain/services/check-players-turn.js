@@ -6,8 +6,8 @@ module.exports = ({ InMemoryGames }) => {
 
     for (let playerName in players) {
       if (playerName === username) {
-        isPlayerTurn = Boolean(players[playerName].turnToPick)
-        players[playerName].turnToPick = false
+        isPlayerTurn = Boolean(players[username].turnToPick)
+        players[username].turnToPick = false
       } else if (isPlayerTurn && !nextPlayerName) nextPlayerName = playerName
     }
 
