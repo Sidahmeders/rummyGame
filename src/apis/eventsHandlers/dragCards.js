@@ -4,6 +4,9 @@ module.exports = ({ wsEventEmitter, events }) => {
   return (payload) => {
     try {
       const { roomName, username } = payload
+
+      // TODO: Check if the user has droped a card before he can pick
+
       const isPlayerTurn = checkPlayersTurn(roomName, username)
       if (!isPlayerTurn) throw Error('please wait for your Turn To Pick')
 
