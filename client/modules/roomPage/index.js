@@ -5,7 +5,8 @@ import { errorNotification } from '../notifications/index.js'
 import displayRoomData from './displayRoomData/index.js'
 import addDraggedCard from './addDraggedCard.js'
 import removeDroppedCard from './removeDroppedCard.js'
-import displayPeersOnlineStatus from './displayPeersOnlineStatus.js'
+import updateOnlineStatus from './updateOnlineStatus.js'
+import updateTurnToPickStatus from './updateTurnToPickStatus.js'
 
 document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
@@ -19,7 +20,8 @@ socket.on('rooms:joined', displayRoomData)
 socket.on('cards:dragged', addDraggedCard)
 socket.on('cards:dropped', removeDroppedCard)
 
-socket.on('peers:disconnect', displayPeersOnlineStatus)
-socket.on('peers:connect', displayPeersOnlineStatus)
+socket.on('peers:disconnect', updateOnlineStatus)
+socket.on('peers:connect', updateOnlineStatus)
+socket.on('peers:trunToPick', updateTurnToPickStatus)
 
 socket.on('rooms:error', errorNotification)
