@@ -1,6 +1,7 @@
 import './dropBoxHandler.js'
 import '../peers-call/index.js'
 
+import { roomListeners } from '../constant/listeners.js'
 import { errorNotification } from '../notifications/index.js'
 import displayRoomData from './displayRoomData/index.js'
 import addDraggedCard from './addDraggedCard.js'
@@ -12,16 +13,15 @@ document.addEventListener('DOMContentLoaded', fetchRoomNameData)
 
 function fetchRoomNameData() {
   const { roomName, username } = getRoomInfo()
-  socket.emit('rooms:data', { username, roomName })
+  socket.emit(roomListeners.rooms_data, { username, roomName })
 }
 
-socket.on('rooms:joined', displayRoomData)
+socket.on(roomListeners.rooms_joined, displayRoomData)
+socket.on(roomListeners.rooms_error, errorNotification)
 
-socket.on('cards:dragged', addDraggedCard)
-socket.on('cards:dropped', removeDroppedCard)
+socket.on(roomListeners.cards_dragged, addDraggedCard)
+socket.on(roomListeners.cards_dropped, removeDroppedCard)
 
-socket.on('peers:disconnect', updateOnlineStatus)
-socket.on('peers:connect', updateOnlineStatus)
-socket.on('peers:trunToPick', updateTurnToPickStatus)
-
-socket.on('rooms:error', errorNotification)
+socket.on(roomListeners.peers_disconnect, updateOnlineStatus)
+socket.on(roomListeners.peers_connect, updateOnlineStatus)
+socket.on(roomListeners.peers_trunToPick, updateTurnToPickStatus)

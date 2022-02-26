@@ -1,3 +1,5 @@
+import { roomEvents } from '../constant/events.js'
+
 function dropBoxHandler() {
   const dropBoxElement = document.getElementById('drop-box')
 
@@ -20,7 +22,7 @@ function dragDrop() {
   const { roomName, username } = getRoomInfo()
   const { cardId } = roomState
   const payload = { roomName, username, cardId }
-  socket.emit('cards:drop', payload)
+  socket.emit(roomEvents.cards_drop, payload)
 }
 
 dropBoxHandler()

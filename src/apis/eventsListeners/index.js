@@ -9,11 +9,11 @@ module.exports = (ws, socket) => {
   wsEventHandler.connection()
   wsEventEmitter.on(listeners.disconnect, wsEventHandler.disconnect)
 
-  wsEventEmitter.on(listeners.roomsData, wsEventHandler.getRoomData)
-  wsEventEmitter.on(listeners.joinRoom, wsEventHandler.joinRoom)
-  wsEventEmitter.on(listeners.cardsDrag, wsEventHandler.dragCards)
-  wsEventEmitter.on(listeners.cardsDrop, wsEventHandler.dropCards)
+  wsEventEmitter.on(listeners.rooms_data, wsEventHandler.getRoomData)
+  wsEventEmitter.on(listeners.rooms_join, wsEventHandler.joinRoom)
+  wsEventEmitter.on(listeners.cards_drag, wsEventHandler.dragCards)
+  wsEventEmitter.on(listeners.cards_drop, wsEventHandler.dropCards)
 
-  wsEventEmitter.on(listeners.peersJoin, wsEventHandler.peerJoin)
-  wsEventEmitter.on(listeners.peersMessage, wsEventHandler.peerMessage)
+  wsEventEmitter.on(listeners.peers_join, wsEventHandler.peerJoin)
+  wsEventEmitter.on(listeners.peers_message, wsEventHandler.peerMessage)
 }

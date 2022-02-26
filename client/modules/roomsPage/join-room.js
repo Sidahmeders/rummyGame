@@ -1,4 +1,6 @@
 import { errorNotification } from '../notifications/index.js'
+import { roomEvents } from '../constant/events.js'
+import { roomListeners } from '../constant/listeners.js'
 
 export default function joinRoom(event) {
   event.preventDefault()
@@ -11,12 +13,12 @@ export default function joinRoom(event) {
     payload[name] = value
   }
 
-  socket.emit('rooms:join', payload)
+  socket.emit(roomEvents.rooms_join, payload)
 }
 
-socket.on('rooms:error', errorNotification)
+socket.on(roomListeners.rooms_error, errorNotification)
 
-socket.on('rooms:joined', (payload) => {
+socket.on(roomListeners.rooms_joined, (payload) => {
   const { roomName, username } = payload
   location.href = `/room/${roomName}?username=${username}`
 })
