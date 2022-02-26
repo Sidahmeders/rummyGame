@@ -11,6 +11,7 @@ var roomState = {
   pickedCardClass: undefined,
   pickedCardElement: undefined,
   droppedCardClass: undefined,
+  cardId: undefined,
 }
 
 // peer-call

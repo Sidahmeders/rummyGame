@@ -11,12 +11,11 @@ export default function addDragableEvents(cardElement) {
 
 function dragStart() {
   this.classList.add('hold')
-  setTimeout(() => {
-    this.classList.add('invisible')
-  }, 0)
+  setTimeout(() => this.classList.add('invisible'), 0)
 
-  roomState.pickedCardElement = this
   roomState.pickedCardClass = this.classList[1]
+  roomState.pickedCardElement = this
+  roomState.cardId = this.getAttribute('card-id')
 }
 
 function dragEnd() {
@@ -40,12 +39,13 @@ function dragLeave() {
 function dragDrop() {
   this.classList.remove('hovered')
   roomState.droppedCardClass = this.classList[1]
-
   this.classList.add(roomState.pickedCardClass)
   this.classList.remove(roomState.droppedCardClass)
 
   roomState.pickedCardElement.classList.remove(roomState.pickedCardClass)
   roomState.pickedCardElement.classList.add(roomState.droppedCardClass)
+  roomState.pickedCardElement.setAttribute('card-id', this.getAttribute('card-id'))
+  this.setAttribute('card-id', roomState.cardId)
 
   updateSuitesStatus()
 }

@@ -18,8 +18,8 @@ function dragLeave() {
 function dragDrop() {
   this.classList.remove('hovered')
   const { roomName, username } = getRoomInfo()
-  const { pickedCardClass } = roomState
-  const payload = { roomName, username, pickedCardClass }
+  const { cardId } = roomState
+  const payload = { roomName, username, cardId }
   socket.emit('cards:drop', payload)
 }
 

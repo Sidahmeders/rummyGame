@@ -9,10 +9,12 @@ export default function addDraggedCard(userData) {
   if (targetCard) {
     const playerElement = document.getElementById('player')
     const cardElement = document.createElement('div')
-    cardElement.className = `player-card ${targetCard}`
-    cardElement.setAttribute('draggable', true)
-    addDragableEvents(cardElement)
 
+    cardElement.className = `player-card ${targetCard.split('+')[0]}`
+    cardElement.setAttribute('card-id', targetCard)
+    cardElement.setAttribute('draggable', true)
+
+    addDragableEvents(cardElement)
     playerElement.appendChild(cardElement)
   }
 

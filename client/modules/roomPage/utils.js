@@ -1,29 +1,26 @@
-export function getTargetCard(updatedPlayerCards = []) {
-  const domPlayerCards = getPlayerCards()
+export function getTargetCard(newPlayerCards = []) {
+  const oldPlayerCards = getPlayerCards()
 
-  const domLength = domPlayerCards.length
-  const paramLength = updatedPlayerCards.length
+  const newCardsLen = newPlayerCards.length
+  const oldCardsLen = oldPlayerCards.length
+  let targetCard = false
 
-  if (paramLength > domLength) return updatedPlayerCards.pop()
-  if (domLength > paramLength) {
-    const encounteredCards = []
-    for (let card of domPlayerCards) {
-      if (!updatedPlayerCards.includes(card) || encounteredCards.includes(card)) return card
-      encounteredCards.push(card)
-    }
-  }
+  if (newCardsLen > oldCardsLen) targetCard = newPlayerCards.filter((x) => !oldPlayerCards.includes(x))
+  if (oldCardsLen > newCardsLen) targetCard = oldPlayerCards.filter((x) => !newPlayerCards.includes(x))
+  if (targetCard) return String(targetCard)
 
   console.warn('Target card not Found')
   return undefined
 }
 
 export function getPlayerCards() {
-  const cardsClassList = []
+  const cardsIdList = []
   const cardsNodes = document.getElementById('player').childNodes
 
   for (let node of cardsNodes) {
-    const nodeClass = node.classList[node.classList.length - 1]
-    cardsClassList.push(nodeClass)
+    const cardId = node.getAttribute('card-id')
+    cardsIdList.push(cardId)
   }
-  return cardsClassList
+
+  return cardsIdList
 }

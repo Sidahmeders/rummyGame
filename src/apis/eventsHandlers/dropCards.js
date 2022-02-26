@@ -3,8 +3,8 @@ const { dropCard, getPlayerRoomData } = require('../../domain/services')
 module.exports = ({ wsEventEmitter, events }) => {
   return (payload) => {
     try {
-      const { username, roomName, pickedCardClass } = payload
-      dropCard(roomName, username, pickedCardClass)
+      const { username, roomName, cardId } = payload
+      dropCard(roomName, username, cardId)
       const userData = getPlayerRoomData(roomName, username)
       wsEventEmitter.emit(events.cardsDropped, userData)
     } catch (err) {
